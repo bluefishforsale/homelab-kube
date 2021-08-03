@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ubuntu
+  namespace: ubuntu
+spec:
+  selector:
+    matchLabels:
+      name: ubuntu
+  template:
+    metadata:
+      labels:
+        name: ubuntu
+    spec:
+      containers:
+      - name: "ubuntu"
+        image: "ubuntu:latest"
+        securityContext:
+          privileged: true
+        command: ['sh', '-c', 'sleep 3600']
+      - name: "ping"
+        image: "sfoubert/iputils"
+        securityContext:
+          privileged: true
+        command: ['sh', '-c', 'sleep 3600']
+      - name: "iproute2"
+        image: "igneoussystems/iproute2"
+        securityContext:
+          privileged: true
+        command: ['sh', '-c', 'sleep 3600']
+      - name: "dig"
+        image: "toolbelt/dig"
+        securityContext:
+          privileged: true
+        command: ['sh', '-c', 'sleep 3600']
+
+
