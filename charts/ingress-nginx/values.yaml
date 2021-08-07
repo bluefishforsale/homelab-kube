@@ -712,7 +712,8 @@ ingress-nginx:
     podSecurityContext: {}
 
     # labels to add to the pod container metadata
-    podLabels: {}
+    podLabels:
+      - app.kubernetes.io/name: ingress-ngin
     #  key: value
 
     ## Node labels for default backend pod assignment

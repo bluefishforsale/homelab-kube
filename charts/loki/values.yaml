@@ -174,7 +174,7 @@ loki:
       port: http-metrics
     initialDelaySeconds: 45
 
-  replicas: 1
+  replicas: 2
 
   resources: {}
   # limits:

@@ -67,6 +67,7 @@ data:
           pods insecure
           fallthrough in-addr.arpa ip6.arpa
         }
+        forward . 192.168.1.2
         prometheus :9153
         cache 30
         loop
@@ -91,10 +92,12 @@ spec:
   selector:
     matchLabels:
       k8s-app: kube-dns
+      app.kubernetes.io/name: "CoreDNS"
   template:
     metadata:
       labels:
         k8s-app: kube-dns
+        app.kubernetes.io/name: "CoreDNS"
     spec:
       priorityClassName: system-cluster-critical
       serviceAccountName: coredns

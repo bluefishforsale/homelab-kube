@@ -139,15 +139,18 @@ metadata:
   labels:
     tier: node
     app: flannel
+    app.kubernetes.io/name: flannel
 spec:
   selector:
     matchLabels:
       app: flannel
+      app.kubernetes.io/name: flannel
   template:
     metadata:
       labels:
         tier: node
         app: flannel
+        app.kubernetes.io/name: flannel
     spec:
       affinity:
         nodeAffinity:
