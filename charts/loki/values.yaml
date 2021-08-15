@@ -140,16 +140,16 @@ loki:
   ## - create a pv which above 10Gi and has same namespace with loki
   ## - keep storageClassName same with below setting
   persistence:
-    enabled: false
+    enabled: true
     accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
     size: 10Gi
     annotations: {}
     # selector:
     #   matchLabels:
     #     app.kubernetes.io/name: loki
     # subPath: ""
-    # existingClaim:
+    existingClaim: loki-data
 
   ## Pod Labels
   podLabels: {}
@@ -174,7 +174,7 @@ loki:
       port: http-metrics
     initialDelaySeconds: 45
 
-  replicas: 2
+  replicas: 1
 
   resources: {}
   # limits:

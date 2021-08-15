@@ -118,10 +118,7 @@ metrics-server:
   #   kubelet-insecure-tls: true
   ##   kubelet-preferred-address-types: InternalIP
   ##
-  extraArgs:
-    requestheader-client-ca-file: /run/secrets/kubernetes.io/serviceaccount/ca.crt
-    # kubelet-insecure-tls: true
-    # kubelet-preferred-address-types: ExternalDNS
+  extraArgs: {}
   ## @param podLabels Pod labels
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
   ##

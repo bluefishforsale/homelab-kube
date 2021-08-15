@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: test-claim
+  name: extradata-ocean
 spec:
   storageClassName: nfs-ocean
   accessModes:
@@ -13,7 +13,7 @@ spec:
 kind: Pod
 apiVersion: v1
 metadata:
-  name: test-pod
+  name: extradata-ocean
 spec:
   containers:
   - name: test-pod
@@ -28,6 +28,6 @@ spec:
         mountPath: "/mnt"
   restartPolicy: "Never"
   volumes:
-    - name: nfs-pvc
+    - name: extradata-ocean
       persistentVolumeClaim:
-        claimName: test-claim
+        claimName: extradata-ocean

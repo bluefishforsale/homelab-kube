@@ -12,7 +12,7 @@ nfs-subdir-external-provisioner:
     server: node004
     path: /sda1
     mountOptions:
-    volumeName: nfs-subdir-node004
+    volumeName: media-node004
 
   # For creating the StorageClass automatically:
   storageClass:
@@ -27,7 +27,7 @@ nfs-subdir-external-provisioner:
 
     # Set a StorageClass name
     # Ignored if storageClass.create is false
-    name: nfs-node004
+    name: media-node004
 
     # Allow volume to be expanded dynamically
     allowVolumeExpansion: true
@@ -36,7 +36,7 @@ nfs-subdir-external-provisioner:
     reclaimPolicy: Delete
 
     # When set to false your PVs will not be archived by the provisioner upon deletion of the PVC.
-    archiveOnDelete: false
+    archiveOnDelete: true
 
     # If it exists and has 'delete' value, delete the directory. If it exists and has 'retain' value, save the directory.
     # Overrides archiveOnDelete.
@@ -45,7 +45,7 @@ nfs-subdir-external-provisioner:
 
     # Specifies a template for creating a directory path via PVC metadata's such as labels, annotations, name or namespace.
     # Ignored if value not set.
-    pathPattern: ${.PVC.namespace}/${.PVC.labels.app}
+    pathPattern: media
 
     # Set access mode - ReadWriteOnce, ReadOnlyMany or ReadWriteMany
     accessModes: ReadWriteOnce

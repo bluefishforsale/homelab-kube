@@ -1,0 +1,12 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: loki-data
+spec:
+  storageClassName: nfs-node000
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi

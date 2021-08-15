@@ -2248,11 +2248,11 @@ kube-prometheus-stack:
       ##
        volumeClaimTemplate:
          spec:
-           storageClassName: nfs-client
-           accessModes: ["ReadWriteOnce"]
+           storageClassName: nfs-node000
+           accessModes: ["ReadWriteMany"]
            resources:
              requests:
-               storage: 50Gi
+               storage: 5Gi
         #  selector: {}
 
       ## Using tmpfs volume

@@ -62,14 +62,6 @@ plex:
           targetPort: 1900
       externalTrafficPolicy: Local
 
-  autoscaling:
-    enabled: true
-    target:  # deploymentname
-    minReplicas:  # 1
-    maxReplicas:  # 100
-    targetCPUUtilizationPercentage:  20
-    targetMemoryUtilizationPercentage:  20
-
   ingress:
     main:
       # -- Enable an ingress for the code-server add-on.
@@ -92,27 +84,40 @@ plex:
   # -- Enable devices to be discoverable
   hostNetwork: false
 
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+              - plex
+        topologyKey: kubernetes.io/hostname
+
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
     config:
-      enabled: false
+      enabled: true
       mountPath: /config
       accessMode: ReadWriteMany
-      size: 1Ti
+      storageClass: nfs-node004
+      size: 1Gi
 
     transcode:
-      enabled: false
+      enabled: true
       mountPath: /transcode
       accessMode: ReadWriteMany
-      size: 1Ti
+      storageClass: nfs-node004
+      size: 1Gi
 
-    movies:
+    media:
       enabled: true
-      mountPath: /ocean
-      accessMode: ReadOnlyMany
-      size: 1Ti
-      storageClass: nfs-ocean
+      mountPath: /media
+      accessMode: ReadWriteMany
+      storageClass: media-node004
+      size: 1Gi
 
   # -- Configure the Security Context for the Pod
   podSecurityContext:
@@ -129,15 +134,24 @@ plex:
     # - 44
     # - 109
 
+  # autoscaling:
+  #   enabled: true
+  #   target:  # deploymentname
+  #   minReplicas:  1
+  #   maxReplicas:  5
+  #   targetCPUUtilizationPercentage:  90
+    # targetMemoryUtilizationPercentage:  20
+
   # -- Configure the resource requests and/or limits for the Pod
   resources:
     requests:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
     #   gpu.intel.com/i915: 1
-      cpu: 2500m
-      memory: 1024Mi
+      cpu: 16
+      memory: 4Gi
     limits:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
-      memory: 4096Mi
+      cpu: 32
+      memory: 32Gi

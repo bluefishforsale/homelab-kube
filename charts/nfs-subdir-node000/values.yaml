@@ -9,10 +9,10 @@ nfs-subdir-external-provisioner:
   imagePullSecrets: []
 
   nfs:
-    server: node004
-    path: /sda1
+    server: node000
+    path: /srv/nfs4/root
     mountOptions:
-    volumeName: nfs-subdir-node004
+    volumeName: nfs-subdir-node000
 
   # For creating the StorageClass automatically:
   storageClass:
@@ -27,7 +27,7 @@ nfs-subdir-external-provisioner:
 
     # Set a StorageClass name
     # Ignored if storageClass.create is false
-    name: nfs-node004
+    name: nfs-node000
 
     # Allow volume to be expanded dynamically
     allowVolumeExpansion: true
