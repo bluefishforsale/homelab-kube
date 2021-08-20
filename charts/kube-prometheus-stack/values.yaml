@@ -5,7 +5,7 @@ kube-prometheus-stack:
 
   ## Provide a name in place of kube-prometheus-stack for `app:` labels
   ##
-  nameOverride: ""
+  nameOverride: prom-stack
 
   ## Override the deployment namespace
   ##
@@ -688,7 +688,7 @@ kube-prometheus-stack:
 
         ## URL of prometheus datasource
         ##
-        url: http://prom-kube-prometheus-stack-prometheus:9090/
+        url: http://prom-prom-stack-prometheus.monitoring.svc.cluster.local:9090
 
         # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
         # defaultDatasourceScrapeInterval: 15s
