@@ -12,6 +12,7 @@ nfs-subdir-external-provisioner:
     server: node000
     path: /srv/nfs4/root
     mountOptions:
+     - nfsvers=4
     volumeName: nfs-subdir-node000
 
   # For creating the StorageClass automatically:
@@ -96,7 +97,15 @@ nfs-subdir-external-provisioner:
 
   tolerations: []
 
-  affinity: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "kubernetes.io/hostname"
+            operator: In
+            values:
+            - "node000"
 
   # Additional labels for any resource created
   labels: {}

@@ -121,9 +121,9 @@ plex:
 
   # -- Configure the Security Context for the Pod
   podSecurityContext:
-    # runAsUser: 568
-    # runAsGroup: 568
-    fsGroup: 568
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
     # # Hardware acceleration using an Intel iGPU w/ QuickSync
     # # These IDs below should be matched to your `video` and `render` group on the host
     # # To obtain those IDs run the following grep statement on the host:

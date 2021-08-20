@@ -10,9 +10,9 @@ sonarr:
     # -- image repository
     repository: ghcr.io/k8s-at-home/sonarr
     # -- image tag
-    tag: latest
+    tag: v3.0.6.1196
     # -- image pull policy
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   # -- environment variables.
   # @default -- See below
@@ -58,19 +58,21 @@ sonarr:
           - -c
           - curl --fail localhost:8989/api/v3/system/status?apiKey=`IFS=\> && while
             read -d \< E C; do if [[ $E = "ApiKey" ]]; then echo $C; fi; done < /config/config.xml`
-        failureThreshold: 5
-        initialDelaySeconds: 60
-        periodSeconds: 10
+        failureThreshold: 30
+        initialDelaySeconds: 180
+        periodSeconds: 30
         successThreshold: 1
-        timeoutSeconds: 10
+        timeoutSeconds: 30
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
     config:
       enabled: true
-      storageClass: nfs-node004
+      storageClass: nfs-node000
+      accessMode: ReadWriteMany
       mountPath: /config
+      size: 1G
 
     media:
       enabled: true
@@ -88,6 +90,11 @@ sonarr:
       interval: 3m
       scrapeTimeout: 1m
       additionalLabels: {}
+
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
 
   # # When using the prometheus.podMonitor the following
   # # container is required
@@ -111,3 +118,13 @@ sonarr:
       - name: config
         mountPath: /config
         readOnly: true
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "kubernetes.io/hostname"
+            operator: In
+            values:
+            - "node000"

@@ -11,7 +11,7 @@ nfs-subdir-external-provisioner:
   nfs:
     server: node004
     path: /sda1
-    mountOptions:
+    mountOptions: nfsvers=4
     volumeName: nfs-subdir-node004
 
   # For creating the StorageClass automatically:

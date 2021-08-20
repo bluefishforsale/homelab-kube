@@ -11,7 +11,7 @@ nfs-subdir-external-provisioner:
   nfs:
     server: ocean
     path: /data01
-    mountOptions:
+    mountOptions: nfsvers=4
     volumeName: nfs-subdir-ocean
 
   # For creating the StorageClass automatically:
@@ -36,7 +36,7 @@ nfs-subdir-external-provisioner:
     reclaimPolicy: Delete
 
     # When set to false your PVs will not be archived by the provisioner upon deletion of the PVC.
-    archiveOnDelete: true
+    archiveOnDelete: false
 
     # If it exists and has 'delete' value, delete the directory. If it exists and has 'retain' value, save the directory.
     # Overrides archiveOnDelete.

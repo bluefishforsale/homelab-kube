@@ -40,7 +40,7 @@ nzbget:
   persistence:
     config:
       enabled: true
-      storageClass: nfs-node004
+      storageClass: localdisk-000
       mountPath: /config
 
     media:
@@ -48,8 +48,28 @@ nzbget:
       mountPath: /media
       accessMode: ReadWriteMany
       storageClass: media-node004
-      size: 1Gi
+      size: 10Gi
 
     downloads:
-      enabled: false
+      enabled: true
+      storageClass: localdisk-000
+      accessMode: ReadWriteMany
       mountPath: /downloads
+      size: 5Gi
+
+  podSecurityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "kubernetes.io/hostname"
+            operator: In
+            values:
+            - "node000"
+
+
