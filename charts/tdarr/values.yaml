@@ -87,4 +87,4 @@ tdarr:
           - key: "kubernetes.io/hostname"
             operator: In
             values:
-            - "node000"
+            - "node004"
