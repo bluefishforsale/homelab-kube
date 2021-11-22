@@ -1,64 +1,20 @@
-#################################################################################################################
-# Define the settings for the rook-ceph cluster with common settings for a production cluster.
-# All nodes with available raw devices will be used for the Ceph cluster. At least three nodes are required
-# in this example. See the documentation for more details on storage settings available.
-################################################################################################################
-
 apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
   name: rook-ceph
-  namespace: rook-ceph # namespace:cluster
+  namespace: rook-ceph
 spec:
   cephVersion:
     image: quay.io/ceph/ceph:v16.2.6
-    allowUnsupported: false
-  # The path on the host where configuration files will be persisted. Must be specified.
-  # Important: if you reinstall the cluster, make sure you delete this directory from each host or else the mons will fail to start on the new cluster.
-  # In Minikube, the '/data' directory is configured to persist across reboots. Use "/data/rook" in Minikube environment.
   dataDirHostPath: /var/lib/rook
-  skipUpgradeChecks: false
-  # Whether or not continue if PGs are not clean during an upgrade
-  continueUpgradeAfterChecksEvenIfNotHealthy: false
-  # WaitTimeoutForHealthyOSDInMinutes defines the time (in minutes) the operator would wait before an OSD can be stopped for upgrade or restart.
-  # If the timeout exceeds and OSD is not ok to stop, then the operator would skip upgrade for the current OSD and proceed with the next one
-  # if `continueUpgradeAfterChecksEvenIfNotHealthy` is `false`. If `continueUpgradeAfterChecksEvenIfNotHealthy` is `true`, then opertor would
-  # continue with the upgrade of an OSD even if its not ok to stop after the timeout. This timeout won't be applied if `skipUpgradeChecks` is `true`.
-  # The default wait timeout is 10 minutes.
-  waitTimeoutForHealthyOSDInMinutes: 10
   mon:
     count: 3
     allowMultiplePerNode: false
-    stretchCluster:
-      failureDomainLabel: topology.rook.io/chassis
-
-  mgr:
-    count: 1
-    modules:
-      - name: pg_autoscaler
-        enabled: true
-  # enable the ceph dashboard for viewing cluster status
   dashboard:
     enabled: true
-    # serve the dashboard under a subpath (useful when you are accessing the dashboard via a reverse proxy)
-    # urlPrefix: /ceph-dashboard
-    # serve the dashboard at the given port.
-    # port: 8443
-    # serve the dashboard using SSL
-    ssl: false
-  # enable prometheus alerting for cluster
-  monitoring:
-    # requires Prometheus to be pre-installed
-    enabled: true
-    # namespace to deploy prometheusRule in. If empty, namespace of the cluster will be used.
-    # Recommended:
-    # If you have a single rook-ceph cluster, set the rulesNamespace to the same namespace as the cluster or keep it empty.
-    # If you have multiple rook-ceph clusters in the same k8s cluster, choose the same namespace (ideally, namespace with prometheus
-    # deployed) to set rulesNamespace for all the clusters. Otherwise, you will get duplicate alerts with multiple alert definitions.
-    rulesNamespace: monitoring
   network:
     # enable host networking
-    provider: host
+    # provider: host
     # enable the Multus network provider
     #provider: multus
     #selectors:
@@ -75,118 +31,27 @@ spec:
     ipFamily: "IPv4"
     # Ceph daemons to listen on both IPv4 and Ipv6 networks
     dualStack: false
-  # enable the crash collector for ceph daemon crash collection
-  crashCollector:
-    disable: false
-    # Uncomment daysToRetain to prune ceph crash entries older than the
-    # specified number of days.
-    #daysToRetain: 30
-  # enable log collector, daemons will log on files and rotate
-  # logCollector:
-  #   enabled: true
-  #   periodicity: 24h # SUFFIX may be 'h' for hours or 'd' for days.
-  # automate [data cleanup process](https://github.com/rook/rook/blob/master/Documentation/ceph-teardown.md#delete-the-data-on-hosts) in cluster destruction.
-  cleanupPolicy:
-    # Since cluster cleanup is destructive to data, confirmation is required.
-    # To destroy all Rook data on hosts during uninstall, confirmation must be set to "yes-really-destroy-data".
-    # This value should only be set when the cluster is about to be deleted. After the confirmation is set,
-    # Rook will immediately stop configuring the cluster and only wait for the delete command.
-    # If the empty string is set, Rook will not destroy any data on hosts during uninstall.
-    confirmation: ""
-    # sanitizeDisks represents settings for sanitizing OSD disks on cluster deletion
-    sanitizeDisks:
-      # method indicates if the entire disk should be sanitized or simply ceph's metadata
-      # in both case, re-install is possible
-      # possible choices are 'complete' or 'quick' (default)
-      method: quick
-      # dataSource indicate where to get random bytes from to write on the disk
-      # possible choices are 'zero' (default) or 'random'
-      # using random sources will consume entropy from the system and will take much more time then the zero source
-      dataSource: zero
-      # iteration overwrite N times instead of the default (1)
-      # takes an integer value
-      iteration: 1
-    # allowUninstallWithVolumes defines how the uninstall should be performed
-    # If set to true, cephCluster deletion does not wait for the PVs to be deleted.
-    allowUninstallWithVolumes: false
-  # To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
-  # The example under 'all' would have all services scheduled on kubernetes nodes labeled with 'role=storage-node' and
-  # tolerate taints with a key of 'storage-node'.
+  # cluster level storage configuration and selection
+  storage:
+    useAllNodes: false
+    useAllDevices: false
+    deviceFilter: "^sd[a-c]"
   placement:
+    all:
+      nodeAffinity:
+      tolerations:
+    mgr:
+      nodeAffinity:
+      tolerations:
+    mon:
+      nodeAffinity:
+      tolerations:
     osd:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: topology.kubernetes.io/hostname
+            - key: role
               operator: In
               values:
-              - node004
-              - node005
-              - node006
-  # The option to automatically remove OSDs that are out and are safe to destroy.
-  removeOSDsIfOutAndSafeToRemove: false
-#  priorityClassNames:
-#    all: rook-ceph-default-priority-class
-#    mon: rook-ceph-mon-priority-class
-#    osd: rook-ceph-osd-priority-class
-#    mgr: rook-ceph-mgr-priority-class
-  storage: # cluster level storage configuration and selection
-    useAllNodes: false
-    useAllDevices: false
-    nodes:
-    - name: "node004"
-      - devices: # specific devices to use for storage can be specified for each node
-        - name: "/dev/disk/by-id/wwn-0x690b11c0378e9100292999be47f012bb" # sda
-        - name: "/dev/disk/by-id/wwn-0x690b11c0378e9100292999d349325794" # sdb
-        - name: "/dev/disk/by-id/wwn-0x690b11c0378e910029299a064c3669ed" # sdc
-    - name: "node005"
-      - devices: # specific devices to use for storage can be specified for each node
-        - name: "/dev/disk/by-id/wwn-0x5000cca24311fa80" # sda
-        - name: "/dev/disk/by-id/wwn-0x5000cca2431424e0" # sdb
-        - name: "/dev/disk/by-id/wwn-0x5000cca24314af64" # sdc
-    - name: "node006"
-      - devices: # specific devices to use for storage can be specified for each node
-        - name: "/dev/disk/by-id/wwn-0x6c81f660efb63c0029299a1934427c8d" # sda
-        - name: "/dev/disk/by-id/wwn-0x6c81f660efb63c0029299a1a344a56d2" # sdb
-        - name: "/dev/disk/by-id/wwn-0x6c81f660efb63c0029299a1a3452b414" # sdc
-  # The section for configuring management of daemon disruptions during upgrade or fencing.
-  disruptionManagement:
-    # If true, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically
-    # via the strategy outlined in the [design](https://github.com/rook/rook/blob/master/design/ceph/ceph-managed-disruptionbudgets.md). The operator will
-    # block eviction of OSDs by default and unblock them safely when drains are detected.
-    managePodBudgets: true
-    # A duration in minutes that determines how long an entire failureDomain like `region/zone/host` will be held in `noout` (in addition to the
-    # default DOWN/OUT interval) when it is draining. This is only relevant when  `managePodBudgets` is `true`. The default value is `30` minutes.
-    osdMaintenanceTimeout: 30
-    # A duration in minutes that the operator will wait for the placement groups to become healthy (active+clean) after a drain was completed and OSDs came back up.
-    # Operator will continue with the next drain if the timeout exceeds. It only works if `managePodBudgets` is `true`.
-    # No values or 0 means that the operator will wait until the placement groups are healthy before unblocking the next drain.
-    pgHealthCheckTimeout: 0
-    # If true, the operator will create and manage MachineDisruptionBudgets to ensure OSDs are only fenced when the cluster is healthy.
-    # Only available on OpenShift.
-    manageMachineDisruptionBudgets: false
-    # Namespace in which to watch for the MachineDisruptionBudgets.
-    machineDisruptionBudgetNamespace: openshift-machine-api
-
-  # healthChecks
-  # Valid values for daemons are 'mon', 'osd', 'status'
-  healthCheck:
-    daemonHealth:
-      mon:
-        disabled: false
-        interval: 45s
-      osd:
-        disabled: false
-        interval: 60s
-      status:
-        disabled: false
-        interval: 60s
-    # Change pod liveness probe, it works for all mon,mgr,osd daemons
-    livenessProbe:
-      mon:
-        disabled: false
-      mgr:
-        disabled: false
-      osd:
-        disabled: false
+              - storage-node
