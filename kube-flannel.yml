@@ -1,4 +1,9 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flannel
+---
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -190,6 +195,11 @@ spec:
         - --ip-masq
         - --kube-subnet-mgr
         - -v=10
+        - --iface-regex=bond.
+        - --iface-regex=enp2s.
+        - --iface-regex=enp2s.
+        - --iface-regex=eno[34]
+        - --iface-regex=192\.168.*
         resources:
           requests:
             cpu: "100m"
