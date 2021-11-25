@@ -2354,13 +2354,13 @@ kube-prometheus-stack:
       storageSpec:
       ## Using PersistentVolumeClaim
       ##
-        volumeClaimTemplate:
-          spec:
-            storageClassName: rook-cephfs
-            accessModes: ["ReadWriteMany" ]
-            resources:
-              requests:
-                storage: 1Gi
+      volumeClaimTemplate:
+        spec:
+          storageClassName: rook-cephfs
+          accessModes: ["ReadWriteMany" ]
+          resources:
+            requests:
+              storage: 1Gi
       #    selector: {}
 
       ## Using tmpfs volume

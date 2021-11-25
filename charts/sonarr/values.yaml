@@ -69,16 +69,17 @@ sonarr:
   persistence:
     config:
       enabled: true
-      storageClass: nfs-node000
+      storageClass: rook-cephfs
       accessMode: ReadWriteMany
       mountPath: /config
       size: 1G
 
     media:
+      existingClaim: true
       enabled: true
       mountPath: /media
       accessMode: ReadWriteMany
-      storageClass: media-node004
+      storageClass: rook-cephfs
       size: 1G
 
   prometheus:

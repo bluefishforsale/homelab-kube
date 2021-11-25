@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: media
         persistentVolumeClaim:
-          claimName: rook-cephfs-pvc
+          claimName: media
           readOnly: false
       - name: mon-endpoint-volume
         configMap:
