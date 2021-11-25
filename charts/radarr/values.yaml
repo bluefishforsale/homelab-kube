@@ -70,17 +70,15 @@ radarr:
   persistence:
     config:
       enabled: true
-      storageClass: nfs-node000
+      storageClass: rook-cephfs
       accessMode: ReadWriteMany
       mountPath: /config
       size: 1G
 
     media:
       enabled: true
-      mountPath: /media
-      accessMode: ReadWriteMany
-      storageClass: media-node004
-      size: 1G
+      existingClaim: movies
+      mountPath: /movies
 
   podSecurityContext:
     runAsUser: 1000
@@ -119,13 +117,3 @@ radarr:
       - name: config
         mountPath: /config
         readOnly: true
-
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "kubernetes.io/hostname"
-            operator: In
-            values:
-            - "node000"

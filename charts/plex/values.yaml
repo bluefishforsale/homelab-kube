@@ -84,16 +84,16 @@ plex:
   # -- Enable devices to be discoverable
   hostNetwork: false
 
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-            - key: app.kubernetes.io/instance
-              operator: In
-              values:
-              - plex
-        topologyKey: kubernetes.io/hostname
+  # affinity:
+  #   podAntiAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #     - labelSelector:
+  #         matchExpressions:
+  #           - key: app.kubernetes.io/instance
+  #             operator: In
+  #             values:
+  #             - plex
+  #       topologyKey: kubernetes.io/hostname
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
@@ -102,22 +102,23 @@ plex:
       enabled: true
       mountPath: /config
       accessMode: ReadWriteMany
-      storageClass: nfs-node004
-      size: 1Gi
+      storageClass: rook-cephfs
+      size: 100Gi
 
     transcode:
+      existingClaim: transcode
       enabled: true
       mountPath: /transcode
-      accessMode: ReadWriteMany
-      storageClass: nfs-node004
-      size: 1Gi
 
-    media:
+    tv:
+      existingClaim: tv
       enabled: true
-      mountPath: /media
-      accessMode: ReadWriteMany
-      storageClass: media-node004
-      size: 1Gi
+      mountPath: /tv
+
+    movies:
+      existingClaim: movies
+      enabled: true
+      mountPath: /movies
 
   # -- Configure the Security Context for the Pod
   podSecurityContext:

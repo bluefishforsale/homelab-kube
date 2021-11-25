@@ -2,6 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: media
   name: ceph-mounts
   labels:
     app: ceph-mounts
@@ -25,6 +26,8 @@ spec:
           securityContext:
             runAsNonRoot: false
           volumeMounts:
+          - name: nfs-ocean
+            mountPath: /nfs-ocean
           {{- range .Values.persistentVolumeClaims }}
           - name: {{ .name}}
             mountPath: /{{ .name}}
@@ -36,6 +39,10 @@ spec:
           claimName: {{ .name }}
           readOnly: false
       {{- end }}
+      - name: nfs-ocean
+        persistentVolumeClaim:
+          claimName: nfs-ocean-pvc
+          readOnly: false
       - name: mon-endpoint-volume
         configMap:
           name: rook-ceph-mon-endpoints

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-ocean-pv
+  namespace: media
+spec:
+  capacity:
+    storage: 18T
+  storageClassName: ""
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    path: /data01
+    server: 192.168.1.143
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=4.2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-ocean-pvc
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  volumeName: nfs-ocean-pv
+  resources:
+    requests:
+      storage: 18T
