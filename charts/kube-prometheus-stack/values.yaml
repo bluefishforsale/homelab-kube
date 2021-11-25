@@ -5,7 +5,7 @@ kube-prometheus-stack:
 
   ## Provide a name in place of kube-prometheus-stack for `app:` labels
   ##
-  nameOverride: kube-prometheus-stack
+  nameOverride: kube-prom-stack
 
   ## Override the deployment namespace
   ##
@@ -209,25 +209,26 @@ kube-prometheus-stack:
     #       {{ end }}
 
     ingress:
-      enabled: false
+      enabled: true
 
       # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
       # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
       # ingressClassName: nginx
 
-      annotations: {}
+      annotations:
+        kubernetes.io/ingress.class: nginx
 
       labels: {}
 
       ## Hosts must be provided if Ingress is enabled.
       ##
-      hosts: []
-        # - alertmanager.domain.com
+      hosts:
+      - alertmanager.svc.cluster.local
 
       ## Paths to use for ingress rules - one path should match the alertmanagerSpec.routePrefix
       ##
-      paths: []
-      # - /
+      paths:
+      - /
 
       ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
       ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
@@ -670,6 +671,7 @@ kube-prometheus-stack:
 
       ## Path for grafana ingress
       path: /
+      # pathType: ImplementationSpecific
 
       ## TLS configuration for grafana Ingress
       ## Secret must be manually created in the namespace
@@ -701,7 +703,7 @@ kube-prometheus-stack:
 
         ## URL of prometheus datasource
         ##
-        url: http://prom-kube-prometheus-stack-prometheus.monitoring:9090
+        url: http://prom-kube-prom-stack-prometheus.monitoring:9090
         # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
         # defaultDatasourceScrapeInterval: 15s
 
@@ -724,14 +726,14 @@ kube-prometheus-stack:
 
     ## Configure additional grafana datasources (passed through tpl)
     ## ref: http://docs.grafana.org/administration/provisioning/#datasources
-      # additionalDataSources:
-      #   - name: Loki
-      #     type: loki
-      #     url: http://loki.monitoring:3100
-      #     editable: false
-      #     jsonData:
-      #       tlsSkipVerify: true
-      #     version: 1
+    additionalDataSources:
+      - name: Loki
+        type: loki
+        url: http://loki.monitoring:3100
+        editable: false
+        jsonData:
+          tlsSkipVerify: true
+        version: 1
     # - name: prometheus-sample
     #   access: proxy
     #   basicAuth: true
@@ -1857,7 +1859,8 @@ kube-prometheus-stack:
       # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
       # ingressClassName: nginx
 
-      annotations: {}
+      annotations:
+        kubernetes.io/ingress.class: nginx
       labels: {}
       servicePort: 10901
 
@@ -1901,13 +1904,14 @@ kube-prometheus-stack:
     #     someoneelse:$apr1$DMZX2Z4q$6SbQIfyuLQd.xmo/P0m2c.
 
     ingress:
-      enabled: true
+      enabled: false
 
       # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
       # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
       ingressClassName: nginx
 
-      annotations: {}
+      annotations:
+        kubernetes.io/ingress.class: nginx
       labels: {}
 
       ## Hostnames.
@@ -1925,7 +1929,7 @@ kube-prometheus-stack:
 
       ## For Kubernetes >= 1.18 you should specify the pathType (determines how Ingress paths should be matched)
       ## See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#better-path-matching-with-path-types
-      pathType: ImplementationSpecific
+      # pathType: ImplementationSpecific
 
       ## TLS configuration for Prometheus Ingress
       ## Secret must be manually created in the namespace

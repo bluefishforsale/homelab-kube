@@ -198,7 +198,7 @@ kube-prometheus-stack:
     #       {{- $root := . -}}
     #       {{ range .Alerts }}
     #         *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
-    #         *Cluster:*  {{ template "cluster" $root }}
+    #         *Cluster:* {{ template "cluster" $root }}
     #         *Description:* {{ .Annotations.description }}
     #         *Graph:* <{{ .GeneratorURL }}|:chart_with_upwards_trend:>
     #         *Runbook:* <{{ .Annotations.runbook }}|:spiral_note_pad:>
@@ -367,14 +367,16 @@ kube-prometheus-stack:
 
       bearerTokenFile:
 
-      ## 	metric relabel configs to apply to samples before ingestion.
+      ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
       metricRelabelings: []
       # - action: keep
       #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
       #   sourceLabels: [__name__]
 
-      # 	relabel configs to apply to samples before ingestion.
+      ## RelabelConfigs to apply to samples before scraping
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
       relabelings: []
       # - sourceLabels: [__meta_kubernetes_pod_node_name]
@@ -487,11 +489,11 @@ kube-prometheus-stack:
       #   selector: {}
 
 
-      ## 	The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name.	string	false
+      ## The external URL the Alertmanager instances will be available under. This is necessary to generate correct URLs. This is necessary if Alertmanager is not served from root of a DNS name. string  false
       ##
       externalUrl:
 
-      ## 	The route prefix Alertmanager registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
+      ## The route prefix Alertmanager registers HTTP handlers for. This is useful, if using ExternalURL and a proxy is rewriting HTTP routes of a request, and the actual ExternalURL is still true,
       ## but the server serves requests under a different route prefix. For example for use with kubectl proxy.
       ##
       routePrefix: /
@@ -559,7 +561,7 @@ kube-prometheus-stack:
       #       app: alertmanager
 
       ## SecurityContext holds pod-level security attributes and common container settings.
-      ## This defaults to non root user with uid 1000 and gid 2000.	*v1.PodSecurityContext	false
+      ## This defaults to non root user with uid 1000 and gid 2000. *v1.PodSecurityContext  false
       ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
       ##
       securityContext:
@@ -632,7 +634,7 @@ kube-prometheus-stack:
     ##
     forceDeployDashboards: true
 
-    ## Deploy default dashboards.
+    ## Deploy default dashboards
     ##
     defaultDashboardsEnabled: true
 
@@ -652,7 +654,7 @@ kube-prometheus-stack:
       ## Labels to be added to the Ingress
       ##
       labels: {}
-      #
+
       ## Hostnames.
       ## Must be provided if Ingress is enable.
       ##
@@ -788,12 +790,17 @@ kube-prometheus-stack:
           component: apiserver
           provider: kubernetes
 
-      ## 	metric relabel configs to apply to samples before ingestion.
+      ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
       metricRelabelings: []
       # - action: keep
       #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
       #   sourceLabels: [__name__]
+
+      ## RelabelConfigs to apply to samples before scraping
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+      ##
       relabelings: []
       # - sourceLabels:
       #     - __meta_kubernetes_namespace
@@ -838,7 +845,9 @@ kube-prometheus-stack:
       resource: false
       # From kubernetes 1.18, /metrics/resource/v1alpha1 renamed to /metrics/resource
       resourcePath: "/metrics/resource/v1alpha1"
-      ## Metric relabellings to apply to samples before ingestion
+
+      ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
       cAdvisorMetricRelabelings: []
       # - sourceLabels: [__name__, image]
@@ -852,7 +861,8 @@ kube-prometheus-stack:
       #   replacement: $1
       #   action: drop
 
-      ## Metric relabellings to apply to samples before ingestion
+      ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
       probesMetricRelabelings: []
       # - sourceLabels: [__name__, image]
@@ -866,9 +876,10 @@ kube-prometheus-stack:
       #   replacement: $1
       #   action: drop
 
-      # 	relabel configs to apply to samples before ingestion.
-      #   metrics_path is required to match upstream rules and charts
+      ## RelabelConfigs to apply to samples before scraping
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
       ##
+      ## metrics_path is required to match upstream rules and charts
       cAdvisorRelabelings:
         - sourceLabels: [__metrics_path__]
           targetLabel: metrics_path
@@ -879,6 +890,9 @@ kube-prometheus-stack:
       #   replacement: $1
       #   action: replace
 
+      ## RelabelConfigs to apply to samples before scraping
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+      ##
       probesRelabelings:
         - sourceLabels: [__metrics_path__]
           targetLabel: metrics_path
@@ -889,6 +903,9 @@ kube-prometheus-stack:
       #   replacement: $1
       #   action: replace
 
+      ## RelabelConfigs to apply to samples before scraping
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+      ##
       resourceRelabelings:
         - sourceLabels: [__metrics_path__]
           targetLabel: metrics_path
@@ -899,6 +916,9 @@ kube-prometheus-stack:
       #   replacement: $1
       #   action: replace
 
+      ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+      ##
       metricRelabelings: []
       # - sourceLabels: [__name__, image]
       #   separator: ;
