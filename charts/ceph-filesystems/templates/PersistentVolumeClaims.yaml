@@ -1,0 +1,16 @@
+{{- with .Values.persistentVolumeClaims }}
+{{- range . }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name:  {{ .name }}
+spec:
+  accessModes:
+  - {{ .accessMode }}
+  resources:
+    requests:
+      storage: {{ .storage }}
+  storageClassName: {{ .storageClassName | default "rook-cephfs" }}
+  {{- end }}
+  {{- end }}

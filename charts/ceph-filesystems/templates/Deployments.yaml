@@ -2,6 +2,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: ceph-mounts
+  labels:
+    app: ceph-mounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ceph-mounts
+  template:
+    metadata:
+      labels:
+        app: ceph-mounts
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          command: ['sh', '-c', 'sleep 3600']
+          imagePullPolicy: IfNotPresent
+          tty: true
+          securityContext:
+            runAsNonRoot: false
+          volumeMounts:
+          {{- range .Values.persistentVolumeClaims }}
+          - name: {{ .name}}
+            mountPath: /{{ .name}}
+          {{- end }}
+      volumes:
+      {{- range .Values.persistentVolumeClaims }}
+      - name: {{ .name}}
+        persistentVolumeClaim:
+          claimName: {{ .name }}
+          readOnly: false
+      {{- end }}
+      - name: mon-endpoint-volume
+        configMap:
+          name: rook-ceph-mon-endpoints
+          items:
+            - key: data
+              path: mon-endpoints
+      - name: ceph-config
+        emptyDir: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: ceph-tools
   labels:
     app: ceph-tools
@@ -17,27 +63,6 @@ spec:
     spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - name: ceph-ubuntu
-          image: ubuntu:latest
-          command: ['sh', '-c', 'sleep 3600']
-          imagePullPolicy: IfNotPresent
-          tty: true
-          securityContext:
-            runAsNonRoot: false
-          env:
-            - name: ROOK_CEPH_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: rook-ceph-mon
-                  key: ceph-username
-            - name: ROOK_CEPH_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: rook-ceph-mon
-                  key: ceph-secret
-          volumeMounts:
-          - name: media
-            mountPath: /media
         - name: ceph-tools
           image: rook/ceph:master
           command: ["/bin/bash"]
@@ -60,17 +85,11 @@ spec:
                   name: rook-ceph-mon
                   key: ceph-secret
           volumeMounts:
-          - name: media
-            mountPath: /media
           - mountPath: /etc/ceph
             name: ceph-config
           - name: mon-endpoint-volume
             mountPath: /etc/rook
       volumes:
-      - name: media
-        persistentVolumeClaim:
-          claimName: media
-          readOnly: false
       - name: mon-endpoint-volume
         configMap:
           name: rook-ceph-mon-endpoints
