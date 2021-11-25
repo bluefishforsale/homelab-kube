@@ -36,22 +36,26 @@ spec:
     useAllNodes: false
     useAllDevices: false
     deviceFilter: "^sd[a-c]"
-  placement:
-    all:
-      nodeAffinity:
-      tolerations:
-    mgr:
-      nodeAffinity:
-      tolerations:
-    mon:
-      nodeAffinity:
-      tolerations:
-    osd:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: role
-              operator: In
-              values:
-              - storage-node
+    nodes:
+    - name: node004
+    - name: node005
+    - name: node006
+  # placement:
+  #   all:
+  #     nodeAffinity:
+  #     tolerations:
+  #   mgr:
+  #     nodeAffinity:
+  #     tolerations:
+  #   mon:
+  #     nodeAffinity:
+  #     tolerations:
+  #   osd:
+  #     nodeAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #         nodeSelectorTerms:
+  #         - matchExpressions:
+  #           - key: role
+  #             operator: In
+  #             values:
+  #             - storage-node
