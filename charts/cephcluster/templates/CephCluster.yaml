@@ -7,6 +7,10 @@ spec:
   cephVersion:
     image: quay.io/ceph/ceph:v16.2.6
   dataDirHostPath: /var/lib/rook
+  mgr:
+    modules:
+    - name: pg_autoscaler
+      enabled: false
   mon:
     count: 3
     allowMultiplePerNode: false
@@ -40,22 +44,19 @@ spec:
     - name: node004
     - name: node005
     - name: node006
-  # placement:
-  #   all:
-  #     nodeAffinity:
-  #     tolerations:
+  placement:
+    all:
+      tolerations:
+        - key: storage-node
+          operator: Exists
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: storage-node
+              operator: In
+              values:
+              - "true"
   #   mgr:
-  #     nodeAffinity:
-  #     tolerations:
   #   mon:
-  #     nodeAffinity:
-  #     tolerations:
   #   osd:
-  #     nodeAffinity:
-  #       requiredDuringSchedulingIgnoredDuringExecution:
-  #         nodeSelectorTerms:
-  #         - matchExpressions:
-  #           - key: role
-  #             operator: In
-  #             values:
-  #             - storage-node

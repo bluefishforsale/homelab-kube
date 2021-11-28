@@ -6,7 +6,7 @@ metadata:
 data:
   config: |
     [global]
-    osd_pool_default_size = 1
-    mon_warn_on_pool_no_redundancy = false
+    osd_pool_default_size = 2
+    mon_warn_on_pool_no_redundancy = true
     bdev_flock_retry = 20
     bluefs_buffered_io = false
