@@ -6,7 +6,7 @@
 1. kubectl apply -n kube-system -f coredns-1.8.yaml
 1. kubectl apply -f ocean-nfs-pvc.yaml
 1. helm install -n rook-ceph rook-ceph -f charts/rook-ceph/values.yaml charts/rook-ceph
-1. helm install -n rook-ceph ceph-cluster charts/cephcluster
+1. helm install -n rook-ceph rook-ceph-cluster -f charts/rook-ceph-cluster/values.yaml charts/rook-ceph-cluster/
 1. helm install -n rook-ceph ceph-filesystems charts/ceph-filesystems
 1. helm install metallb -n metallb -f charts/metallb/values.yaml charts/metallb
 1. helm install  -n nginx ingress-nginx charts/ingress-nginx/

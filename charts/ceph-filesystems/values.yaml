@@ -6,12 +6,12 @@ persistentVolumeClaims:
     storageClassName: rook-cephfs
   - name: tv
     namespace: media
-    storage: 10T
+    storage: 15T
     accessMode: ReadWriteMany
     storageClassName: rook-cephfs
   - name: movies
     namespace: media
-    storage: 10T
+    storage: 15T
     accessMode: ReadWriteMany
     storageClassName: rook-cephfs
   - name: music

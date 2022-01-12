@@ -40,36 +40,27 @@ nzbget:
   persistence:
     config:
       enabled: true
-      storageClass: localdisk-000
+      storageClass: rook-cephfs
       mountPath: /config
 
-    media:
+    incoming:
       enabled: true
-      mountPath: /media
-      accessMode: ReadWriteMany
-      storageClass: media-node004
-      size: 10Gi
+      storageClass: rook-cephfs
+      mountPath: /incoming
+      accessMode: ReadWriteOnce
+      size: 100G
 
-    downloads:
+    tv:
+      existingClaim: tv
       enabled: true
-      storageClass: localdisk-000
-      accessMode: ReadWriteMany
-      mountPath: /downloads
-      size: 5Gi
+      mountPath: /tv
+
+    movies:
+      existingClaim: movies
+      enabled: true
+      mountPath: /movies
 
   podSecurityContext:
     runAsUser: 1000
     runAsGroup: 1000
     fsGroup: 1000
-
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "kubernetes.io/hostname"
-            operator: In
-            values:
-            - "node000"
-
-

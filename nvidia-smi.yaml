@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nvidia-smi
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.present
+            operator: In
+            values:
+            - "true"
+  containers:
+  - image: nvidia/cuda:11.5.1-cudnn8-runtime-ubuntu18.04
+    name: nvidia-smi
+    command: ["sleep", "3600"]
+    # args:
+      # - nvidia-smi
+    # resources:
+    #   limits:
+    #     nvidia.com/gpu.present: 1
+    #   requests:
+    #     nvidia.com/gpu.present: 1
+    volumeMounts:
+    - mountPath: /usr/bin/
+      name: binaries
+    - mountPath: /usr/lib/x86_64-linux-gnu
+      name: libraries
+  volumes:
+  - name: binaries
+    hostPath:
+      path: /usr/bin/
+  - name: libraries
+    hostPath:
+      path: /usr/lib/x86_64-linux-gnu

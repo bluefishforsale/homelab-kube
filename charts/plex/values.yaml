@@ -9,9 +9,9 @@ plex:
     # -- image repository
     repository: ghcr.io/k8s-at-home/plex
     # -- image tag
-    tag: v1.23.2.4656-85f0adf5b
+    tag: latest
     # -- image pull policy
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   # -- environment variables. See [plex docs](https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/) for more details.
   # **NOTE:** Plex preference options are camelCase and CASE SENSITIVE!
@@ -22,15 +22,15 @@ plex:
     TZ: America/Los_Angeles
     ADVERTISE_IP: http://plex.svc.cluster.local
     # ALLOWED_NETWORKS:
-    # PLEX_CLAIM: "6SWvgNykocyxaHJszdz5"
-    FriendlyName: plex-kube
+    PLEX_CLAIM: "6SWvgNykocyxaHJszdz5"
+    FriendlyName: MegaPlex
     # EnableIPv6: 0
     LogVerbose: 1
     logDebug: 1
     # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
     # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
     # PLEX_PREFERENCE_6: "TranscoderQuality=2"
-    # PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
+    PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
     # PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
 
   # -- Configures service settings for the chart.
@@ -83,17 +83,6 @@ plex:
 
   # -- Enable devices to be discoverable
   hostNetwork: false
-
-  # affinity:
-  #   podAntiAffinity:
-  #     requiredDuringSchedulingIgnoredDuringExecution:
-  #     - labelSelector:
-  #         matchExpressions:
-  #           - key: app.kubernetes.io/instance
-  #             operator: In
-  #             values:
-  #             - plex
-  #       topologyKey: kubernetes.io/hostname
 
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
@@ -149,10 +138,23 @@ plex:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
     #   gpu.intel.com/i915: 1
-      cpu: 16
+      cpu: 8
       memory: 4Gi
     limits:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
       cpu: 32
       memory: 32Gi
+
+  tolerations:
+    - key: storage-node
+      operator: Exists
+  affinity:
+    nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: nvidia.com/gpu.present
+              operator: In
+              values:
+              - "true"

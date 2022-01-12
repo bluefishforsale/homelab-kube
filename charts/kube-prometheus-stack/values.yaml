@@ -9,7 +9,7 @@ kube-prometheus-stack:
 
   ## Override the deployment namespace
   ##
-  namespaceOverride: monitoring
+  namespaceOverride: ""
 
   ## Provide a k8s version to auto dashboard import script example: kubeTargetVersionOverride: 1.16.6
   ##
@@ -746,6 +746,14 @@ kube-prometheus-stack:
     #   type: prometheus
     #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
     #   version: 1
+
+    ## Configure grafana dashboard to import
+    ## NOTE: To use dashboards you must also enable/configure dashboardProviders
+    ## ref: https://grafana.com/dashboards
+    ##
+    ## dashboards per provider, use provider name as key.
+    ##
+    dashboards: {}
 
     ## Passed to grafana subchart and used by servicemonitor below
     ##
@@ -2251,7 +2259,7 @@ kube-prometheus-stack:
 
       ## How long to retain metrics
       ##
-      retention: 10d
+      retention: 90d
 
       ## Maximum size of metrics
       ##
@@ -2358,7 +2366,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteMany" ]
             resources:
               requests:
-                storage: 1Gi
+                storage: 100Gi
       #    selector: {}
 
       ## Using tmpfs volume
