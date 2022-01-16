@@ -644,7 +644,7 @@ kube-prometheus-stack:
     ##
     defaultDashboardsTimezone: America/Los_Angeles
 
-    adminPassword: prom-operator
+    adminPassword: admin
 
     ingress:
       ## If true, Grafana Ingress will be created

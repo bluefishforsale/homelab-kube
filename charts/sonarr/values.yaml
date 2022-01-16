@@ -69,10 +69,8 @@ sonarr:
   persistence:
     config:
       enabled: true
-      storageClass: rook-cephfs
-      accessMode: ReadWriteMany
+      existingClaim: sonarr-config
       mountPath: /config
-      size: 1G
 
     media:
       existingClaim: tv

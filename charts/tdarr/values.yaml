@@ -62,17 +62,23 @@ tdarr:
   persistence:
     config:
       enabled: true
-      storageClass: nfs-node000
-      accessMode: ReadWriteMany
+      existingClaim: tdarr-config
       mountPath: /config
-      size: 1G
 
-    media:
+    transcode:
       enabled: true
-      mountPath: /media
-      accessMode: ReadWriteMany
-      storageClass: media-node004
-      size: 1G
+      existingClaim: transcode
+      mountPath: /transcode
+
+    tv:
+      enabled: true
+      existingClaim: tv
+      mountPath: /tv
+
+    movies:
+      enabled: true
+      existingClaim: movies
+      mountPath: /movies
 
   # podSecurityContext:
   #   runAsUser: 1000

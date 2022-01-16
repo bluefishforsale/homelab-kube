@@ -1,7 +1,25 @@
 persistentVolumeClaims:
+  - name: tdarr-config
+    namespace: media
+    storage: 1Gi
+    accessMode: ReadWriteMany
+  - name: sonarr-config
+    namespace: media
+    storage: 1Gi
+    accessMode: ReadWriteMany
+  - name: radarr-config
+    namespace: media
+    storage: 5Gi
+    accessMode: ReadWriteMany
+    storageClassName: rook-cephfs
+  - name: plex-config
+    namespace: media
+    storage: 100Gi
+    accessMode: ReadWriteMany
+    storageClassName: rook-cephfs
   - name: transcode
     namespace: media
-    storage: 500M
+    storage: 1500M
     accessMode: ReadWriteMany
     storageClassName: rook-cephfs
   - name: tv

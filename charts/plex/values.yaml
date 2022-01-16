@@ -89,24 +89,22 @@ plex:
   persistence:
     config:
       enabled: true
+      existingClaim: plex-config
       mountPath: /config
-      accessMode: ReadWriteMany
-      storageClass: rook-cephfs
-      size: 100Gi
 
     transcode:
-      existingClaim: transcode
       enabled: true
+      existingClaim: transcode
       mountPath: /transcode
 
     tv:
-      existingClaim: tv
       enabled: true
+      existingClaim: tv
       mountPath: /tv
 
     movies:
-      existingClaim: movies
       enabled: true
+      existingClaim: movies
       mountPath: /movies
 
   # -- Configure the Security Context for the Pod

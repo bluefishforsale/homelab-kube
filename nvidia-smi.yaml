@@ -18,11 +18,11 @@ spec:
     command: ["sleep", "3600"]
     # args:
       # - nvidia-smi
-    # resources:
-    #   limits:
-    #     nvidia.com/gpu.present: 1
-    #   requests:
-    #     nvidia.com/gpu.present: 1
+    resources:
+      limits:
+        nvidia.com/gpu.present: 1
+      requests:
+        nvidia.com/gpu.present: 1
     volumeMounts:
     - mountPath: /usr/bin/
       name: binaries

@@ -1,0 +1,7 @@
+nfsVolumes:
+  - nfs: /nfs-ocean/complete/movies
+    ceph: /movies
+    pvc: movies
+  - nfs: /nfs-ocean/complete/tv
+    ceph: /tv
+    pvc: tv

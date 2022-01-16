@@ -1,0 +1,42 @@
+{{- with .Values.nfsVolumes }}
+{{- range . }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: "rsync-{{ .pvc }}"
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: "rsync-{{ .pvc }}"
+            image: instrumentisto/rsync-ssh
+            imagePullPolicy: IfNotPresent
+            command:
+            - rsync
+            - -rav
+            - --stats
+            - --delete
+            - --chown=1000:1000
+            - {{ .nfs }}
+            - {{ .ceph }}
+            volumeMounts:
+            - name: nfs-ocean
+              mountPath: /nfs-ocean
+            - name: {{ .pvc }}
+              mountPath: {{ .ceph }}
+          volumes:
+          - name: nfs-ocean
+            persistentVolumeClaim:
+              claimName: nfs-ocean-pvc
+              readOnly: true
+          - name: {{ .pvc }}
+            persistentVolumeClaim:
+              claimName: {{ .pvc }}
+              readOnly: false
+          restartPolicy: OnFailure
+{{- end }}
+{{- end }}

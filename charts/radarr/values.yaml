@@ -70,10 +70,8 @@ radarr:
   persistence:
     config:
       enabled: true
-      storageClass: rook-cephfs
-      accessMode: ReadWriteMany
+      existingClaim: radarr-config
       mountPath: /config
-      size: 1G
 
     media:
       enabled: true
