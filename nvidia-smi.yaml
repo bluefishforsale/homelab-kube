@@ -13,16 +13,16 @@ spec:
             values:
             - "true"
   containers:
-  - image: nvidia/cuda:11.5.1-cudnn8-runtime-ubuntu18.04
+  - image: nvidia/cuda:11.4.2-cudnn8-runtime-ubuntu18.04
     name: nvidia-smi
     command: ["sleep", "3600"]
     # args:
       # - nvidia-smi
     resources:
       limits:
-        nvidia.com/gpu.present: 1
+        nvidia.com/gpu: 1
       requests:
-        nvidia.com/gpu.present: 1
+        nvidia.com/gpu: 1
     volumeMounts:
     - mountPath: /usr/bin/
       name: binaries

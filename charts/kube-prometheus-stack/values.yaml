@@ -2366,7 +2366,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteMany" ]
             resources:
               requests:
-                storage: 100Gi
+                storage: 1Ti
       #    selector: {}
 
       ## Using tmpfs volume

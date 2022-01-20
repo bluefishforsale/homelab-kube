@@ -391,6 +391,7 @@ rook-ceph-cluster:
         name: rook-cephfs
         reclaimPolicy: Retain
         allowVolumeExpansion: true
+        mount_options: discard
         # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem.md#provision-storage for available configuration
         parameters:
           # The secrets contain Ceph admin credentials.

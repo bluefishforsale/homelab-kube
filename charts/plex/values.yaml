@@ -4,6 +4,8 @@ plex:
   # This chart inherits from our common library chart. You can check the default values/options here:
   # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
   #
+  runtimeClassName:
+    nvidia-container-runtime
 
   image:
     # -- image repository
@@ -27,6 +29,8 @@ plex:
     # EnableIPv6: 0
     LogVerbose: 1
     logDebug: 1
+    NVIDIA_VISIBLE_DEVICES: all
+    NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
     # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
     # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
     # PLEX_PREFERENCE_6: "TranscoderQuality=2"
@@ -138,11 +142,13 @@ plex:
     #   gpu.intel.com/i915: 1
       cpu: 8
       memory: 4Gi
+      nvidia.com/gpu: 1
     limits:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
       cpu: 32
       memory: 32Gi
+      nvidia.com/gpu: 1
 
   tolerations:
     - key: storage-node

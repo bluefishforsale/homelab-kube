@@ -45,7 +45,7 @@ operator:
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   priorityClassName: system-node-critical
-  defaultRuntime: docker
+  defaultRuntime: containerd
   runtimeClass: nvidia
   initContainer:
     image: cuda

@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: media
+  name: ceph-mounts
+  labels:
+    app: ceph-mounts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ceph-mounts
+  template:
+    metadata:
+      labels:
+        app: ceph-mounts
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          command: ['sh', '-c', 'sleep 3600']
+          imagePullPolicy: IfNotPresent
+          tty: true
+          securityContext:
+            runAsNonRoot: false
+          volumeMounts:
+          - name: nfs-ocean
+            mountPath: /nfs-ocean
+          {{- range .Values.persistentVolumeClaims }}
+          - name: {{ .name }}
+            mountPath: /{{ .name }}
+          {{- end }}
+      volumes:
+      {{- range .Values.persistentVolumeClaims }}
+      - name: {{ .name}}
+        persistentVolumeClaim:
+          claimName: {{ .name }}
+          readOnly: false
+      {{- end }}
+      - name: nfs-ocean
+        persistentVolumeClaim:
+          claimName: nfs-ocean-pvc
+          readOnly: false
