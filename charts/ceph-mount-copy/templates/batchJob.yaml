@@ -15,7 +15,7 @@ spec:
   #          │ │ │ │ │
   #          │ │ │ │ │
   #          * * * * *
-  schedule: "* * * * *"
+  schedule: "15 * * * *"
   concurrencyPolicy: Forbid
   jobTemplate:
     spec:
