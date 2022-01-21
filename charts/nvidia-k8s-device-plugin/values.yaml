@@ -1,0 +1,18 @@
+nvidia:
+  nvidia-device-plugin:
+    nodeSelector:
+      nvidia.com/gpu.present: "true"
+  nvidia-dcgm-exporter:
+    nodeSelector:
+      nvidia.com/gpu.present: "true"
+
+nvidia-gpu-exporter:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: nvidia.com/gpu.present
+            operator: In
+            values:
+            - "true"
