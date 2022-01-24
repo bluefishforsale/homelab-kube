@@ -22,10 +22,48 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 32,
-  "iteration": 1642732691891,
+  "iteration": 1642801473496,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "dedupStrategy": "exact",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "expr": "{namespace=\"media\", app=~\"rsync-.*\"}",
+          "instant": false,
+          "maxLines": 50,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Rsync cronJob Log",
+      "type": "logs"
+    },
     {
       "fieldConfig": {
         "defaults": {
@@ -83,7 +121,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 11
       },
       "id": 2,
       "interval": "1m",
@@ -97,7 +135,7 @@
             "min"
           ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "bottom"
         },
         "tooltip": {
           "mode": "single"
@@ -111,27 +149,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "(\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n  -\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n)\n",
+          "expr": "(\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n  -\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n) ",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Used Space",
+          "legendFormat": "{{persistentvolumeclaim}}",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "exemplar": true,
-          "expr": "sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n",
-          "format": "time_series",
-          "hide": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Free Space",
-          "refId": "B"
         }
       ],
       "title": "/movies PV Usage",
@@ -194,7 +218,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 11
       },
       "id": 5,
       "interval": "1m",
@@ -208,7 +232,7 @@
             "min"
           ],
           "displayMode": "table",
-          "placement": "right"
+          "placement": "bottom"
         },
         "tooltip": {
           "mode": "single"
@@ -256,10 +280,10 @@
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 18
       },
       "hiddenSeries": false,
       "id": 4,
@@ -344,41 +368,6 @@
       "yaxis": {
         "align": false
       }
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 16
-      },
-      "id": 2,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
-          },
-          "expr": "{namespace=\"media\", app=~\"rsync-.*\"}",
-          "refId": "A"
-        }
-      ],
-      "title": "Panel Title",
-      "type": "logs"
     }
   ],
   "refresh": "10s",
@@ -447,13 +436,13 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Rsync status",
   "uid": "Zs7mggxnz",
-  "version": 3,
+  "version": 8,
   "weekStart": ""
 }

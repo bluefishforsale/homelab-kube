@@ -1,11 +1,11 @@
 apiVersion: v2
-name: k8s-device-plugin
+name: nvidia-support
 version: 1.0.0
 
 dependencies:
-  - name: nvidia
-    version: 0.4.3
-    repository: https://mesosphere.github.io/charts/staging
+  - name: nvidia-device-plugin
+    version: 0.10.0
+    repository: https://nvidia.github.io/k8s-device-plugin
   - name: nvidia-gpu-exporter
     version: 0.3.1
     repository: https://utkuozdemir.org/helm-charts

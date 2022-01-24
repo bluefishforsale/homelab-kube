@@ -23,7 +23,8 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 7056,
   "graphTooltip": 0,
-  "iteration": 1642640658559,
+  "id": 17,
+  "iteration": 1642723190840,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -41,10 +42,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -109,7 +106,7 @@
       "options": {
         "colorMode": "value",
         "graphMode": "none",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -118,17 +115,25 @@
           "fields": "",
           "values": false
         },
-        "text": {},
+        "text": {
+          "titleSize": 50
+        },
         "textMode": "auto"
       },
       "pluginVersion": "8.3.3",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
           "expr": "ceph_health_status{cluster=\"$cluster\"}",
           "format": "time_series",
           "instant": true,
           "interval": "$interval",
           "intervalFactor": 1,
+          "legendFormat": " ",
           "refId": "A",
           "step": 300
         }
@@ -1980,7 +1985,7 @@
       "type": "stat"
     },
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1988,183 +1993,184 @@
         "y": 11
       },
       "id": 53,
-      "panels": [],
+      "panels": [
+        {
+          "columns": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 18,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "id": 70,
+          "links": [],
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "ALERTS{cluster='$cluster', alertstate='firing'}",
+              "format": "table",
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Alerts from CephThanos",
+          "transform": "table",
+          "type": "table-old"
+        },
+        {
+          "columns": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "id": 105,
+          "links": [],
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 2,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "topk(5,sort_desc(ceph_osd_apply_latency_ms{cluster='$cluster'} + ceph_osd_commit_latency_ms{cluster='$cluster'}))",
+              "format": "table",
+              "instant": true,
+              "intervalFactor": 1,
+              "refId": "A",
+              "target": ""
+            }
+          ],
+          "title": "Top Sluggish OSD's",
+          "transform": "table",
+          "type": "table-old"
+        },
+        {
+          "columns": [],
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 38
+          },
+          "id": 103,
+          "links": [],
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
+            {
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
+            },
+            {
+              "alias": "",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "expr": "ceph_osd_up{cluster=\"$cluster\"} == 0",
+              "format": "table",
+              "instant": true,
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Down OSD's",
+          "transform": "table",
+          "type": "table-old"
+        }
+      ],
       "title": "Alerts",
       "type": "row"
-    },
-    {
-      "columns": [],
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 18,
-        "w": 24,
-        "x": 0,
-        "y": 12
-      },
-      "id": 70,
-      "links": [],
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "ALERTS{cluster='$cluster', alertstate='firing'}",
-          "format": "table",
-          "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Alerts from CephThanos",
-      "transform": "table",
-      "type": "table-old"
-    },
-    {
-      "columns": [],
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 30
-      },
-      "id": 105,
-      "links": [],
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 5,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "topk(5,sort_desc(ceph_osd_apply_latency_ms{cluster='$cluster'} + ceph_osd_commit_latency_ms{cluster='$cluster'}))",
-          "format": "table",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A",
-          "target": ""
-        }
-      ],
-      "title": "Top Sluggish OSD's",
-      "transform": "table",
-      "type": "table-old"
-    },
-    {
-      "columns": [],
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 38
-      },
-      "id": 103,
-      "links": [],
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "date"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "ceph_osd_up{cluster=\"$cluster\"} == 0",
-          "format": "table",
-          "instant": true,
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "Down OSD's",
-      "transform": "table",
-      "type": "table-old"
     },
     {
       "collapsed": true,
@@ -2172,7 +2178,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 12
       },
       "id": 108,
       "panels": [
@@ -2497,7 +2503,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 13
       },
       "id": 39,
       "panels": [],
@@ -2529,7 +2535,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 48
+        "y": 14
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2654,7 +2660,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 48
+        "y": 14
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2758,7 +2764,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 48
+        "y": 14
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2858,7 +2864,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 56
+        "y": 22
       },
       "hiddenSeries": false,
       "id": 77,
@@ -2941,7 +2947,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 56
+        "y": 22
       },
       "hiddenSeries": false,
       "id": 78,
@@ -3024,7 +3030,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 56
+        "y": 22
       },
       "hiddenSeries": false,
       "id": 79,
@@ -3107,7 +3113,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 64
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 80,
@@ -3190,7 +3196,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 64
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 81,
@@ -3275,7 +3281,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 64
+        "y": 30
       },
       "hiddenSeries": false,
       "id": 106,
@@ -3358,7 +3364,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 71
+        "y": 37
       },
       "id": 41,
       "panels": [],
@@ -3377,13 +3383,15 @@
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {},
       "gridPos": {
         "h": 12,
         "w": 6,
         "x": 0,
-        "y": 72
+        "y": 38
       },
+      "hiddenSeries": false,
       "id": 18,
       "legend": {
         "alignAsTable": true,
@@ -3400,6 +3408,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 5,
@@ -3468,13 +3479,15 @@
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {},
       "gridPos": {
         "h": 12,
         "w": 8,
         "x": 6,
-        "y": 72
+        "y": 38
       },
+      "hiddenSeries": false,
       "id": 19,
       "legend": {
         "alignAsTable": true,
@@ -3484,6 +3497,8 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sort": "current",
+        "sortDesc": false,
         "total": false,
         "values": true
       },
@@ -3491,6 +3506,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 5,
@@ -3731,13 +3749,15 @@
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {},
       "gridPos": {
         "h": 6,
         "w": 10,
         "x": 14,
-        "y": 72
+        "y": 38
       },
+      "hiddenSeries": false,
       "id": 20,
       "legend": {
         "alignAsTable": true,
@@ -3747,6 +3767,8 @@
         "min": false,
         "rightSide": true,
         "show": true,
+        "sort": "current",
+        "sortDesc": true,
         "total": false,
         "values": true
       },
@@ -3754,6 +3776,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 5,
@@ -3841,13 +3866,15 @@
       "editable": true,
       "error": false,
       "fill": 1,
+      "fillGradient": 0,
       "grid": {},
       "gridPos": {
         "h": 6,
         "w": 10,
         "x": 14,
-        "y": 78
+        "y": 44
       },
+      "hiddenSeries": false,
       "id": 15,
       "legend": {
         "avg": false,
@@ -3862,6 +3889,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "connected",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 5,
@@ -3920,7 +3950,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 84
+        "y": 50
       },
       "id": 40,
       "panels": [],
@@ -3945,15 +3975,17 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 85
+        "y": 51
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 83,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "ceph_osd_apply_latency_ms{cluster='$cluster'}",
@@ -4002,15 +4034,17 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 85
+        "y": 51
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 84,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "ceph_osd_commit_latency_ms{cluster='$cluster'}",
@@ -4057,15 +4091,17 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 93
+        "y": 59
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 85,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "rate(ceph_osd_op_r_latency_sum{cluster=\"$cluster\"}[5m]) / rate(ceph_osd_op_r_latency_count{cluster=\"$cluster\"}[5m]) >= 0",
@@ -4113,15 +4149,17 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 93
+        "y": 59
       },
       "heatmap": {},
+      "hideZeroBuckets": false,
       "highlightCards": true,
       "id": 86,
       "legend": {
         "show": true
       },
       "links": [],
+      "reverseYBuckets": false,
       "targets": [
         {
           "expr": "rate(ceph_osd_op_w_latency_sum{cluster=\"$cluster\"}[5m]) / rate(ceph_osd_op_w_latency_count{cluster=\"$cluster\"}[5m]) >= 0",
@@ -4161,12 +4199,14 @@
         "uid": "PBFA97CFB590B2093"
       },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 101
+        "y": 67
       },
+      "hiddenSeries": false,
       "id": 44,
       "legend": {
         "alignAsTable": true,
@@ -4183,6 +4223,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 5,
@@ -4248,12 +4291,14 @@
         "uid": "PBFA97CFB590B2093"
       },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 101
+        "y": 67
       },
+      "hiddenSeries": false,
       "id": 35,
       "legend": {
         "alignAsTable": true,
@@ -4271,6 +4316,9 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
       "pluginVersion": "8.3.3",
       "pointradius": 1,
@@ -4338,7 +4386,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 108
+        "y": 74
       },
       "id": 61,
       "panels": [
@@ -4757,8 +4805,8 @@
         "auto_min": "1m",
         "current": {
           "selected": false,
-          "text": "auto",
-          "value": "$__auto_interval_interval"
+          "text": "1m",
+          "value": "1m"
         },
         "hide": 0,
         "includeAll": false,
@@ -4767,7 +4815,7 @@
         "name": "interval",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "auto",
             "value": "$__auto_interval_interval"
           },
@@ -4787,7 +4835,7 @@
             "value": "30s"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "1m",
             "value": "1m"
           },
@@ -4838,6 +4886,7 @@
           }
         ],
         "query": "5s,10s,30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "queryValue": "",
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
@@ -4877,7 +4926,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {

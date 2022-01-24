@@ -1,8 +1,5 @@
-nvidia:
-  nvidia-device-plugin:
-    nodeSelector:
-      nvidia.com/gpu.present: "true"
-  nvidia-dcgm-exporter:
+nvidia-device-plugin:
+    migStrategy: mixed
     nodeSelector:
       nvidia.com/gpu.present: "true"
 

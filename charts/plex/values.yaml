@@ -98,7 +98,7 @@ plex:
 
     transcode:
       enabled: true
-      existingClaim: transcode
+      existingClaim: plex-local
       mountPath: /transcode
 
     tv:

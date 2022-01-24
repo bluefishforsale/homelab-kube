@@ -17,3 +17,10 @@
 1. helm install radarr -n media -f charts/radarr/values.yaml charts/radarr
 1. helm install plex -n media -f charts/plex/values.yaml charts/plex
 1. helm install nzbget -n media  -f charts/nzbget/values.yaml charts/nzbget
+
+
+# how to get rook-ceph password
+* username : admin
+```
+kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.data.password}} | base64 -D
+```
