@@ -352,7 +352,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       selfMonitor: true
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
@@ -765,7 +765,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "2s"
       selfMonitor: true
 
       # Path to use for scraping metrics. Might be different if server.root_url is set
@@ -802,7 +802,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
       proxyUrl: ""
@@ -843,7 +843,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -993,7 +993,7 @@ kube-prometheus-stack:
       enabled: true
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -1041,7 +1041,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -1082,7 +1082,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -1162,7 +1162,7 @@ kube-prometheus-stack:
       enabled: true
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
       proxyUrl: ""
@@ -1218,7 +1218,7 @@ kube-prometheus-stack:
       enabled: true
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
       proxyUrl: ""
@@ -1276,7 +1276,7 @@ kube-prometheus-stack:
       enabled: true
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -1311,7 +1311,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15"
       ## Scrape Timeout. If not set, the Prometheus default scrape timeout is used.
       ##
       scrapeTimeout: ""
@@ -1369,7 +1369,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "1s"
 
       ## proxyUrl: URL of a proxy that should be used for scraping.
       ##
@@ -1568,7 +1568,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       ## Scrape timeout. If not set, the Prometheus default scrape timeout is used.
       scrapeTimeout: ""
       selfMonitor: true
@@ -1745,7 +1745,7 @@ kube-prometheus-stack:
     # Needs thanosService to be enabled as well
     thanosServiceMonitor:
       enabled: false
-      interval: ""
+      interval: "15s"
 
       ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.
       scheme: ""
@@ -2001,7 +2001,7 @@ kube-prometheus-stack:
     serviceMonitor:
       ## Scrape interval. If not set, the Prometheus default scrape interval is used.
       ##
-      interval: ""
+      interval: "15s"
       selfMonitor: true
 
       ## scheme: HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS.

@@ -1,0 +1,19 @@
+{{- with .Values.persistentVolumeClaims }}
+{{- range . }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .name }}
+  {{- if .namespace }}
+  namespace: {{ .namespace }}
+  {{- end }}
+spec:
+  accessModes:
+  - {{ .accessMode }}
+  resources:
+    requests:
+      storage: {{ .storage }}
+  storageClassName: {{ .storageClassName | default "ceph-block" }}
+{{- end }}
+{{- end }}

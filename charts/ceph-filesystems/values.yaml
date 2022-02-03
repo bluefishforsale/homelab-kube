@@ -21,11 +21,6 @@ persistentVolumeClaims:
     storage: 100Gi
     accessMode: ReadWriteMany
     storageClassName: rook-cephfs
-  - name: transcode
-    namespace: media
-    storage: 1500M
-    accessMode: ReadWriteMany
-    storageClassName: rook-cephfs
   - name: tv
     namespace: media
     storage: 15T
@@ -34,10 +29,5 @@ persistentVolumeClaims:
   - name: movies
     namespace: media
     storage: 15T
-    accessMode: ReadWriteMany
-    storageClassName: rook-cephfs
-  - name: music
-    namespace: media
-    storage: 1T
     accessMode: ReadWriteMany
     storageClassName: rook-cephfs

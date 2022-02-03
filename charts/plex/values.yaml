@@ -14,6 +14,8 @@ plex:
     tag: latest
     # -- image pull policy
     pullPolicy: Always
+  # command: [ '/bin/bash']
+  # args: ['/keylase/docker-entrypoint.sh',  '/usr/bin/tini -- /entrypoint.sh' ]
 
   # -- environment variables. See [plex docs](https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/) for more details.
   # **NOTE:** Plex preference options are camelCase and CASE SENSITIVE!
@@ -117,6 +119,10 @@ plex:
         mountPath: "/config/Library/Application Support/Plex Media Server/Logs"
         readOnly: true
 
+      # - name: keylase
+      #   mountPath: /keylase
+      #   readOnly: true
+
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
@@ -138,7 +144,6 @@ plex:
       enabled: true
       medium: "Memory"
       type: emptyDir
-      # existingClaim: plex-local
       mountPath: /transcode
 
     tv:

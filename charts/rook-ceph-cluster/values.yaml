@@ -20,7 +20,7 @@ rook-ceph-cluster:
   # Installs a debugging toolbox deployment
   toolbox:
     enabled: true
-    image: rook/ceph:v1.7.8
+    image: rook/ceph:v1.8.2
     tolerations: []
     affinity: {}
 
@@ -179,12 +179,7 @@ rook-ceph-cluster:
                 operator: In
                 values:
                 - "true"
-    #     podAffinity:
-    #     podAntiAffinity:
-    #     topologySpreadConstraints:
-    #     tolerations:
-    #     - key: storage-node
-    #       operator: Exists
+
     #   # The above placement information can also be specified for mon, osd, and mgr components
     #   mon:
     #   # Monitor deployments may contain an anti-affinity rule for avoiding monitor
@@ -217,22 +212,22 @@ rook-ceph-cluster:
 
     resources:
     #   # The requests and limits set here, allow the mgr pod to use half of one CPU core and 1 gigabyte of memory
-    #   mgr:
-    #     limits:
-    #       cpu: "500m"
-    #       memory: "1024Mi"
-    #     requests:
-    #       cpu: "500m"
-    #       memory: "1024Mi"
+      mgr:
+        limits:
+          cpu: "500m"
+          memory: "512M"
+        requests:
+          cpu: "500m"
+          memory: "1024M"
     #   # The above example requests/limits can also be added to the other components
     #   mon:
       osd:
         limits:
           cpu: "500m"
-          memory: "8192Mi"
+          memory: "2048M"
         requests:
           cpu: "500m"
-          memory: "8192Mi"
+          memory: "4096Mi"
 
     #   prepareosd:
     #   mgr-sidecar:
