@@ -14,8 +14,6 @@ plex:
     tag: latest
     # -- image pull policy
     pullPolicy: Always
-  # command: [ '/bin/bash']
-  # args: ['/keylase/docker-entrypoint.sh',  '/usr/bin/tini -- /entrypoint.sh' ]
 
   # -- environment variables. See [plex docs](https://support.plex.tv/articles/201105343-advanced-hidden-server-settings/) for more details.
   # **NOTE:** Plex preference options are camelCase and CASE SENSITIVE!
@@ -29,7 +27,7 @@ plex:
     EnableIPv6: 0
     LogVerbose: 1
     logDebug: 1
-    PLEX_MEDIA_SERVER_USE_SYSLOG: true
+    PLEX_MEDIA_SERVER_USE_SYSLOG: false
     NVIDIA_VISIBLE_DEVICES: all
     NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
     PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
@@ -85,44 +83,6 @@ plex:
   # -- Enable devices to be discoverable
   hostNetwork: false
 
-  addons:
-    promtail:
-      # -- Enable running a promtail container in the pod
-      enabled: true
-
-      image:
-        # -- Specify the promtail image
-        repository: grafana/promtail
-        # -- Specify the promtail image tag
-        tag: 2.2.0
-        # -- Specify the promtail image pull policy
-        pullPolicy: IfNotPresent
-
-      # -- Set any environment variables for promtail here
-      env: {}
-
-      # -- Set promtail command line arguments
-      args: []
-
-      # -- The URL to Loki
-      loki: "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
-
-      # -- The paths to logs on the volume
-      logs:
-      - name: logs
-        path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
-
-      # -- Specify a list of volumes that get mounted in the promtail container.
-      # At least 1 volumeMount is required!
-      volumeMounts:
-      - name: logs
-        mountPath: "/config/Library/Application Support/Plex Media Server/Logs"
-        readOnly: true
-
-      # - name: keylase
-      #   mountPath: /keylase
-      #   readOnly: true
-
   # -- Configure persistence settings for the chart under this key.
   # @default -- See values.yaml
   persistence:
@@ -155,6 +115,7 @@ plex:
       enabled: true
       existingClaim: movies
       mountPath: /movies
+
 
   # -- Configure the Security Context for the Pod
   podSecurityContext:
@@ -203,7 +164,42 @@ plex:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: nvidia.com/gpu.present
+            # - key: nvidia.com/gpu.present
+            - key: nvidia
               operator: In
               values:
               - "true"
+
+  addons:
+    promtail:
+      # -- Enable running a promtail container in the pod
+      enabled: true
+
+      image:
+        # -- Specify the promtail image
+        repository: grafana/promtail
+        # -- Specify the promtail image tag
+        tag: 2.2.0
+        # -- Specify the promtail image pull policy
+        pullPolicy: IfNotPresent
+
+      # -- Set any environment variables for promtail here
+      env: {}
+
+      # -- Set promtail command line arguments
+      args: []
+
+      # -- The URL to Loki
+      loki: "http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push"
+
+      # -- The paths to logs on the volume
+      logs:
+      - name: logs
+        path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+
+      # -- Specify a list of volumes that get mounted in the promtail container.
+      # At least 1 volumeMount is required!
+      volumeMounts:
+      - name: logs
+        mountPath: "/config/Library/Application Support/Plex Media Server/Logs"
+        readOnly: true

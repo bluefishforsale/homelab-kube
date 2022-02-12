@@ -27,7 +27,8 @@ rook-ceph-cluster:
   monitoring:
     # requires Prometheus to be pre-installed
     # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
-    enabled: true
+    # enabled: true
+    enabled: false
     rulesNamespaceOverride: monitoring
 
   # If true, create & use PSP resources. Set this to the same value as the rook-ceph chart.
@@ -47,7 +48,7 @@ rook-ceph-cluster:
       # versions running within the cluster. See tags available at https://hub.docker.com/r/ceph/ceph/tags/.
       # If you want to be more precise, you can always use a timestamp tag such quay.io/ceph/ceph:v15.2.11-20200419
       # This tag might not contain a new Ceph version, just security fixes from the underlying operating system, which will reduce vulnerabilities
-      image: quay.io/ceph/ceph:v16.2.6
+      image: quay.io/ceph/ceph:v16.2.7
       # Whether to allow unsupported versions of Ceph. Currently `octopus` and `pacific` are supported.
       # Future versions such as `pacific` would require this to be set to `true`.
       # Do not set to true in production.
@@ -106,7 +107,7 @@ rook-ceph-cluster:
     # Network configuration, see: https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md#network-configuration-settings
     # network:
     #   # enable host networking
-    #   provider: host
+      # provider: host
     #   # EXPERIMENTAL: enable the Multus network provider
     #   provider: multus
     #   selectors:
@@ -120,9 +121,9 @@ rook-ceph-cluster:
     #     # public: public-conf --> NetworkAttachmentDefinition object name in Multus
     #     # cluster: cluster-conf --> NetworkAttachmentDefinition object name in Multus
     #   # Provide internet protocol version. IPv6, IPv4 or empty string are valid options. Empty string would mean IPv4
-    #   ipFamily: "IPv6"
+      # ipFamily: "IPv4"
     #   # Ceph daemons to listen on both IPv4 and Ipv6 networks
-    #   dualStack: false
+      # dualStack: false
 
     # enable the crash collector for ceph daemon crash collection
     crashCollector:
@@ -211,36 +212,48 @@ rook-ceph-cluster:
     #   monitoring:
 
     resources:
-    #   # The requests and limits set here, allow the mgr pod to use half of one CPU core and 1 gigabyte of memory
+      mon:
+        limits:
+          cpu: "500m"
+          memory: "1024Mi"
+        requests:
+          cpu: "500m"
+          memory: "1024Mi"
       mgr:
         limits:
           cpu: "500m"
-          memory: "512M"
+          memory: "1024Mi"
         requests:
           cpu: "500m"
-          memory: "1024M"
-    #   # The above example requests/limits can also be added to the other components
-    #   mon:
+          memory: "1024Mi"
+      cleanup:
+        limits:
+          cpu: "500m"
+          memory: "1024Mi"
+        requests:
+          cpu: "500m"
+          memory: "1024Mi"
+      prepareosd:
+        limits:
+          cpu: "500m"
+          memory: "1024Mi"
+        requests:
+          cpu: "500m"
+          memory: "1024Mi"
       osd:
         limits:
           cpu: "500m"
-          memory: "2048M"
+          memory: "4096Mi"
         requests:
           cpu: "500m"
-          memory: "4096Mi"
-
-    #   prepareosd:
-    #   mgr-sidecar:
-    #   crashcollector:
-    #   logcollector:
-    #   cleanup:
+          memory: "2048Mi"
 
     # The option to automatically remove OSDs that are out and are safe to destroy.
     removeOSDsIfOutAndSafeToRemove: false
 
     # priority classes to apply to ceph resources
     # priorityClassNames:
-    #   all: rook-ceph-default-priority-class
+    #   all: rook-ceph-mon-priority-class
     #   mon: rook-ceph-mon-priority-class
     #   osd: rook-ceph-osd-priority-class
     #   mgr: rook-ceph-mgr-priority-class

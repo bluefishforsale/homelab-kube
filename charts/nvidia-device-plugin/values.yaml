@@ -1,11 +1,13 @@
 nvidia-device-plugin:
     migStrategy: mixed
     nodeSelector:
-      nvidia.com/gpu.present: "true"
+      nvidia: "true"
+      # nvidia.com/gpu.present: "true"
 
 nvidia-gpu-exporter:
   nodeSelector:
-    nvidia.com/gpu.present: "true"
+    nvidia: "true"
+    # nvidia.com/gpu.present: "true"
   # affinity:
   #   nodeAffinity:
   #     requiredDuringSchedulingIgnoredDuringExecution:

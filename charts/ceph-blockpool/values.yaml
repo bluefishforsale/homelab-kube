@@ -1,5 +1,0 @@
-persistentVolumeClaims:
-  - name: test-volume
-    namespace: media
-    storage: 10Gi
-    accessMode: ReadWriteMany
