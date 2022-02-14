@@ -18,14 +18,16 @@
 1. helm install -n rook-ceph ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
 1. helm install -n monitoring prom -f charts/kube-prometheus-stack/values.yaml charts/kube-prometheus-stack
-1. helm install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
 1. helm install -n monitoring loki -f charts/loki/values.yaml charts/loki
+1. helm install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
+
+1. helm install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
 
 1. helm install nvidia-device-plugin -f charts/nvidia-device-plugin/values.yaml charts/nvidia-device-plugin
-1. helm install -n media -f plex charts/plex/values.yaml charts/plex
+1. helm install -n media plex -f charts/plex/values.yaml charts/plex
+1. helm install -n media tautulli -f charts/tautulli/values.yaml charts/tautulli
 1. helm install -n media sonarr -f charts/sonarr/values.yaml charts/sonarr
 1. helm install -n media radarr -f charts/radarr/values.yaml charts/radarr
-1. helm install -n media -f tautulli charts/tautulli/values.yaml charts/tautulli
 1. helm install -n media nzbget -f charts/nzbget/values.yaml charts/nzbget
 
 # how to get rook-ceph password

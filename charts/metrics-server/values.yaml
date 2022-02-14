@@ -74,9 +74,8 @@ metrics-server:
     minAvailable: 1
     maxUnavailable: 1
 
-    # - --cert-dir=/tmp
+    # - --cert-dir=/certs
   defaultArgs:
-    - --cert-dir=/var/lib/kubernetes
     - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
     - --kubelet-use-node-status-port
     - --metric-resolution=15s

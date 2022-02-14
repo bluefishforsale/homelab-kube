@@ -1,7 +1,5 @@
 for NS in \
-    flannel gpu-operator httpbin istio-system k8sdash kube-dash \
-    lidarr loki media metallb monitoring nfs nginx nvidia nzbget plex radarr \
-    rook-ceph sonarr tautulli tdarr ubuntu ;
+    flannel istio-system media metallb monitoring nfs nginx nvidia radarr rook-ceph ;
     do
         kubectl create ns ${NS}
     done

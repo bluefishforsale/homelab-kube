@@ -28,7 +28,7 @@ rook-ceph-cluster:
     # requires Prometheus to be pre-installed
     # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
     # enabled: true
-    enabled: false
+    enabled: true
     rulesNamespaceOverride: monitoring
 
   # If true, create & use PSP resources. Set this to the same value as the rook-ceph chart.
@@ -235,10 +235,10 @@ rook-ceph-cluster:
           memory: "1024Mi"
       prepareosd:
         limits:
-          cpu: "500m"
+          cpu: "1500m"
           memory: "1024Mi"
         requests:
-          cpu: "500m"
+          cpu: "1500m"
           memory: "1024Mi"
       osd:
         limits:
@@ -261,7 +261,7 @@ rook-ceph-cluster:
     storage:
       useAllNodes: false
       useAllDevices: false
-      deviceFilter: "^sd[a-g]"
+      deviceFilter: "^sd[a-h]"
       nodes:
       - name: node004
       - name: node005
