@@ -60,7 +60,7 @@ metrics-server:
     # if you use Weave network on EKS
     enabled: false
 
-  replicas: 2
+  replicas: 1
 
   updateStrategy: {}
   #   type: RollingUpdate
@@ -71,10 +71,9 @@ metrics-server:
   podDisruptionBudget:
     # https://kubernetes.io/docs/tasks/run-application/configure-pdb/
     enabled: false
-    minAvailable: 1
-    maxUnavailable: 1
+    minAvailable:
+    maxUnavailable:
 
-    # - --cert-dir=/certs
   defaultArgs:
     - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
     - --kubelet-use-node-status-port
@@ -83,12 +82,37 @@ metrics-server:
     - --tls-private-key-file=/certs/ca-key.pem
 
   args: []
+  livenessProbe:
+    httpGet:
+      path: /livez
+      port: https
+      scheme: HTTPS
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 3
 
-  metrics:
-    enabled: false
+  readinessProbe:
+    httpGet:
+      path: /readyz
+      port: https
+      scheme: HTTPS
+    initialDelaySeconds: 20
+    periodSeconds: 10
+    failureThreshold: 3
+
+  service:
+    type: ClusterIP
+    port: 443
+    annotations: {}
+    labels: {}
+      # kubernetes.io/cluster-service: "true"
+      # kubernetes.io/name: "Metrics-server"
+
+    metrics:
+      enabled: false
 
   serviceMonitor:
-    enabled: false
+    enabled: true
     additionalLabels: {}
     interval: 1m
     scrapeTimeout: 10s
