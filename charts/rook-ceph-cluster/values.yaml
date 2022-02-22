@@ -27,9 +27,9 @@ rook-ceph-cluster:
   monitoring:
     # requires Prometheus to be pre-installed
     # enabling will also create RBAC rules to allow Operator to create ServiceMonitors
+    enabled: false
     # enabled: true
-    enabled: true
-    rulesNamespaceOverride: monitoring
+    # rulesNamespaceOverride: monitoring
 
   # If true, create & use PSP resources. Set this to the same value as the rook-ceph chart.
   pspEnable: true
@@ -214,35 +214,35 @@ rook-ceph-cluster:
     resources:
       mon:
         limits:
-          cpu: "500m"
-          memory: "1024Mi"
+          cpu: "2500m"
+          memory: "2024Mi"
         requests:
           cpu: "500m"
           memory: "1024Mi"
       mgr:
         limits:
-          cpu: "500m"
-          memory: "1024Mi"
+          cpu: "3500m"
+          memory: "2024Mi"
         requests:
           cpu: "500m"
           memory: "1024Mi"
       cleanup:
         limits:
-          cpu: "500m"
+          cpu: "1500m"
           memory: "1024Mi"
         requests:
           cpu: "500m"
           memory: "1024Mi"
       prepareosd:
         limits:
-          cpu: "1500m"
+          cpu: "2500m"
           memory: "1024Mi"
         requests:
           cpu: "1500m"
           memory: "1024Mi"
       osd:
         limits:
-          cpu: "500m"
+          cpu: "1500m"
           memory: "4096Mi"
         requests:
           cpu: "500m"
@@ -261,11 +261,12 @@ rook-ceph-cluster:
     storage:
       useAllNodes: false
       useAllDevices: false
-      deviceFilter: "^sd[a-h]"
-      nodes:
-      - name: node004
-      - name: node005
-      - name: node006
+      # deviceFilter:
+      # devicFilter: "^sd[a-h]"
+      # nodes:
+      # - name: node004
+      # - name: node005
+      # - name: node006
       # deviceFilter:
       # config:
       #   crushRoot: "custom-root" # specify a non-default root label for the CRUSH map
@@ -287,6 +288,39 @@ rook-ceph-cluster:
       #     config: # configuration can be specified at the node level which overrides the cluster level config
       #   - name: "172.17.4.301"
       #     deviceFilter: "^sd."
+      config:
+        osdsPerDevice: "1" # this value can be overridden at the node or device level
+      nodes:
+      - name: node004
+        devices:
+        - name: "sda"
+        - name: "sdb"
+        - name: "sdc"
+        - name: "sdd"
+        - name: "sde"
+        - name: "sdf"
+        - name: "sdf"
+        - name: "sdh"
+      - name: node005
+        devices:
+        - name: "sda"
+        - name: "sdb"
+        - name: "sdc"
+        - name: "sdd"
+        - name: "sde"
+        - name: "sdf"
+        - name: "sdf"
+        - name: "sdh"
+      - name: node006
+        devices:
+        - name: "sda"
+        - name: "sdb"
+        - name: "sdc"
+        - name: "sdd"
+        - name: "sde"
+        - name: "sdf"
+        - name: "sdf"
+        - name: "sdh"
 
     # The section for configuring management of daemon disruptions during upgrade or fencing.
     disruptionManagement:

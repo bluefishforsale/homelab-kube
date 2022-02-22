@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 22,
-  "iteration": 1644428921553,
+  "id": 28,
+  "iteration": 1644864831923,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -59,7 +59,7 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Syslog",
       "type": "logs"
     },
     {
@@ -95,7 +95,7 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Not Syslog",
       "type": "logs"
     },
     {
@@ -151,7 +151,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "app"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 10,
@@ -186,7 +211,7 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Not Syslog",
       "type": "timeseries"
     },
     {
@@ -277,7 +302,7 @@
           "refId": "A"
         }
       ],
-      "title": "Panel Title",
+      "title": "Syslog",
       "type": "timeseries"
     }
   ],
@@ -309,13 +334,13 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Loki Log Summary",
   "uid": "4hV7n0anz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }

@@ -1,16 +1,15 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: ubuntu
-  namespace: ubuntu
+  name: diag-tools
 spec:
   selector:
     matchLabels:
-      name: ubuntu
+      name: diag-tools
   template:
     metadata:
       labels:
-        name: ubuntu
+        name: diag-tools
     spec:
       containers:
       - name: "ubuntu"
@@ -30,8 +29,11 @@ spec:
         command: ['sh', '-c', 'sleep 3600']
       - name: "dig"
         image: "toolbelt/dig"
-        securityContext:
-          privileged: true
         command: ['sh', '-c', 'sleep 3600']
-
+      - name: "curl"
+        image: "curlimages/curl"
+        command: ['sh', '-c', 'sleep 3600']
+      - name: "openssl"
+        image: "alpine/openssl"
+        command: ['sh', '-c', 'sleep 3600']
 
