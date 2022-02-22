@@ -172,7 +172,8 @@ spec:
       serviceAccountName: flannel
       initContainers:
       - name: install-cni
-        image: quay.io/coreos/flannel:v0.14.0
+        # image: quay.io/coreos/flannel:v0.14.0
+        image: flannelcni/flannel
         command:
         - cp
         args:
@@ -186,13 +187,14 @@ spec:
           mountPath: /etc/kube-flannel/
       containers:
       - name: kube-flannel
-        image: quay.io/coreos/flannel:v0.14.0
+        # image: quay.io/coreos/flannel:v0.14.0
+        image: flannelcni/flannel
         command:
         - /opt/bin/flanneld
         args:
         - --ip-masq
         - --kube-subnet-mgr
-        - -v=10
+        - -v=1
         - --iface-regex=bond.
         - --iface-regex=enp2s.
         - --iface-regex=enp2s.
