@@ -24,6 +24,8 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
  helm install -n monitoring loki -f charts/loki/values.yaml charts/loki
  helm install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
 
+ helm install -n cert-manager cert-manager -f charts/cert-manager/values.yaml charts/cert-manager
+
  helm install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
 
  helm install nvidia-device-plugin -f charts/nvidia-device-plugin/values.yaml charts/nvidia-device-plugin

@@ -1,8 +1,8 @@
 nvidia-device-plugin:
-    migStrategy: mixed
-    nodeSelector:
-      nvidia: "true"
-      # nvidia.com/gpu.present: "true"
+  migStrategy: mixed
+  nodeSelector:
+    nvidia: "true"
+    # nvidia.com/gpu.present: "true"
 
 nvidia-gpu-exporter:
   nodeSelector:
