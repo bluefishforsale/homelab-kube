@@ -73,6 +73,10 @@ plex:
         kubernetes.io/ingress.class: nginx
       labels: {}
       hosts:
+        - host: home.terrac.com
+          paths:
+            - path: /
+              pathType: Prefix
         - host: plex.svc.cluster.local
           paths:
             - path: /
