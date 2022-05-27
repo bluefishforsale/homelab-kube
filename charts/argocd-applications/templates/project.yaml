@@ -17,7 +17,7 @@ spec:
   # We allow any namespace. tightetn this later.
   destinations:
   - namespace: '*'
-    server: {{ .server | default "https://apiserver.home" | quote }}
+    server: {{ .server | default "https://kubernetes.default.svc" | quote }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:

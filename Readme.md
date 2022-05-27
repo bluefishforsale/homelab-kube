@@ -25,6 +25,8 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
  helm install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
 
  helm install -n cert-manager cert-manager -f charts/cert-manager/values.yaml charts/cert-manager
+ helm install -n argo-cd argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
+
 
  helm install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
 
@@ -36,11 +38,19 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
  helm install -n media nzbget -f charts/nzbget/values.yaml charts/nzbget
 ```
 
-# how to get rook-ceph password
+# getting passwords
+## rook-ceph UI password
 * username : admin
 ```
 kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.data.password}} | base64 -D
 ```
+
+## argo-cd password
+```
+kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+```
+
+
 
 # ceph benchmarking procedure
 ## list pools already createed

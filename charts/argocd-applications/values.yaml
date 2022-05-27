@@ -36,10 +36,17 @@ ignoreDifferences: &ignoreDifferences
 
 Applications:
 # we loop this section per app chart
-  - name: httpbin
-    namespace: default
+  - name: argocd-applications
+    path: charts/argocd-applications
+    namespace: argocd
     repoURL: *repoURL
-    path: charts/httpbin
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: rsyc-cron
+    path: charts/rsyc-cron
+    namespace: media
+    repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 

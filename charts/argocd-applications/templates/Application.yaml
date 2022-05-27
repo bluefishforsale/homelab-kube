@@ -7,7 +7,7 @@ kind: Application
 metadata:
   name: {{ .name }}
   # You'll usually want to add your resources to the argocd namespace.
-  namespace: {{ .namespace }}
+  namespace: argocd
   # Add this finalizer ONLY if you want these to cascade delete.
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -23,12 +23,6 @@ spec:
 
     # helm specific config
     helm:
-      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
-      parameters: {}
-
-      # Use the contents of files as parameters (uses Helm's --set-file)
-      fileParameters: {}
-
       # Release name override (defaults to application name)
       releaseName: {{ .name }}
 
@@ -43,15 +37,17 @@ spec:
 
   # Destination cluster and namespace to deploy the application
   destination:
-    server: {{ .server | default "https://apiserver.home" | quote }}
+    server: {{ .server | default "https://kubernetes.default.svc" | quote }}
     namespace: {{ .namespace }}
 
   # Sync policy
-  syncPolicy: {{ .syncPolicy | toYaml | trim | nindent 2  }}
+  syncPolicy:
+  {{ .syncPolicy | toYaml | trim | nindent 4  }}
 
   # Will ignore differences between live and desired states during the diff. Note that these configurations are not
   # used during the sync process.
-  ignoreDifferences: {{ .ignoreDifferences | toYaml | trim | nindent 2  }}
+  ignoreDifferences:
+  {{ .ignoreDifferences | toYaml | trim | nindent 4  }}
 
 {{- end }}
 {{- end }}
