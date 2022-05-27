@@ -1,0 +1,57 @@
+
+{{- with .Values.Applications }}
+{{- range . }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name }}
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: {{ .namespace }}
+  # Add this finalizer ONLY if you want these to cascade delete.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # The project the application belongs to.
+  project: {{ .project | default "default" }}
+
+  # Source of the application manifests
+  source:
+    repoURL: {{ .repoURL }}
+    targetRevision: {{ .targetRevision | default "HEAD" | quote }}
+    path: {{ .path }}
+
+    # helm specific config
+    helm:
+      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
+      parameters: {}
+
+      # Use the contents of files as parameters (uses Helm's --set-file)
+      fileParameters: {}
+
+      # Release name override (defaults to application name)
+      releaseName: {{ .name }}
+
+      # Helm values files for overriding values in the helm chart
+      # The path is relative to the spec.source.path directory defined above
+      valueFiles:
+      - {{ .project | default "values.yaml" }}
+
+      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+      version: v2
+
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: {{ .server | default "https://apiserver.home" | quote }}
+    namespace: {{ .namespace }}
+
+  # Sync policy
+  syncPolicy: {{ .syncPolicy | toYaml | trim | nindent 2  }}
+
+  # Will ignore differences between live and desired states during the diff. Note that these configurations are not
+  # used during the sync process.
+  ignoreDifferences: {{ .ignoreDifferences | toYaml | trim | nindent 2  }}
+
+{{- end }}
+{{- end }}
