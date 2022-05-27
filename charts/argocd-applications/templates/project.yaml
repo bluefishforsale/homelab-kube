@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   # Project description
-  description: Primary Project
+  description: Default Project
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
@@ -16,7 +16,7 @@ spec:
 
   # We allow any namespace. tightetn this later.
   destinations:
-  - namespace: '*'
+  - namespace: 'argocd'
     server: {{ .server | default "https://kubernetes.default.svc" | quote }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
