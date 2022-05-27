@@ -36,6 +36,13 @@ ignoreDifferences: &ignoreDifferences
 
 Applications:
 # we loop this section per app chart
+  - name: argo-cd
+    path: charts/argo-cd
+    namespace: argocd
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
   - name: argocd-applications
     path: charts/argocd-applications
     namespace: argocd
