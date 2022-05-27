@@ -43,7 +43,7 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
-  - name: argocd-applications
+  - name: root-apps
     path: charts/argocd-applications
     namespace: argocd
     repoURL: *repoURL
