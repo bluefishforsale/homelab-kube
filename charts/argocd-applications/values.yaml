@@ -34,8 +34,11 @@ ignoreDifferences: &ignoreDifferences
     managedFieldsManagers:
     - kube-controller-manager
 
-Applications:
+##############################################################################################################
 # we loop this section per app chart
+##############################################################################################################
+Applications:
+
   - name: argo-cd
     path: charts/argo-cd
     namespace: argocd
@@ -87,6 +90,63 @@ Applications:
   - name: kube-prometheus-stack
     path: charts/kube-prometheus-stack
     namespace: monitoring
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: loki-stack
+    path: charts/loki-stack
+    namespace: monitoring
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: lidarr
+    path: charts/lidarr
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: metallb
+    path: charts/metallb
+    namespace: metallb
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: metrics-server
+    path: charts/metrics-server
+    namespace: kube-system
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: nvidia-support
+    path: charts/nvidia-support
+    namespace: kube-system
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: nzbget
+    enabled: False
+    path: charts/nzbget
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: plex
+    path: charts/plex
+    namespace: media
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
