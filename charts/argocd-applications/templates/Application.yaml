@@ -1,7 +1,8 @@
 
 {{- with .Values.Applications }}
 {{- range . }}
-{{- if .enabled != False}}
+{{ if .enabled }}
+{{ if ne .enabled false }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -50,6 +51,7 @@ spec:
   ignoreDifferences:
   {{ .ignoreDifferences | toYaml | trim | nindent 4  }}
 
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
