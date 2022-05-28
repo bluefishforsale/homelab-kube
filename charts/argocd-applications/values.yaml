@@ -96,8 +96,8 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: loki-stack
-    path: charts/loki-stack
+  - name: loki
+    path: charts/loki
     namespace: monitoring
     project: homelab
     repoURL: *repoURL
