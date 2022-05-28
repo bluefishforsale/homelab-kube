@@ -90,7 +90,7 @@ Applications:
 
   - name: promtail
     path: charts/promtail
-    namespace: media
+    namespace: monitoring
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
