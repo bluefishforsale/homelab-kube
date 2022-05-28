@@ -1,7 +1,7 @@
 
 {{- with .Values.Applications }}
 {{- range . }}
-{{ if .enabled }}
+{{- if .enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
