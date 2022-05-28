@@ -1,4 +1,4 @@
-apiVersion: v1
+apiversion: v2
 name: nvidia-support
 version: 1.0.0
 

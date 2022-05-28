@@ -1,4 +1,4 @@
-apiVersion: v1
+apiversion: v2
 name: ceph-filesystems
 description: A Helm chart for Kubernetes
 

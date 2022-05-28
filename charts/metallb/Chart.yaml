@@ -1,4 +1,4 @@
-apiVersion: v1
+apiversion: v2
 name: metallb
 version: 1.0.0
 dependencies:
