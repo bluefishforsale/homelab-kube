@@ -1,6 +1,4 @@
 apiVersion: v2
-name: argocd-apps
-description: ArgoCD App of Apps
-type: application
-version: 1.0.0
 appVersion: v2
+version: 1.0.0
+name: argocd-apps
