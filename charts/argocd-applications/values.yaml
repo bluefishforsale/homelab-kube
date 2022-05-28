@@ -75,3 +75,12 @@ Applications:
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
+
+  - name: ingress-nginx
+    path: charts/ingress-nginx
+    namespace: nginx
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
