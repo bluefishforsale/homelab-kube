@@ -105,7 +105,7 @@ Applications:
     namespace: monitoring
     project: homelab
     repoURL: *repoURL
-    syncPolicy: *syncPolicy
+    syncPolicy: *syncReplace
     ignoreDifferences: *ignoreDifferences
 
   - name: kube-prom-stack-dashboards
