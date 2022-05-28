@@ -67,3 +67,11 @@ Applications:
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
+
+  - name: ceph-filesystems
+    path: charts/ceph-filesystems
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
