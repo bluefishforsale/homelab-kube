@@ -55,25 +55,18 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: rsync-cron
-    path: charts/rsync-cron
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  ### do not enable until PV/PVC re-attach works
+  # - name: ceph-filesystems
+  #   path: charts/ceph-filesystems
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: tautulli
-    path: charts/tautulli
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
-
-  - name: ceph-filesystems
-    path: charts/ceph-filesystems
-    namespace: media
+  - name: metallb
+    path: charts/metallb
+    namespace: metallb
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
@@ -95,25 +88,17 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: loki-stack
-    path: charts/loki-stack
-    namespace: monitoring
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
-
-  - name: lidarr
-    path: charts/lidarr
+  - name: promtail
+    path: charts/promtail
     namespace: media
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: metallb
-    path: charts/metallb
-    namespace: metallb
+  - name: loki-stack
+    path: charts/loki-stack
+    namespace: monitoring
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
@@ -135,9 +120,16 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: nzbget
-    enabled: false
-    path: charts/nzbget
+  - name: rsync-cron
+    path: charts/rsync-cron
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: tautulli
+    path: charts/tautulli
     namespace: media
     project: homelab
     repoURL: *repoURL
@@ -151,3 +143,44 @@ Applications:
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
+
+  - name: radarr
+    path: charts/radarr
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  - name: sonarr
+    path: charts/sonarr
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
+  # - name: nzbget
+  #   enabled: false
+  #   path: charts/nzbget
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
+
+  # - name: lidarr
+  #   path: charts/lidarr
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
+
+  # - name: tdarr
+  #   path: charts/tdarr
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
