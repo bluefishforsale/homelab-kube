@@ -126,7 +126,7 @@ argo-cd:
     # -- Application controller log format. Either `text` or `json`
     logFormat: text
     # -- Application controller log level
-    logLevel: info
+    logLevel: debug
 
     # -- Additional command line arguments to pass to application controller
     extraArgs: []
