@@ -15,7 +15,7 @@ spec:
   - {{ .Values.repoURL | trim | quote}}
 
   destinations:
-  - namespace: 'argocd'
+  - namespace: '*'
     server: {{ .server | default "https://kubernetes.default.svc" | quote }}
 
   # Deny all cluster-scoped resources from being created, except for Namespace
