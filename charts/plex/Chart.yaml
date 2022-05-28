@@ -1,4 +1,4 @@
-apiversion: v2
+apiVersion: v2
 name: plex
 version: 1.0.0
 dependencies:
