@@ -246,7 +246,7 @@ argo-cd:
     ## Application controller metrics configuration
     metrics:
       # -- Deploy metrics service
-      enabled: false
+      enabled: true
       applicationLabels:
         # -- Enables additional labels in argocd_app_labels metric
         enabled: false
@@ -263,7 +263,7 @@ argo-cd:
         portName: http-metrics
       serviceMonitor:
         # -- Enable a prometheus ServiceMonitor
-        enabled: false
+        enabled: true
         # -- Prometheus ServiceMonitor interval
         interval: 30s
         # -- Prometheus [RelabelConfigs] to apply to samples before scraping
@@ -895,7 +895,7 @@ argo-cd:
     # -- Argo CD server log format: Either `text` or `json`
     logFormat: text
     # -- Argo CD server log level
-    logLevel: info
+    logLevel: debug
 
     # -- Annotations to be added to server pods
     podAnnotations: {}

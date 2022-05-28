@@ -46,6 +46,7 @@ Applications:
   - name: root-apps
     path: charts/argocd-applications
     namespace: argocd
+    project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences

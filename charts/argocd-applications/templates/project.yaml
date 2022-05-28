@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: default
+  name: homelab
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   # Project description
-  description: Default Project
+  description: homelab Project
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
-  - '*'
+  - {{ .Values.repoURL | trim | quote}}
 
   destinations:
   - namespace: 'argocd'
@@ -28,11 +28,10 @@ spec:
   - name: read-only
     description: Read-only privileges to default
     policies:
-    - p, role:read-only, *, get, *, allow
-    - p, role:read-only, *, list, *, allow
+    - p, proj:homelab:read-only, applications, get, */*, allow
 
   # A role which provides sync privileges to only the guestbook-dev application
-  - name: argocd
+  - name: ci-role
     description: Sync privileges for all apps in all namespaces
     policies:
-    - p, role:argocd, *, applications *, allow
+    - p, proj:homelab:ci-role, applications, sync, */*, allow
