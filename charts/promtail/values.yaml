@@ -18,7 +18,7 @@ promtail:
       # -- Docker image pull policy for the init container image
       pullPolicy: IfNotPresent
     # -- The inotify max user instances to configure
-    fsInotifyMaxUserInstances: 128
+    fsInotifyMaxUserInstances: 16535
 
   image:
     # -- The Docker registry
