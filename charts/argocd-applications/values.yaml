@@ -51,10 +51,10 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  # - name: rsyc-cron
-  #   path: charts/rsyc-cron
-  #   namespace: media
-  #   repoURL: *repoURL
-  #   syncPolicy: *syncPolicy
-  #   ignoreDifferences: *ignoreDifferences
+  - name: rsyc-cron
+    path: charts/rsyc-cron
+    namespace: media
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
 
