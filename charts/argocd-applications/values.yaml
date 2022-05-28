@@ -84,3 +84,10 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
+  - name: kube-prometheus-stack
+    path: charts/kube-prometheus-stack
+    namespace: monitoring
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
