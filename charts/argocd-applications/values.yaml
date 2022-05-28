@@ -36,12 +36,13 @@ ignoreDifferences: &ignoreDifferences
 
 Applications:
 # we loop this section per app chart
-  # - name: argo-cd
-  #   path: charts/argo-cd
-  #   namespace: argocd
-  #   repoURL: *repoURL
-  #   syncPolicy: *syncPolicy
-  #   ignoreDifferences: *ignoreDifferences
+  - name: argo-cd
+    path: charts/argo-cd
+    namespace: argocd
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
 
   - name: root-apps
     path: charts/argocd-applications
@@ -54,6 +55,7 @@ Applications:
   - name: rsyc-cron
     path: charts/rsyc-cron
     namespace: media
+    project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
