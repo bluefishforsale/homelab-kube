@@ -20,7 +20,7 @@ spec:
 
   # Deny all cluster-scoped resources from being created, except for Namespace
   clusterResourceWhitelist:
-  - group: ''
+  - group: '*'
     kind: '*'
 
   roles:
@@ -28,11 +28,11 @@ spec:
   - name: read-only
     description: Read-only privileges to default
     policies:
-    - p, proj:default:read-only, applications, get, default/*, allow
+    - p, role:read-only, *, get, *, allow
+    - p, role:read-oefault, *, list, *, allow
 
-  # A role which provides sync privileges to only the guestbook-dev application, e.g. to provide
-  # sync privileges to a CI system
-  - name: ci-role
+  # A role which provides sync privileges to only the guestbook-dev application
+  - name: argocd
     description: Sync privileges for all apps in all namespaces
     policies:
-    - p, proj:default:ci-role, applications, sync, */*, allow
+    - p, role:argocd, *, applications *, allow
