@@ -40,6 +40,7 @@ ignoreDifferences: &ignoreDifferences
 Applications:
 
   - name: argo-cd
+    enabled: True
     path: charts/argo-cd
     namespace: argocd
     project: homelab
@@ -48,6 +49,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: root-apps
+    enabled: True
     path: charts/argocd-applications
     namespace: argocd
     project: homelab
@@ -56,6 +58,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: rsync-cron
+    enabled: True
     path: charts/rsync-cron
     namespace: media
     project: homelab
@@ -64,6 +67,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: tautulli
+    enabled: True
     path: charts/tautulli
     namespace: media
     project: homelab
@@ -72,6 +76,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: ceph-filesystems
+    enabled: True
     path: charts/ceph-filesystems
     namespace: media
     project: homelab
@@ -80,6 +85,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: ingress-nginx
+    enabled: True
     path: charts/ingress-nginx
     namespace: nginx
     project: homelab
@@ -88,6 +94,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: kube-prometheus-stack
+    enabled: True
     path: charts/kube-prometheus-stack
     namespace: monitoring
     project: homelab
@@ -96,6 +103,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: loki-stack
+    enabled: True
     path: charts/loki-stack
     namespace: monitoring
     project: homelab
@@ -104,6 +112,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: lidarr
+    enabled: True
     path: charts/lidarr
     namespace: media
     project: homelab
@@ -112,6 +121,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: metallb
+    enabled: True
     path: charts/metallb
     namespace: metallb
     project: homelab
@@ -120,6 +130,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: metrics-server
+    enabled: True
     path: charts/metrics-server
     namespace: kube-system
     project: homelab
@@ -128,6 +139,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: nvidia-support
+    enabled: True
     path: charts/nvidia-support
     namespace: kube-system
     project: homelab
@@ -145,6 +157,7 @@ Applications:
     ignoreDifferences: *ignoreDifferences
 
   - name: plex
+    enabled: True
     path: charts/plex
     namespace: media
     project: homelab
