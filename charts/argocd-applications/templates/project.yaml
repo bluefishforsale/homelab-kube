@@ -29,7 +29,7 @@ spec:
     description: Read-only privileges to default
     policies:
     - p, role:read-only, *, get, *, allow
-    - p, role:read-oefault, *, list, *, allow
+    - p, role:read-only, *, list, *, allow
 
   # A role which provides sync privileges to only the guestbook-dev application
   - name: argocd
