@@ -9,7 +9,7 @@ items:
   kind: ConfigMap
   metadata:
     name: {{ printf "%s" $dashboardName | trunc 63 | trimSuffix "-" }}
-    namespace: monitoring
+    namespace: {{ .Release.Namespace }}
     annotations:
       argocd.argoproj.io/sync-options: Replace=true
     labels:
