@@ -9,7 +9,7 @@ items:
   kind: ConfigMap
   metadata:
     name: {{ printf "%s" $dashboardName | trunc 63 | trimSuffix "-" }}
-    namespace: {{- include "kube-prometheus-stack.namespace" | trim | quote }}
+    namespace: {{- include "kube-prometheus-stack.namespace" $ | trim | quote }}
     annotations:
       argocd.argoproj.io/sync-options: Replace=true
     labels:
