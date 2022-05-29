@@ -1,0 +1,7 @@
+apiVersion: v2
+name: argo-tunnel
+version: 1.0.0
+dependencies:
+  - name: argo-tunnel
+    version: 0.6.5
+    repository: https://cloudflare.github.io/helm-charts

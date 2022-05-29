@@ -39,6 +39,14 @@ ignoreDifferences: &ignoreDifferences
 ##############################################################################################################
 Applications:
 
+  - name: argo-tunnel
+    path: charts/argo-tunnel
+    namespace: cloudflare
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
   - name: argo-cd
     path: charts/argo-cd
     namespace: argocd

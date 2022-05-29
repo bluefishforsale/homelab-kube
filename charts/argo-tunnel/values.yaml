@@ -1,0 +1,34 @@
+# Default values for cloudflare argo-tunnel ingress.
+argo-tunnel:
+  controller:
+    name: controller
+    image:
+      repository: gcr.io/cloudflare-registry/argo-tunnel
+      tag: "0.6.5"
+      pullPolicy: Always
+    ingressClass: argo-tunnel
+    logLevel: 3
+    replicaCount: 1
+    resources:
+      limits:
+        cpu: 100m
+        memory: 256Mi
+  # Enable load balancing
+  # requires load balancing enabled on the cloudflare account.
+  loadBalancing:
+    enabled: false
+
+  # Enable rbac
+  rbac:
+    create: false
+    name: ""
+
+  serviceAccount:
+    create: true
+    name: argo-tunnel
+
+  # Enable secret mapping file
+  secretMapping:
+    create: false
+    content:
+      {}
