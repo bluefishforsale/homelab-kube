@@ -66,11 +66,11 @@ metallb:
 
     # the service account used by prometheus
     # required when .Values.prometheus.podMonitor.enabled == true
-    serviceAccount: ""
+    serviceAccount: "kube-prometheus-stack-kube-prometheus"
 
     # the namespace where prometheus is deployed
     # required when .Values.prometheus.podMonitor.enabled == true
-    namespace: ""
+    namespace: "monitoring"
 
     # Prometheus Operator PodMonitors
     podMonitor:
