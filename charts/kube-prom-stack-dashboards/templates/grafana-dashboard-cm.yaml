@@ -1,0 +1,22 @@
+{{- $files := .Files.Glob "files/dashboards/*.json" }}
+{{- if $files }}
+apiVersion: v1
+kind: ConfigMapList
+items:
+{{- range $path, $fileContents := $files }}
+{{- $dashboardName := regexReplaceAll "(^.*/)(.*)\\.json$" $path "${2}" }}
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: {{ printf "%s" $dashboardName | trunc 63 | trimSuffix "-" }}
+    namespace: monitoring
+    annotations:
+      argocd.argoproj.io/sync-options: Replace=true
+    labels:
+      grafana_dashboard: "1"
+      app: prom-grafana
+{{ include "kube-prometheus-stack.labels" $ | indent 6 }}
+  data:
+    {{ $dashboardName }}.json: {{ $.Files.Get $path | toJson }}
+{{- end }}
+{{- end }}
