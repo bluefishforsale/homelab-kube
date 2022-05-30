@@ -21,8 +21,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 28,
-  "iteration": 1644864831923,
+  "id": 32,
+  "iteration": 1653931641612,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -54,7 +54,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{job=\"syslog\"}|=\"$search\"",
+          "expr": "{job=\"syslog\"}",
           "legendFormat": "{{app}}",
           "refId": "A"
         }
@@ -90,7 +90,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{job!=\"syslog\"}|=\"$search\"",
+          "expr": "{job!=\"syslog\"}",
           "legendFormat": "",
           "refId": "A"
         }
@@ -313,23 +313,22 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "",
-          "value": ""
+        "datasource": {
+          "type": "loki",
+          "uid": "P8E80F9AEF21F6940"
         },
-        "hide": 0,
-        "name": "search",
-        "options": [
+        "filters": [
           {
-            "selected": true,
-            "text": "",
-            "value": ""
+            "condition": "",
+            "key": "app",
+            "operator": "=~",
+            "value": "argo.*"
           }
         ],
-        "query": "",
+        "hide": 0,
+        "name": "filter",
         "skipUrlSync": false,
-        "type": "textbox"
+        "type": "adhoc"
       }
     ]
   },
@@ -341,6 +340,6 @@
   "timezone": "",
   "title": "Loki Log Summary",
   "uid": "4hV7n0anz",
-  "version": 2,
+  "version": 1,
   "weekStart": ""
 }

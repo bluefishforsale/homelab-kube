@@ -2217,7 +2217,7 @@ argo-cd:
           # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/email/
 
     # -- Set the logging level. (One of: `debug`, `info`, `warn`, `error`)
-    logLevel: info
+    logLevel: debug
 
     # -- Extra arguments to provide to the controller
     extraArgs: []
