@@ -1,0 +1,14 @@
+{{range $i, $e := until .Values.pvcNodes }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-consul-consul-consul-server-{{- $i }}
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: rook-cephfs
+{{- end }}

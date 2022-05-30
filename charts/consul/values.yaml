@@ -1,3 +1,5 @@
+pvcNodes: 6
+
 consul:
   # Available parameters and their default values for the Consul chart.
 
