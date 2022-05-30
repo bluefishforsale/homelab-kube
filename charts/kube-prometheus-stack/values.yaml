@@ -707,7 +707,7 @@ kube-prometheus-stack:
 
         ## URL of prometheus datasource
         ##
-        url: http://kube-prometheus-stack-kube-prometheus.monitoring:9090
+        url: http://kube-prometheus-stack-prometheus.monitoring:9090
         # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
         # defaultDatasourceScrapeInterval: 15s
 
