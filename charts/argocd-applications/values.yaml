@@ -192,3 +192,11 @@ Applications:
   #   repoURL: *repoURL
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
+
+  - name: cert-manager
+    path: charts/cert-manager
+    namespace: cert-manager
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
