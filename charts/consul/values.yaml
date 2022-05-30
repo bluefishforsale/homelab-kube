@@ -1396,7 +1396,7 @@ consul:
     # configure `ui.service`.
     # @default: global.enabled
     # @type: boolean
-    enabled: "-"
+    enabled: true
 
     # Configure the service for the Consul UI.
     service:
@@ -1459,7 +1459,7 @@ consul:
       enabled: true
 
       # Optionally set the ingressClassName.
-      ingressClassName: ""
+      ingressClassName: "nginx"
 
       # pathType override - see: https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
       pathType: Prefix
@@ -1499,8 +1499,7 @@ consul:
       #   'annotation-key': annotation-value
       # ```
       # @type: string
-      annotations: |
-        'kubernetes.io/ingress.class': nginx
+      annotations: null
 
     # Configurations for displaying metrics in the UI.
     metrics:
