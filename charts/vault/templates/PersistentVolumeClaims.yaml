@@ -1,16 +1,16 @@
-{{ $count := (.Values.pvcNodes | int) }}
-{{range $i, $e := until $count }}
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-{{ .Release.Namespace }}-consul-consul-server-{{- $i }}
-  namespace: {{ .Release.Namespace }}
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: rook-cephfs
-{{- end }}
+# {{ $count := (.Values.pvcNodes | int) }}
+# {{range $i, $e := until $count }}
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: data-{{ .Release.Namespace }}-consul-consul-server-{{- $i }}
+#   namespace: {{ .Release.Namespace }}
+# spec:
+#   accessModes:
+#   - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 10Gi
+#   storageClassName: rook-cephfs
+# {{- end }}
