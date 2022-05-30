@@ -1517,7 +1517,7 @@ consul:
       # baseURL is the URL of the prometheus server, usually the service URL.
       # This value is only used if `ui.enabled` is set to true.
       # @type: string
-      baseURL: http://kube-prometheus-stack-prometheus
+      baseURL: http://kube-prometheus-stack-prometheus.monitoring
 
     # Corresponds to https://www.consul.io/docs/agent/options#ui_config_dashboard_url_templates configuration.
     dashboardURLTemplates:
