@@ -1,4 +1,5 @@
-{{range $i, $e := until .Values.pvcNodes }}
+{{ $count := (.Values.pvcNodes | int) }}
+{{range $i, $e := until $count }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
