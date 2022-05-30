@@ -114,7 +114,7 @@ consul:
     # register as. This can't be changed once the Consul cluster is up and running
     # since Consul doesn't support an automatic way to change this value currently:
     # https://github.com/hashicorp/consul/issues/1858.
-    datacenter: dc1
+    datacenter: homelab
 
     # Controls whether pod security policies are created for the Consul components
     # created by this chart. See https://kubernetes.io/docs/concepts/policy/pod-security-policy/.
@@ -1456,7 +1456,7 @@ consul:
     ingress:
       # This will create an Ingress resource for the Consul UI.
       # @type: boolean
-      enabled: false
+      enabled: true
 
       # Optionally set the ingressClassName.
       ingressClassName: ""
@@ -1475,7 +1475,8 @@ consul:
       # ```
       #
       # @type: array<map>
-      hosts: []
+      hosts:
+        - consul.svc.cluster.local
 
       # tls is a list of hosts and secret name in an Ingress
       # which tells the Ingress controller to secure the channel.
@@ -1498,7 +1499,8 @@ consul:
       #   'annotation-key': annotation-value
       # ```
       # @type: string
-      annotations: null
+      annotations: |
+        'kubernetes.io/ingress.class': nginx
 
     # Configurations for displaying metrics in the UI.
     metrics:
@@ -1516,7 +1518,7 @@ consul:
       # baseURL is the URL of the prometheus server, usually the service URL.
       # This value is only used if `ui.enabled` is set to true.
       # @type: string
-      baseURL: http://prometheus-server
+      baseURL: http://kube-prometheus-stack-prometheus
 
     # Corresponds to https://www.consul.io/docs/agent/options#ui_config_dashboard_url_templates configuration.
     dashboardURLTemplates:
