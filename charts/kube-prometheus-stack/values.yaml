@@ -218,6 +218,7 @@ kube-prometheus-stack:
       annotations:
         kubernetes.io/ingress.class: nginx
         argocd.argoproj.io/sync-options: Replace=true
+        dummy.io/null-thingy: value
 
       # labels: {}
 
