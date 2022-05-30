@@ -1458,10 +1458,10 @@ consul:
     ingress:
       # This will create an Ingress resource for the Consul UI.
       # @type: boolean
-      enabled: false
+      enabled: true
 
       # Optionally set the ingressClassName.
-      ingressClassName: ""
+      ingressClassName: "nginx"
 
       # pathType override - see: https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
       pathType: Prefix
@@ -1477,7 +1477,10 @@ consul:
       # ```
       #
       # @type: array<map>
-      hosts: []
+      hosts:
+        - host: consul.svc.cluster.local
+          paths:
+            - /
 
       # tls is a list of hosts and secret name in an Ingress
       # which tells the Ingress controller to secure the channel.
