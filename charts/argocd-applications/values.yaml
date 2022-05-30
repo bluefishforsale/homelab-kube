@@ -200,3 +200,11 @@ Applications:
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
+
+  - name: vault
+    path: charts/vault
+    namespace: vault
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
