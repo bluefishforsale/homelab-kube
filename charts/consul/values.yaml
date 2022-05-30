@@ -677,14 +677,14 @@ consul:
     # See https://www.consul.io/docs/install/performance#read-write-tuning for considerations around choosing a
     # performant storage class.
     # @type: string
-    storageClass: rook-cephfs
+    storageClass: ceph-block
 
     # This will enable/disable Connect (https://consul.io/docs/connect). Setting this to true
     # _will not_ automatically secure pod communication, this
     # setting will only enable usage of the feature. Consul will automatically initialize
     # a new CA and set of certificates. Additional Connect settings can be configured
     # by setting the `server.extraConfig` value.
-    connect: false
+    connect: true
 
     serviceAccount:
       # This value defines additional annotations for the server service account. This should be formatted as a multi-line
