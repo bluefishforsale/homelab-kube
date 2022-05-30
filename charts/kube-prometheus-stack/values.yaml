@@ -691,7 +691,8 @@ kube-prometheus-stack:
 
         ## Annotations for Grafana dashboard configmaps
         ##
-        annotations: {}
+        annotations:
+          argocd.argoproj.io/sync-options: Replace=true
         multicluster:
           global:
             enabled: false
@@ -1700,7 +1701,8 @@ kube-prometheus-stack:
 
     ## Annotations for Prometheus
     ##
-    annotations: {}
+    annotations:
+      argocd.argoproj.io/sync-options: Replace=true
 
     ## Service account for Prometheuses to use.
     ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
