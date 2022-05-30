@@ -1013,7 +1013,7 @@ consul:
     # `server.enabled`, since the agents can be configured to join an external cluster.
     # @default: global.enabled
     # @type: boolean
-    enabled: "-"
+    enabled: true
 
     # The name of the Docker image (including any tag) for the containers
     # running Consul client agents.
