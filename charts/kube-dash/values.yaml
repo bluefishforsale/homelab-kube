@@ -34,9 +34,9 @@ kubernetes-dashboard:
   ## Additional container arguments
   ##
   extraArgs:
-    - --enable-skip-login
-  # - --enable-insecure-login
-  #   - --system-banner="Welcome to Kubernetes"
+  - --enable-skip-login
+  - --enable-insecure-login
+  - --system-banner="Welcome to Kubernetes"
 
   ## Additional container environment variables
   ##
@@ -132,6 +132,7 @@ kubernetes-dashboard:
     #   key: value
     annotations:
       kubernetes.io/ingress.class: nginx
+      argocd.argoproj.io/sync-options: Replace=true
     #   kubernetes.io/tls-acme: 'true'
     ## If you plan to use TLS backend with enableInsecureLogin set to false
     ## (default), you need to uncomment the below.
@@ -163,7 +164,7 @@ kubernetes-dashboard:
     ## Must be provided if Ingress is enabled
     ##
     hosts:
-      - k8sdash.svc.cluster.local
+      - kube-dash.svc.cluster.local
 
     ## Kubernetes Dashboard Ingress TLS configuration
     ## Secrets must be manually created in the namespace
