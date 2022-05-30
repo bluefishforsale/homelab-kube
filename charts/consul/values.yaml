@@ -580,7 +580,7 @@ consul:
     # within Kubernetes to join that cluster, this should probably be false.
     # @default: global.enabled
     # @type: boolean
-    enabled: "-"
+    enabled: true
 
     # The name of the Docker image (including any tag) for the containers running
     # Consul server agents.
