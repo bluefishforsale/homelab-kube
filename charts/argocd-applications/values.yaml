@@ -72,6 +72,14 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
+  - name: cilium
+    path: charts/cilium
+    namespace: cilium
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
   - name: metallb
     path: charts/metallb
     namespace: metallb
