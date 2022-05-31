@@ -895,7 +895,7 @@ argo-cd:
     # -- Argo CD server log format: Either `text` or `json`
     logFormat: text
     # -- Argo CD server log level
-    logLevel: debug
+    logLevel: info
 
     # -- Annotations to be added to server pods
     podAnnotations: {}
