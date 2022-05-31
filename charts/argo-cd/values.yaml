@@ -1593,13 +1593,13 @@ argo-cd:
       # readOnlyRootFilesystem: true
 
     # -- Resource limits and requests for the repo server pods
-    resources: {}
-    #  limits:
-    #    cpu: 50m
-    #    memory: 128Mi
-    #  requests:
-    #    cpu: 10m
-    #    memory: 64Mi
+    resources:
+     limits:
+       cpu: 50m
+       memory: 128Mi
+     requests:
+       cpu: 10m
+       memory: 64Mi
 
     ## Repo server service configuration
     service:
