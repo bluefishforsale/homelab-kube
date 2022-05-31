@@ -1595,10 +1595,10 @@ argo-cd:
     # -- Resource limits and requests for the repo server pods
     resources:
      limits:
-       cpu: 50m
-       memory: 128Mi
+       cpu: 150m
+       memory: 256Mi
      requests:
-       cpu: 10m
+       cpu: 50m
        memory: 64Mi
 
     ## Repo server service configuration
