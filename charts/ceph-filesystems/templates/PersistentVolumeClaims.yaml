@@ -10,10 +10,10 @@ metadata:
   {{- end }}
 spec:
   accessModes:
-  - {{ .accessMode }}
+  - {{ .accessMode | default "ReadWriteMany" | trim | quote }}
   resources:
     requests:
       storage: {{ .storage }}
-  storageClassName: {{ .storageClassName | default "rook-cephfs" }}
+  storageClassName: {{ .storageClassName | default "rook-cephfs" | trim | quote }}
 {{- end }}
 {{- end }}

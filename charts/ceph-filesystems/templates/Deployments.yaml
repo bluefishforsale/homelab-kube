@@ -37,7 +37,7 @@ spec:
         - name: fstrim
           image: ubuntu:latest
           command: ["/bin/bash"]
-          args: ["-c","for mount in $(mount | awk '/storageos\\/volumes\\/v.*/ {print $3}'); do if [ -d ${mount} ]; then fstrim -v ${mount}; fi; sleep 5; done"]
+          args: ["-c","while true ; do for mount in $(mount | mount | awk '/volumes/ {print $3}'); do if [ -d ${mount} ]; then fstrim -v ${mount}; fi; sleep 2; done; sleep 500 ;done"]
           imagePullPolicy: IfNotPresent
           tty: true
           securityContext:

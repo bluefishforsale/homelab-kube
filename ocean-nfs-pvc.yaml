@@ -12,7 +12,7 @@ spec:
   nfs:
     path: /data01
     server: 192.168.1.143
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete
   mountOptions:
     - nfsvers=4.2
 ---
