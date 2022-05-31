@@ -126,7 +126,7 @@ argo-cd:
     # -- Application controller log format. Either `text` or `json`
     logFormat: text
     # -- Application controller log level
-    logLevel: debug
+    logLevel: info
 
     # -- Additional command line arguments to pass to application controller
     extraArgs: []
@@ -2217,7 +2217,7 @@ argo-cd:
           # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/email/
 
     # -- Set the logging level. (One of: `debug`, `info`, `warn`, `error`)
-    logLevel: debug
+    logLevel: info
 
     # -- Extra arguments to provide to the controller
     extraArgs: []
