@@ -1732,9 +1732,9 @@ kube-prometheus-stack:
     prometheusConfigReloader:
       # image to use for config and rule reloading
       image:
-      repository: quay.io/prometheus-operator/prometheus-config-reloader
-      tag: v0.56.2
-      sha: ""
+        repository: quay.io/prometheus-operator/prometheus-config-reloader
+        tag: v0.56.2
+        sha: ""
 
       # resource config for prometheusConfigReloader
       resources:
