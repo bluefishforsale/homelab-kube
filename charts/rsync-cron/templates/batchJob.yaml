@@ -31,6 +31,13 @@ spec:
               mountPath: /nfs-ocean
             - name: {{ .pvc }}
               mountPath: {{ .ceph }}
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 2048Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
           volumes:
           - name: nfs-ocean
             persistentVolumeClaim:
