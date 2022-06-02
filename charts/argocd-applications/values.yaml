@@ -109,6 +109,7 @@ Applications:
     path: charts/kube-prometheus-stack
     namespace: monitoring
     project: homelab
+    plugin:
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
