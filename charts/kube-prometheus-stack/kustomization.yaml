@@ -20,5 +20,5 @@ patchesJson6902:
       name: ".*"
     patch: |-
       - op: add
-        path: "/metadata/annotations~argocd.argoproj.io/sync-options"
+        path: "/metadata/annotations~1argocd.argoproj.io/sync-options"
         value: "Replace=true"
