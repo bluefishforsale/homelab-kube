@@ -158,7 +158,7 @@ coredns:
   # To use the livenessProbe, the health plugin needs to be enabled in CoreDNS' server config
   livenessProbe:
     enabled: true
-    initialDelaySeconds: 60
+    initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 5
@@ -166,7 +166,7 @@ coredns:
   # To use the readinessProbe, the ready plugin needs to be enabled in CoreDNS' server config
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 30
+    initialDelaySeconds: 10
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 5
