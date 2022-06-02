@@ -105,7 +105,7 @@ argo-cd:
 
     # -- The number of application controller pods to run.
     # If changing the number of replicas you must pass the number as `ARGOCD_CONTROLLER_REPLICAS` as an environment variable
-    replicas: 1
+    replicas: 3
 
     # -- Deploy the application controller as a StatefulSet instead of a Deployment, this is required for HA capability.
     enableStatefulSet: true
@@ -126,7 +126,7 @@ argo-cd:
     # -- Application controller log format. Either `text` or `json`
     logFormat: text
     # -- Application controller log level
-    logLevel: info
+    logLevel: debug
 
     # -- Additional command line arguments to pass to application controller
     extraArgs: []
@@ -895,7 +895,7 @@ argo-cd:
     # -- Argo CD server log format: Either `text` or `json`
     logFormat: text
     # -- Argo CD server log level
-    logLevel: info
+    logLevel: debug
 
     # -- Annotations to be added to server pods
     podAnnotations: {}
@@ -1480,11 +1480,11 @@ argo-cd:
 
     autoscaling:
       # -- Enable Horizontal Pod Autoscaler ([HPA]) for the repo server
-      enabled: false
+      enabled: true
       # -- Minimum number of replicas for the repo server [HPA]
-      minReplicas: 1
+      minReplicas: 3
       # -- Maximum number of replicas for the repo server [HPA]
-      maxReplicas: 5
+      maxReplicas: 15
       # -- Average CPU utilization percentage for the repo server [HPA]
       targetCPUUtilizationPercentage: 50
       # -- Average memory utilization percentage for the repo server [HPA]
@@ -1518,7 +1518,7 @@ argo-cd:
     # -- Repo server log format: Either `text` or `json`
     logFormat: text
     # -- Repo server log level
-    logLevel: info
+    logLevel: debug
 
     # -- Annotations to be added to repo server pods
     podAnnotations: {}
@@ -1595,11 +1595,11 @@ argo-cd:
     # -- Resource limits and requests for the repo server pods
     resources:
      limits:
-       cpu: 150m
+       cpu: 250m
        memory: 256Mi
      requests:
-       cpu: 50m
-       memory: 64Mi
+       cpu: 150m
+       memory: 128Mi
 
     ## Repo server service configuration
     service:
@@ -1947,7 +1947,7 @@ argo-cd:
     name: applicationset-controller
 
     # -- The number of controller pods to run
-    replicaCount: 1
+    replicaCount: 3
 
     image:
       # -- Repository to use for the application set controller
