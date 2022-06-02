@@ -11,4 +11,4 @@ patchesJson6902:
       name: prometheuses.monitoring.coreos.com
     patch: |-
       - op: delete
-        path: /spec/metadata/annotations/kubectl.kubernetes.io/last-applied-configuration
+        path: /metadata/annotations/kubectl.kubernetes.io/last-applied-configuration
