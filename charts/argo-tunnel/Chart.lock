@@ -1,0 +1,6 @@
+dependencies:
+- name: argo-tunnel
+  repository: https://cloudflare.github.io/helm-charts
+  version: 0.6.5
+digest: sha256:a550677335e8142144aa56730f40450f73adcbbf6e891f1dbe7ea1a5bb04569f
+generated: "2022-06-02T10:20:32.13436-07:00"
