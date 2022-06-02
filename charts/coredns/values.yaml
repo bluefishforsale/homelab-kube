@@ -116,10 +116,10 @@ coredns:
     - name: ready
     # Required to query kubernetes API for data
     - name: kubernetes
-      parameters: svc.cluster.local cluster.local local in-addr.arpa ip6.arpa
+      parameters: cluster.local in-addr.arpa ip6.arpa
       configBlock: |-
         pods insecure
-        fallthrough home in-addr.arpa ip6.arpa
+        fallthrough in-addr.arpa ip6.arpa
         ttl 30
     # Serves a /metrics endpoint on :9153, required for serviceMonitor
     - name: prometheus
