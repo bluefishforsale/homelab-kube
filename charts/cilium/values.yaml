@@ -7,7 +7,7 @@ cilium:
 
   debug:
     # -- Enable debug logging
-    enabled: false
+    enabled: true
     # verbose:
 
   rbac:
@@ -19,8 +19,8 @@ cilium:
   # - name: "image-pull-secret"
 
   # kubeConfigPath: ~/.kube/config
-  # k8sServiceHost:
-  # k8sServicePort:
+# k8sServiceHost:
+# k8sServicePort:
 
   cluster:
     # -- Name of the cluster. Only required for Cluster Mesh.
@@ -78,7 +78,7 @@ cilium:
   name: cilium
 
   # -- Roll out cilium agent pods automatically when configmap is updated.
-  rollOutCiliumPods: false
+  rollOutCiliumPods: true
 
   # -- Agent container image.
   image:
@@ -376,9 +376,10 @@ cilium:
     # - docker
     # - none
     # - auto (automatically detect the container runtime)
-    integration: none
+    integration: auto
+    # integration: containerd
     # -- Configure the path to the container runtime control socket.
-    # socketPath: /path/to/runtime.sock
+    # socketPath: /run/containerd/containerd.sock
 
   # crdWaitTimeout: ""
 
@@ -694,7 +695,7 @@ cilium:
 
     relay:
       # -- Enable Hubble Relay (requires hubble.enabled=true)
-      enabled: false
+      enabled: true
 
       # -- Roll out Hubble Relay pods automatically when configmap is updated.
       rollOutPods: false
@@ -787,7 +788,7 @@ cilium:
 
     ui:
       # -- Whether to enable the Hubble UI.
-      enabled: false
+      enabled: true
 
       standalone:
         # -- When true, it will allow installing the Hubble UI only, without checking dependencies.
@@ -912,12 +913,12 @@ cilium:
 
       # -- hubble-ui ingress configuration.
       ingress:
-        enabled: false
-        annotations: {}
-          # kubernetes.io/ingress.class: nginx
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx
           # kubernetes.io/tls-acme: "true"
         hosts:
-          - chart-example.local
+          - hubble-ui.svc.cluster.local
         tls: []
         #  - secretName: chart-example-tls
         #    hosts:
@@ -955,9 +956,9 @@ cilium:
     operator:
       # -- Deprecated in favor of ipam.operator.clusterPoolIPv4PodCIDRList.
       # IPv4 CIDR range to delegate to individual nodes for IPAM.
-      clusterPoolIPv4PodCIDR: "10.0.0.0/8"
+      # clusterPoolIPv4PodCIDR: "10.244.0.0/16"
       # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
-      clusterPoolIPv4PodCIDRList: []
+      clusterPoolIPv4PodCIDRList: ["10.244.0.0/16"]
       # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
       clusterPoolIPv4MaskSize: 24
       # -- Deprecated in favor of ipam.operator.clusterPoolIPv6PodCIDRList.
@@ -1085,7 +1086,7 @@ cilium:
 
   # -- Specify the IPv4 CIDR for native routing (ie to avoid IP masquerade for).
   # This value corresponds to the configured cluster-cidr.
-  # ipv4NativeRoutingCIDR:
+  # ipv4NativeRoutingCIDR: "10.244.0.0/16"
 
   monitor:
     # -- Enable the cilium-monitor sidecar.
@@ -1333,7 +1334,7 @@ cilium:
     enabled: true
 
     # -- Roll out cilium-operator pods automatically when configmap is updated.
-    rollOutPods: false
+    rollOutPods: true
 
     # -- cilium-operator image.
     image:

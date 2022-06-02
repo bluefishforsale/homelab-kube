@@ -1,0 +1,6 @@
+dependencies:
+- name: coredns
+  repository: https://coredns.github.io/helm
+  version: 1.19.4
+digest: sha256:8f0b6a7e78ee7d7f115cb4deb2d31ca5d88fb85b6b24470a4dad3d22f18ee158
+generated: "2022-05-31T15:55:31.856239-07:00"
