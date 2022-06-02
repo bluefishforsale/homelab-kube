@@ -35,6 +35,8 @@ spec:
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
 
+    plugin: {{ .plugin | default (dict) }}
+
   # Destination cluster and namespace to deploy the application
   destination:
     server: {{ .server | default "https://kubernetes.default.svc" | quote }}

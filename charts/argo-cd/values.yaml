@@ -1219,10 +1219,10 @@ argo-cd:
         - name: kustomized-helm
           init:
             command: ["/bin/sh", "-c"]
-            args: ["helm dependency build"]
+            args: ["helm dependency build || true"]
           generate:
-            command: [sh, -c]
-            args: ["helm template --release-name release-name . > all.yaml && kustomize build"]
+            command: ["/bin/sh", "-c"]
+            args: ["helm template . --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --include-crds > all.yaml && kustomize build"]
 
       # DEPRECATED: Please instead use configs.credentialTemplates and configs.repositories
       # repositories: |
