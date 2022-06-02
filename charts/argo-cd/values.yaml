@@ -1215,6 +1215,14 @@ argo-cd:
       url: ""
       # Argo CD instance label key
       application.instanceLabelKey: argocd.argoproj.io/instance
+      configManagementPlugins: |
+        - name: kustomized-helm
+          init:
+            command: ["/bin/sh", "-c"]
+            args: ["helm dependency build"]
+          generate:
+            command: [sh, -c]
+            args: ["helm template --release-name release-name . > all.yaml && kustomize build"]
 
       # DEPRECATED: Please instead use configs.credentialTemplates and configs.repositories
       # repositories: |
