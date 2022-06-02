@@ -2360,7 +2360,7 @@ kube-prometheus-stack:
 
       ## Maximum size of metrics
       ##
-      retentionSize: "990Gi"
+      retentionSize: "990GB"
 
       ## Enable compression of the write-ahead log using Snappy.
       ##
@@ -2460,7 +2460,7 @@ kube-prometheus-stack:
         volumeClaimTemplate:
           spec:
             storageClassName: rook-cephfs
-            accessModes: ["ReadWriteMany" ]
+            accessModes: ["ReadWriteMany"]
             resources:
               requests:
                 storage: 1Ti

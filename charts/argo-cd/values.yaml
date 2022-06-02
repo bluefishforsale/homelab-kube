@@ -126,7 +126,7 @@ argo-cd:
     # -- Application controller log format. Either `text` or `json`
     logFormat: text
     # -- Application controller log level
-    logLevel: debug
+    logLevel: info
 
     # -- Additional command line arguments to pass to application controller
     extraArgs: []
@@ -895,7 +895,7 @@ argo-cd:
     # -- Argo CD server log format: Either `text` or `json`
     logFormat: text
     # -- Argo CD server log level
-    logLevel: debug
+    logLevel: info
 
     # -- Annotations to be added to server pods
     podAnnotations: {}
@@ -1518,7 +1518,7 @@ argo-cd:
     # -- Repo server log format: Either `text` or `json`
     logFormat: text
     # -- Repo server log level
-    logLevel: debug
+    logLevel: info
 
     # -- Annotations to be added to repo server pods
     podAnnotations: {}
@@ -1595,11 +1595,11 @@ argo-cd:
     # -- Resource limits and requests for the repo server pods
     resources:
      limits:
-       cpu: 250m
+       cpu: 500m
        memory: 256Mi
      requests:
-       cpu: 150m
-       memory: 128Mi
+       cpu: 350m
+       memory: 64Mi
 
     ## Repo server service configuration
     service:
