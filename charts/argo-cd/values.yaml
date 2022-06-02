@@ -227,8 +227,8 @@ argo-cd:
     # -- Resource limits and requests for the application controller pods
     resources:
      limits:
-       cpu: 500m
-       memory: 1287Mi
+       cpu: 1500m
+       memory: 256Mi
      requests:
        cpu: 250m
        memory: 64Mi
@@ -365,7 +365,7 @@ argo-cd:
   ## Dex
   dex:
     # -- Enable dex
-    enabled: true
+    enabled: false
     # -- Dex name
     name: dex-server
 
@@ -848,7 +848,7 @@ argo-cd:
 
     autoscaling:
       # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo CD server
-      enabled: false
+      enabled: true
       # -- Minimum number of replicas for the Argo CD server [HPA]
       minReplicas: 1
       # -- Maximum number of replicas for the Argo CD server [HPA]
@@ -1484,15 +1484,15 @@ argo-cd:
     name: repo-server
 
     # -- The number of repo server pods to run
-    replicas: 3
+    replicas: 1
 
     autoscaling:
       # -- Enable Horizontal Pod Autoscaler ([HPA]) for the repo server
       enabled: true
       # -- Minimum number of replicas for the repo server [HPA]
-      minReplicas: 3
+      minReplicas: 1
       # -- Maximum number of replicas for the repo server [HPA]
-      maxReplicas: 15
+      maxReplicas: 5
       # -- Average CPU utilization percentage for the repo server [HPA]
       targetCPUUtilizationPercentage: 50
       # -- Average memory utilization percentage for the repo server [HPA]
@@ -2068,7 +2068,7 @@ argo-cd:
       # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
       limits:
         cpu: 1000m
-        memory: 512Mi
+        memory: 2048Mi
       requests:
         cpu: 100m
         memory: 128Mi
