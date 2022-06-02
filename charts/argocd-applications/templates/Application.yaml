@@ -35,7 +35,7 @@ spec:
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
 
-    plugin: {{ .plugin | default (dict) }}
+    plugin: {{ .plugin | default "" }}
 
   # Destination cluster and namespace to deploy the application
   destination:
