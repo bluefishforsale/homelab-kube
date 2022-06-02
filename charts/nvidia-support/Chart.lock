@@ -1,9 +1,0 @@
-dependencies:
-- name: nvidia-device-plugin
-  repository: https://nvidia.github.io/k8s-device-plugin
-  version: 0.10.0
-- name: nvidia-gpu-exporter
-  repository: https://utkuozdemir.org/helm-charts
-  version: 0.3.1
-digest: sha256:4d07f2843bc60fa0420d10a1884018827067e0f9deace466cdf52882945afb29
-generated: "2022-01-23T09:29:06.431323-08:00"

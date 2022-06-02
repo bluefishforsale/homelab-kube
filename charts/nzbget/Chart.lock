@@ -1,6 +1,0 @@
-dependencies:
-- name: nzbget
-  repository: https://k8s-at-home.com/charts/
-  version: 12.0.0
-digest: sha256:fade32a9ffa0a5b36a09039de1a45df465f0127a3dc894ba0358e541d9de463e
-generated: "2021-08-13T19:41:29.861332-07:00"
