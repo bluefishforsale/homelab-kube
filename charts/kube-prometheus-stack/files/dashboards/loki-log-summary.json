@@ -29,7 +29,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "gridPos": {
         "h": 11,
@@ -52,7 +52,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "{job=\"syslog\"}",
           "legendFormat": "{{app}}",
@@ -65,7 +65,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "gridPos": {
         "h": 11,
@@ -88,7 +88,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "{job!=\"syslog\"}",
           "legendFormat": "",
@@ -101,7 +101,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -179,7 +179,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "sum(count_over_time({job!=\"syslog\"}[1m])) by (app)",
           "legendFormat": "{{app}}",
@@ -192,7 +192,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -270,7 +270,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "sum(count_over_time({job=\"syslog\"}[1m])) by (app)",
           "legendFormat": "{{app}}",
@@ -290,7 +290,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "P8E80F9AEF21F6940"
+          "uid": "PBFA97CFB590B2093"
         },
         "filters": [],
         "hide": 0,

@@ -29,7 +29,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "gridPos": {
         "h": 11,
@@ -52,7 +52,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "{namespace=\"media\", app=~\"rsync-.*\"}",
           "instant": false,

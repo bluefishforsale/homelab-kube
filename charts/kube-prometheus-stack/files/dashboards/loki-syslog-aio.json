@@ -58,7 +58,7 @@
       "dashes": false,
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -111,7 +111,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "count_over_time({job=\"syslog\"}[$__interval])",
           "legendFormat": "{{host}}",
@@ -154,7 +154,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "",
       "fieldConfig": {
@@ -200,7 +200,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "PBFA97CFB590B2093"
           },
           "expr": "count_over_time({host=~\"$host\", job=\"syslog\"} [$__interval] |~ \"$free_form_filter\" |~ \"$filter\")",
           "legendFormat": "{{host}}",
@@ -214,7 +214,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "",
       "gridPos": {
@@ -263,7 +263,7 @@
         },
         "datasource": {
           "type": "loki",
-          "uid": "P8E80F9AEF21F6940"
+          "uid": "PBFA97CFB590B2093"
         },
         "definition": "label_values({job=\"syslog\"})",
         "hide": 0,
