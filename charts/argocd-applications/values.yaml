@@ -109,7 +109,7 @@ Applications:
     path: charts/kube-prometheus-stack
     namespace: monitoring
     project: homelab
-    plugin: ""
+    plugin: kustomized-helm
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
