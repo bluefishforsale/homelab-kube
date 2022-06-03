@@ -11,9 +11,9 @@ patchesJson6902:
       kind: CustomResourceDefinition
       name: ".*"
     patch: |-
-      - op: remove
-        path: /metadata/annotations
-        value: kubectl.kubernetes.io/last-applied-configuration
+      # - op: remove
+      #   path: /metadata/annotations
+      #   value: kubectl.kubernetes.io/last-applied-configuration
       - op: add
         path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
         value: "Replace=true"
