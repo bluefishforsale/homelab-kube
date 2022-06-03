@@ -15,7 +15,7 @@ patchesJson6902:
       #   path: /metadata/annotations
       #   value: kubectl.kubernetes.io/last-applied-configuration
       - op: add
-        path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
+        path: "/metadata/annotations/argocd.argoproj.io/sync-options"
         value: "Replace=true"
   - target:
       version: v1
@@ -23,5 +23,5 @@ patchesJson6902:
       name: ".*"
     patch: |-
       - op: add
-        path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
+        path: "/metadata/annotations/argocd.argoproj.io/sync-options"
         value: "Replace=true"
