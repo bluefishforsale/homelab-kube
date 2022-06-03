@@ -48,7 +48,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "decimals": 2,
         "editable": true,
@@ -193,7 +193,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "fieldConfig": {
           "defaults": {
@@ -288,7 +288,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "editable": true,
         "error": false,
@@ -400,7 +400,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "decimals": 2,
         "editable": true,
@@ -506,7 +506,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "prometheus"
         },
         "decimals": 2,
         "editable": true,
@@ -710,7 +710,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "prometheus"
           },
           "definition": "label_values(ceph_pool_metadata, name)",
           "hide": 0,

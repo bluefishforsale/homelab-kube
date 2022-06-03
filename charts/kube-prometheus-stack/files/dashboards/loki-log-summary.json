@@ -29,7 +29,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "loki"
       },
       "gridPos": {
         "h": 11,
@@ -52,7 +52,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "loki"
           },
           "expr": "{job=\"syslog\"}",
           "legendFormat": "{{app}}",
@@ -65,7 +65,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "loki"
       },
       "gridPos": {
         "h": 11,
@@ -88,7 +88,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "loki"
           },
           "expr": "{job!=\"syslog\"}",
           "legendFormat": "",
@@ -101,7 +101,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -179,7 +179,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "loki"
           },
           "expr": "sum(count_over_time({job!=\"syslog\"}[1m])) by (app)",
           "legendFormat": "{{app}}",
@@ -192,7 +192,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "PBFA97CFB590B2093"
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -270,7 +270,7 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "loki"
           },
           "expr": "sum(count_over_time({job=\"syslog\"}[1m])) by (app)",
           "legendFormat": "{{app}}",
@@ -290,7 +290,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "loki"
         },
         "filters": [],
         "hide": 0,
