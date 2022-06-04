@@ -12,22 +12,9 @@ patchesStrategicMerge:
     annotations:
       argocd.argoproj.io/sync-options: Replace=true
     name: ".*"
-
-# patchesJson6902:
-#   - target:
-#       group: apiextensions.k8s.io
-#       version: v1
-#       kind: CustomResourceDefinition
-#       name: ".*"
-#     patch: |-
-#       - op: add
-#         path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
-#         value: "Replace=true"
-  # - target:
-  #     version: v1
-  #     kind: ConfigMap
-  #     name: ".*"
-  #   patch: |-
-  #     - op: add
-  #       path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
-  #       value: "Replace=true"
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    annotations:
+      argocd.argoproj.io/sync-options: Replace=true
+    name: ".*"
