@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,15 +24,15 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 32,
-  "iteration": 1653931641638,
+  "id": 20,
+  "iteration": 1654323239735,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 11,
@@ -52,10 +55,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
           "expr": "{job=\"syslog\"}",
-          "legendFormat": "{{app}}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -65,7 +68,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 11,
@@ -88,10 +91,10 @@
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
           "expr": "{job!=\"syslog\"}",
-          "legendFormat": "",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -101,7 +104,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "fieldConfig": {
         "defaults": {
@@ -172,17 +175,18 @@
           "sortDesc": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum(count_over_time({job!=\"syslog\"}[1m])) by (app)",
-          "legendFormat": "{{app}}",
+          "expr": "{job!=\"syslog\"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -192,7 +196,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "loki"
+        "uid": "P8E80F9AEF21F6940"
       },
       "fieldConfig": {
         "defaults": {
@@ -263,17 +267,18 @@
           "sortDesc": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "loki"
+            "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum(count_over_time({job=\"syslog\"}[1m])) by (app)",
-          "legendFormat": "{{app}}",
+          "expr": "{job=\"syslog\"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -282,7 +287,7 @@
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 34,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
