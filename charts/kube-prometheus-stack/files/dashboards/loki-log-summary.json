@@ -86,7 +86,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 12,
         "x": 0,
         "y": 0
@@ -203,7 +203,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 6
       },
       "id": 3,
       "options": {
@@ -225,7 +225,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum by (app) (count_over_time({job!=\"syslog\"}[1m]))",
+          "expr": "sum by (app) (count_over_time({job!=\"syslog\"}[1m])) >0",
           "legendFormat": "{{app}}",
           "queryType": "range",
           "refId": "A"
@@ -293,15 +293,12 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 6
       },
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ],
+          "calcs": [],
           "displayMode": "table",
           "placement": "right",
           "sortBy": "Last *",
@@ -318,8 +315,8 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum by (job) (count_over_time({job=\"syslog\"}[1m]))",
-          "legendFormat": "{{job}}",
+          "expr": "sum by (app) (count_over_time({job=\"syslog\"}[1m])) >0",
+          "legendFormat": "{{app}}",
           "queryType": "range",
           "refId": "A"
         }
@@ -336,7 +333,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 13
       },
       "id": 4,
       "options": {
@@ -372,7 +369,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 22
       },
       "id": 5,
       "options": {
@@ -448,7 +445,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
