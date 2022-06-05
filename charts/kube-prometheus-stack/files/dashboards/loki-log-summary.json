@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 20,
-  "iteration": 1654323239737,
+  "id": 8,
+  "iteration": 1654390110537,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -225,7 +225,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum by (app) (count_over_time({job!=\"syslog\"}[1m])) >0",
+          "expr": "sum by (app) (count_over_time({job!=\"syslog\"}[1m] |~ \"$search\" )) >0 ",
           "legendFormat": "{{app}}",
           "queryType": "range",
           "refId": "A"
@@ -315,7 +315,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "sum by (app) (count_over_time({job=\"syslog\"}[1m])) >0",
+          "expr": "sum by (app) (count_over_time({job=\"syslog\"}[1m] |~ \"$search\" )) >0",
           "legendFormat": "{{app}}",
           "queryType": "range",
           "refId": "A"
@@ -352,7 +352,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{job=\"syslog\"}",
+          "expr": "{job=\"syslog\"} |~ \"$search\"",
           "queryType": "range",
           "refId": "A"
         }
@@ -388,7 +388,7 @@
             "type": "loki",
             "uid": "P8E80F9AEF21F6940"
           },
-          "expr": "{job!=\"syslog\"}",
+          "expr": "{job!=\"syslog\"} |~ \"$search\"",
           "queryType": "range",
           "refId": "A"
         }
@@ -408,7 +408,14 @@
           "type": "loki",
           "uid": "P8E80F9AEF21F6940"
         },
-        "filters": [],
+        "filters": [
+          {
+            "condition": "",
+            "key": "app",
+            "operator": "=",
+            "value": "argocd-application-controller"
+          }
+        ],
         "hide": 0,
         "name": "filter",
         "skipUrlSync": false,
@@ -426,6 +433,10 @@
             "prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0"
           ]
         },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "definition": "label_values(kubelet_volume_stats_used_bytes, persistentvolumeclaim)",
         "hide": 2,
         "includeAll": true,
@@ -441,6 +452,25 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "kube-prom",
+          "value": "kube-prom"
+        },
+        "hide": 0,
+        "name": "search",
+        "options": [
+          {
+            "selected": true,
+            "text": "kube-prom",
+            "value": "kube-prom"
+          }
+        ],
+        "query": "kube-prom",
+        "skipUrlSync": false,
+        "type": "textbox"
       }
     ]
   },
