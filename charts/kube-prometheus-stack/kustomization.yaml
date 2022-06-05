@@ -11,6 +11,7 @@ patchesStrategicMerge:
   metadata:
     annotations:
       argocd.argoproj.io/sync-options: Replace=true
+      terrac.custom.com/super-thing: true
     name: ".*"
   apiVersion: v1
   kind: ConfigMap
