@@ -406,7 +406,7 @@
       {
         "datasource": {
           "type": "loki",
-          "uid": "loki"
+          "uid": "P8E80F9AEF21F6940"
         },
         "filters": [],
         "hide": 0,
@@ -445,7 +445,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
