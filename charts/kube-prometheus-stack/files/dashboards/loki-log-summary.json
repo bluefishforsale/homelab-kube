@@ -25,7 +25,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
   "id": 8,
-  "iteration": 1654390110537,
+  "iteration": 1654390110549,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -408,14 +408,7 @@
           "type": "loki",
           "uid": "P8E80F9AEF21F6940"
         },
-        "filters": [
-          {
-            "condition": "",
-            "key": "app",
-            "operator": "=",
-            "value": "argocd-application-controller"
-          }
-        ],
+        "filters": [],
         "hide": 0,
         "name": "filter",
         "skipUrlSync": false,
@@ -456,19 +449,19 @@
       {
         "current": {
           "selected": false,
-          "text": "kube-prom",
-          "value": "kube-prom"
+          "text": "",
+          "value": ""
         },
         "hide": 0,
         "name": "search",
         "options": [
           {
             "selected": true,
-            "text": "kube-prom",
-            "value": "kube-prom"
+            "text": "",
+            "value": ""
           }
         ],
-        "query": "kube-prom",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       }
