@@ -13,4 +13,3 @@ patchesStrategicMerge:
       argocd.argoproj.io/sync-options: Replace=true
       terrac.custom.com/super-thing: true
     name: prometheuses.monitoring.coreos.com
-
