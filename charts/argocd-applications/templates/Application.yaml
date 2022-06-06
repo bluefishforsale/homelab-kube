@@ -21,7 +21,7 @@ spec:
     targetRevision: {{ .targetRevision | default "HEAD" | quote }}
     path: {{ .path }}
 
-		{{- if not (hasKey . "plugin" ) }}
+		# {{- if not (hasKey . "plugin" ) }}
     # helm specific config
     helm:
       # Release name override (defaults to application name)
@@ -35,7 +35,7 @@ spec:
       # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
-		{{- end }}
+		# {{- end }}
 
 		{{- if .plugin }}
     plugin:
