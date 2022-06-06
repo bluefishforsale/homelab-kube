@@ -25,7 +25,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 17,
-  "iteration": 1654486067713,
+  "iteration": 1654486067757,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -402,16 +402,16 @@
           "query": "label_values(kubelet_volume_stats_used_bytes, persistentvolumeclaim)",
           "refId": "StandardVariableQuery"
         },
-        "refresh": 1,
-        "regex": "/(tv|movies|plex|sonarr|radarr|tautulli|tdarr)/",
+        "refresh": 2,
+        "regex": "/(tv|movies|plex.*|sonarr.*|radarr.*|tautulli.*|tdarr.*)/",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
