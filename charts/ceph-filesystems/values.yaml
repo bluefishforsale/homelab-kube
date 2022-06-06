@@ -16,7 +16,7 @@ persistentVolumeClaims:
     storage: 100Gi
   - name: tv
     namespace: media
-    storage: 8Ti
+    storage: 9Ti
   - name: movies
     namespace: media
     storage: 8Ti
