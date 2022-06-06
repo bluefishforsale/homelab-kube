@@ -51,7 +51,7 @@ Applications:
   - name: argo-cd
     path: charts/argo-cd
     namespace: argocd
-    plugin: kustomized-helm
+    # plugin: kustomized-helm
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
@@ -110,7 +110,7 @@ Applications:
     path: charts/kube-prometheus-stack
     namespace: monitoring
     project: homelab
-    plugin: kustomized-helm
+    # plugin: kustomized-helm
     repoURL: *repoURL
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences

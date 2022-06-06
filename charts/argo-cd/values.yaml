@@ -1251,7 +1251,8 @@ argo-cd:
       #     - email
 
     # -- Annotations to be added to Argo CD ConfigMap
-    configAnnotations: {}
+    configAnnotations:
+      argocd.argoproj.io/sync-options: Replace=true
 
     # -- Argo CD rbac config ([Argo CD RBAC policy])
     ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
