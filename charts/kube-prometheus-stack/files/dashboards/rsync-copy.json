@@ -25,7 +25,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 17,
-  "iteration": 1654486067705,
+  "iteration": 1654486067713,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -84,7 +84,38 @@
           },
           "unit": "bytes"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Capacity: movies"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Used : movies"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 7,
@@ -123,7 +154,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "(avg without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~\"$pvc\"}))))",
+          "expr": "sum by (persistentvolumeclaim) (topk(1, (kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~\"$pvc\"})))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -139,7 +170,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by (persistentvolumeclaim)  (kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"$pvc\"})",
+          "expr": "sum by (persistentvolumeclaim)  (topk(1, kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"$pvc\"}))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -149,7 +180,7 @@
           "refId": "B"
         }
       ],
-      "title": "PV {{$pvc}}",
+      "title": "Used: $pvc",
       "type": "timeseries"
     },
     {
