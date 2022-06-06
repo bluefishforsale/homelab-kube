@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -21,50 +24,16 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 32,
-  "iteration": 1642801473496,
+  "id": 17,
+  "iteration": 1654486067685,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "loki",
+        "type": "prometheus",
         "uid": "prometheus"
       },
-      "gridPos": {
-        "h": 11,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 2,
-      "options": {
-        "dedupStrategy": "exact",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": true,
-        "sortOrder": "Descending",
-        "wrapLogMessage": true
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "prometheus"
-          },
-          "expr": "{namespace=\"media\", app=~\"rsync-.*\"}",
-          "instant": false,
-          "maxLines": 50,
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Rsync cronJob Log",
-      "type": "logs"
-    },
-    {
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -92,7 +61,7 @@
             "spanNulls": true,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -121,11 +90,12 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 11
+        "y": 0
       },
       "id": 2,
       "interval": "1m",
       "links": [],
+      "maxPerRow": 2,
       "options": {
         "legend": {
           "calcs": [
@@ -138,30 +108,55 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.3.3",
+      "repeat": "pvc",
+      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "(\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n  -\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"movies\"})))\n) ",
+          "expr": "(avg without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{persistentvolumeclaim=~\"$pvc\"}))))",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{persistentvolumeclaim}}",
+          "legendFormat": "Capacity: {{persistentvolumeclaim}}",
+          "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "sum by (persistentvolumeclaim)  (kubelet_volume_stats_used_bytes{persistentvolumeclaim=~\"$pvc\"})",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Used : {{persistentvolumeclaim}}",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "/movies PV Usage",
+      "title": "PV {{$pvc}}",
       "type": "timeseries"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -189,7 +184,7 @@
             "spanNulls": true,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -218,7 +213,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 11
+        "y": 0
       },
       "id": 5,
       "interval": "1m",
@@ -235,7 +230,8 @@
           "placement": "bottom"
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.3.3",
@@ -245,13 +241,15 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "(\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"tv\"})))\n  -\n  sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"tv\"})))\n)\n",
+          "expr": "avg without(instance, node) (topk(1, (kubelet_volume_stats_capacity_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"tv\"})))",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Used Space",
+          "legendFormat": "Capacity: {{persistentvolumeclaim}}",
+          "range": true,
           "refId": "A"
         },
         {
@@ -259,13 +257,15 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "editorMode": "code",
           "exemplar": true,
-          "expr": "sum without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"tv\"})))\n",
+          "expr": "avg without(instance, node) (topk(1, (kubelet_volume_stats_available_bytes{job=\"kubelet\", metrics_path=\"/metrics\", namespace=\"media\", persistentvolumeclaim=\"tv\"})))\n",
           "format": "time_series",
-          "hide": true,
+          "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Free Space",
+          "legendFormat": "Used: {{persistentvolumeclaim}}",
+          "range": true,
           "refId": "B"
         }
       ],
@@ -277,13 +277,17 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 7
       },
       "hiddenSeries": false,
       "id": 4,
@@ -312,7 +316,7 @@
       },
       "paceLength": 10,
       "percentage": false,
-      "pluginVersion": "8.3.3",
+      "pluginVersion": "8.5.0",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -368,10 +372,48 @@
       "yaxis": {
         "align": false
       }
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "prometheus"
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 2,
+      "options": {
+        "dedupStrategy": "exact",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "prometheus"
+          },
+          "expr": "{namespace=\"media\", app=~\"rsync-.*\"}",
+          "instant": false,
+          "maxLines": 50,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Rsync cronJob Log",
+      "type": "logs"
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 34,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -432,6 +474,28 @@
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "definition": "label_values(kubelet_volume_stats_used_bytes, persistentvolumeclaim)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "pvc",
+        "options": [],
+        "query": {
+          "query": "label_values(kubelet_volume_stats_used_bytes, persistentvolumeclaim)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/(loki.*|prom.*)/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -443,6 +507,6 @@
   "timezone": "",
   "title": "Rsync status",
   "uid": "Zs7mggxnz",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }
