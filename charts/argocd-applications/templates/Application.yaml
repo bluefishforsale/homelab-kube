@@ -39,7 +39,7 @@ spec:
 
 		{{- if .plugin }}
     plugin:
-      name: {{ .plugin | default "" }}
+      name: {{ .plugin }}
 		{{- end }}
 
   # Destination cluster and namespace to deploy the application

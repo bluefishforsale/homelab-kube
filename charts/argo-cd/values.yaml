@@ -1219,7 +1219,7 @@ argo-cd:
         - name: kustomized-helm
           init:
             command: ["/bin/sh", "-c"]
-            args: ["helm dependency build || true"]
+            args: ["helm dependency build"]
           generate:
             command: ["/bin/sh", "-c"]
             args: ["helm template . -f values.yaml --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --include-crds > all.yaml && kustomize build"]
