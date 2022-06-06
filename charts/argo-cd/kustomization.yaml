@@ -18,3 +18,10 @@ patchesStrategicMerge:
     annotations:
       argocd.argoproj.io/sync-options: Replace=true
     name: ".*"
+
+patches:
+  - path: hpa.argocd-fix.patch.yaml
+    target:
+      group: autoscaling
+      version: v2
+      kind: HorizontalPodAutoscaler
