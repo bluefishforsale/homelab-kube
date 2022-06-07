@@ -1229,7 +1229,7 @@ argo-cd:
         - name: kustomized-helm
           init:
             command: ["/bin/sh", "-c"]
-            args: ["helm dependency build"]
+            args: [" awk '(/repository:/){print $2}' Chart.yaml | helm repo add $ARGOCD_APP_NAME && helm dependency build"]
           generate:
             command: ["/bin/sh", "-c"]
             args: ["helm template . -f values.yaml --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --include-crds > all.yaml && kustomize build"]
