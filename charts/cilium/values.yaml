@@ -19,8 +19,8 @@ cilium:
   # - name: "image-pull-secret"
 
   # kubeConfigPath: ~/.kube/config
-# k8sServiceHost:
-# k8sServicePort:
+  k8sServiceHost: 10.32.0.1
+  k8sServicePort: 443
 
   cluster:
     # -- Name of the cluster. Only required for Cluster Mesh.
@@ -198,7 +198,7 @@ cilium:
 
   # -- Enable installation of PodCIDR routes between worker
   # nodes if worker nodes share a common L2 network segment.
-  autoDirectNodeRoutes: false
+  autoDirectNodeRoutes: true
 
   # -- Annotate k8s node upon initialization with Cilium's metadata.
   annotateK8sNode: true
@@ -544,7 +544,7 @@ cilium:
 
   hostPort:
     # -- Enable hostPort service support.
-    enabled: false
+    enabled: true
 
   # -- Configure ClusterIP service handling in the host namespace (the node).
   hostServices:
@@ -606,7 +606,7 @@ cilium:
       #
       #   --set metrics.enabled="{dns:query;ignoreAAAA,drop,tcp,flow,icmp,http}"
       #
-      enabled: ~
+      enabled: true
       # -- Configure the port the hubble metric server listens on.
       port: 9091
       # -- Annotations to be added to hubble-metrics service.
@@ -615,7 +615,7 @@ cilium:
         # -- Create ServiceMonitor resources for Prometheus Operator.
         # This requires the prometheus CRDs to be available.
         # ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-        enabled: false
+        enabled: true
         # -- Labels to add to ServiceMonitor hubble
         labels: {}
         # -- Annotations to add to ServiceMonitor hubble
@@ -1028,7 +1028,7 @@ cilium:
   # -- Configure the kube-proxy replacement in Cilium BPF datapath
   # Valid options are "disabled", "probe", "partial", "strict".
   # ref: https://docs.cilium.io/en/stable/gettingstarted/kubeproxy-free/
-  #kubeProxyReplacement: "disabled"
+  kubeProxyReplacement: "strict"
 
   # -- healthz server bind address for the kube-proxy replacement.
   # To enable set the value to '0.0.0.0:10256' for all ipv4
@@ -1082,11 +1082,11 @@ cilium:
   # -- Specify the IPv4 CIDR for native routing (ie to avoid IP masquerade for).
   # This value corresponds to the configured cluster-cidr.
   # Deprecated in favor of ipv4NativeRoutingCIDR, will be removed in 1.12.
-  # nativeRoutingCIDR:
+  # nativeRoutingCIDR: "10.244.0.0/16"
 
   # -- Specify the IPv4 CIDR for native routing (ie to avoid IP masquerade for).
   # This value corresponds to the configured cluster-cidr.
-  # ipv4NativeRoutingCIDR: "10.244.0.0/16"
+  ipv4NativeRoutingCIDR: "10.244.0.0/16"
 
   monitor:
     # -- Enable the cilium-monitor sidecar.
@@ -1121,7 +1121,7 @@ cilium:
   # -- Configure N-S k8s service loadbalancing
   nodePort:
     # -- Enable the Cilium NodePort service implementation.
-    enabled: false
+    enabled: true
 
     # -- Port range to use for NodePort services.
     # range: "30000,32767"
@@ -1149,12 +1149,12 @@ cilium:
 
   # -- Configure prometheus metrics on the configured port at /metrics
   prometheus:
-    enabled: false
+    enabled: true
     port: 9090
     serviceMonitor:
       # -- Enable service monitors.
       # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/master/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-      enabled: false
+      enabled: true
       # -- Labels to add to ServiceMonitor cilium-agent
       labels: {}
       # -- Annotations to add to ServiceMonitor cilium-agent
@@ -1222,7 +1222,7 @@ cilium:
   #   - disabled
   #   - vxlan (default)
   #   - geneve
-  tunnel: "vxlan"
+  tunnel: "disabled"
 
   # -- Disable the usage of CiliumEndpoint CRD.
   disableEndpointCRD: "false"
@@ -1461,12 +1461,12 @@ cilium:
     # -- Enable prometheus metrics for cilium-operator on the configured port at
     # /metrics
     prometheus:
-      enabled: false
+      enabled: true
       port: 6942
       serviceMonitor:
         # -- Enable service monitors.
         # This requires the prometheus CRDs to be available (see https://github.com/prometheus-operator/prometheus-operator/blob/master/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml)
-        enabled: false
+        enabled: true
         # -- Labels to add to ServiceMonitor cilium-operator
         labels: {}
         # -- Annotations to add to ServiceMonitor cilium-operator
@@ -1732,7 +1732,7 @@ cilium:
         # -- Optional port to use as the node port for apiserver access.
         nodePort: 32379
         # -- Optional loadBalancer IP address to use with type LoadBalancer.
-        # loadBalancerIP:
+        # loadBalancerIP: 192.168.1.64
 
         # -- Annotations for the clustermesh-apiserver
         # For GKE LoadBalancer, use annotation cloud.google.com/load-balancer-type: "Internal"

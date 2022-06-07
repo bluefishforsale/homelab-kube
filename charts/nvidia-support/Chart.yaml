@@ -4,7 +4,7 @@ version: 1.0.0
 
 dependencies:
   - name: nvidia-device-plugin
-    version: 0.10.0
+    version: 0.11.0
     repository: https://nvidia.github.io/k8s-device-plugin
   - name: nvidia-gpu-exporter
     version: 0.3.1
