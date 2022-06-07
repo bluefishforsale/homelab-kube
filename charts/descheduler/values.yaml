@@ -61,9 +61,9 @@ descheduler:
 
   deschedulerPolicy:
     # nodeSelector: "key1=value1,key2=value2"
-    # maxNoOfPodsToEvictPerNode: 10
-    # maxNoOfPodsToEvictPerNamespace: 10
-    # ignorePvcPods: true
+    maxNoOfPodsToEvictPerNode: 3
+    maxNoOfPodsToEvictPerNamespace: 1
+    ignorePvcPods: true
     # evictLocalStoragePods: true
     strategies:
       RemoveDuplicates:
