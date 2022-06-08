@@ -7,8 +7,8 @@ cilium:
 
   debug:
     # -- Enable debug logging
-    enabled: false
-    # verbose:
+    enabled: true
+    # verbose: flow
 
   rbac:
     # -- Enable creation of Resource-Based Access Control configuration.
@@ -260,7 +260,7 @@ cilium:
     # neighMax: 524288
 
     # -- Configure the maximum number of entries in endpoint policy map (per endpoint).
-    policyMapMax: 16384
+    policyMapMax: 32768
 
     # -- Configure auto-sizing for all BPF maps based on available memory.
     # ref: https://docs.cilium.io/en/stable/concepts/ebpf/maps/#ebpf-maps
@@ -282,7 +282,7 @@ cilium:
     lbExternalClusterIP: false
 
     # -- Enable native IP masquerade support in eBPF
-    #masquerade: false
+    masquerade: true
 
     # -- Configure whether direct routing mode should route traffic via
     # host stack (true) or directly and more efficiently out of BPF (false) if
@@ -971,7 +971,7 @@ cilium:
 
   # -- Configure the eBPF-based ip-masq-agent
   ipMasqAgent:
-    enabled: false
+    enabled: true
 
   # iptablesLockTimeout defines the iptables "--wait" option when invoked from Cilium.
   # iptablesLockTimeout: "5s"
@@ -1108,7 +1108,7 @@ cilium:
 
     # -- acceleration is the option to accelerate service handling via XDP
     # e.g. native, disabled
-    # acceleration: disabled
+    acceleration: native
 
     # -- dsrDispatch configures whether IP option or IPIP encapsulation is
     # used to pass a service IP and port to remote backend
@@ -1124,7 +1124,7 @@ cilium:
     enabled: true
 
     # -- Port range to use for NodePort services.
-    # range: "30000,32767"
+    range: "15000,32767"
 
     # -- Set to true to prevent applications binding to service ports.
     bindProtection: true
