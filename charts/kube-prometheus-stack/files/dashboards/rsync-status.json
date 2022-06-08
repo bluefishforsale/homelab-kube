@@ -287,7 +287,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "prometheus"
+        "uid": "P8E80F9AEF21F6940"
       },
       "gridPos": {
         "h": 11,
