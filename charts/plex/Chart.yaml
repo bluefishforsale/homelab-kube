@@ -3,6 +3,6 @@ name: plex
 version: 1.0.0
 dependencies:
   - name: plex
-    version: 5.3.0
+    version: 6.3.3
     repository: https://k8s-at-home.com/charts/
 
