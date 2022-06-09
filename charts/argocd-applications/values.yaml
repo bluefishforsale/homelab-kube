@@ -51,7 +51,7 @@ Applications:
   - name: argo-cd
     path: charts/argo-cd
     namespace: argocd
-    # plugin: kustomized-helm
+    plugin: kustomized-helm
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy

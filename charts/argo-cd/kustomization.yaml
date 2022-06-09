@@ -20,7 +20,10 @@ patchesStrategicMerge:
     name: ".*"
 
 patches:
-  - path: hpa.argocd-fix.patch.yaml
+- patch: |-
+    - op: replace
+      path: "/apiVersion"
+      value: "autoscaling/v2beta2"
     target:
       group: autoscaling
       version: v2
