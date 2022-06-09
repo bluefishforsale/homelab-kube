@@ -1,6 +1,35 @@
 # Kubernetes Dependency map
 ## Start thigns in this order
 
+### New helm bootstrap + argo way
+```
+# CRDs so we don't need two passes
+kubectl apply  -f charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-*
+
+# cilium so things have a network
+helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
+
+# dns but after cilium
+helm upgrade --install -n kube-system  coredns -f charts/coredns/values.yaml charts/coredns
+
+# local NFS server to copy from
+kubectl create ns media
+kubectl apply -f ocean-nfs-pvc.yaml
+
+# ceph
+helm upgrade --install -n rook-ceph --create-namespace rook-ceph -f charts/rook-ceph/values.yaml charts/rook-ceph
+helm upgrade --install -n rook-ceph --create-namespace rook-ceph-cluster -f charts/rook-ceph-cluster/values.yaml charts/rook-ceph-cluster
+helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
+
+# install argo server
+helm upgrade --install -n argocd --create-namespace argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
+helm upgrade --install -n argocd --create-namespace argocd-applications -f charts/argocd-applications/values.yaml charts/argocd-applications
+
+
+
+```
+
+### OLD MANUAL HELM WWAY
 ```
 sh ./create_namespaces.sh
 kubectl apply -n flannel -f kube-flannel.yml
