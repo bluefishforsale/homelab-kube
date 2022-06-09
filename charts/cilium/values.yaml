@@ -7,8 +7,8 @@ cilium:
 
   debug:
     # -- Enable debug logging
-    enabled: true
-    # verbose: flow
+    enabled: false
+    # verbose:
 
   rbac:
     # -- Enable creation of Resource-Based Access Control configuration.
@@ -282,7 +282,7 @@ cilium:
     lbExternalClusterIP: false
 
     # -- Enable native IP masquerade support in eBPF
-    masquerade: true
+    #masquerade: false
 
     # -- Configure whether direct routing mode should route traffic via
     # host stack (true) or directly and more efficiently out of BPF (false) if
@@ -971,7 +971,7 @@ cilium:
 
   # -- Configure the eBPF-based ip-masq-agent
   ipMasqAgent:
-    enabled: true
+    enabled: false
 
   # iptablesLockTimeout defines the iptables "--wait" option when invoked from Cilium.
   # iptablesLockTimeout: "5s"
