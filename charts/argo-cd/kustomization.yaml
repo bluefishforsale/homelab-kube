@@ -22,8 +22,8 @@ patchesStrategicMerge:
 patches:
 - patch: |-
     - op: replace
-      path: "/apiVersion"
-      value: "autoscaling/v2beta2"
+      path: /apiVersion
+      value: autoscaling/v2beta2
     target:
       group: autoscaling
       version: v2
