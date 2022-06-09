@@ -28,13 +28,4 @@ patches:
     group: autoscaling
     version: v2
     kind: HorizontalPodAutoscaler
-    name: argo-cd-argocd-repo-server-hpa
-- patch: |-
-    - op: replace
-      path: /apiVersion
-      value: autoscaling/v2beta2
-  target:
-    group: autoscaling
-    version: v2
-    kind: HorizontalPodAutoscaler
-    name: argo-cd-argocd-server-hpa
+    name: "argo-cd-.*"
