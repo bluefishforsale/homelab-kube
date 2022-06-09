@@ -16,16 +16,16 @@ helm upgrade --install -n kube-system  coredns -f charts/coredns/values.yaml cha
 kubectl create ns media
 kubectl apply -f ocean-nfs-pvc.yaml
 
-# ceph
-helm upgrade --install -n rook-ceph --create-namespace rook-ceph -f charts/rook-ceph/values.yaml charts/rook-ceph
+# ceph appset / cluster def / pvc's
+helm upgrade --install -n rook-ceph --create-namespace rook-cephargocd-applications -f charts/rook-ceph/values.yaml charts/rook-ceph
 helm upgrade --install -n rook-ceph --create-namespace rook-ceph-cluster -f charts/rook-ceph-cluster/values.yaml charts/rook-ceph-cluster
 helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
 # install argo server
 helm upgrade --install -n argocd --create-namespace argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
+
+# argo app of apps
 helm upgrade --install -n argocd --create-namespace argocd-applications -f charts/argocd-applications/values.yaml charts/argocd-applications
-
-
 
 ```
 
