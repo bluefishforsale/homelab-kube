@@ -24,7 +24,7 @@ patches:
     - op: replace
       path: /apiVersion
       value: autoscaling/v2beta2
-    target:
-      group: autoscaling
-      version: v2
-      kind: HorizontalPodAutoscaler
+  target:
+    group: autoscaling
+    version: v2
+    kind: HorizontalPodAutoscaler
