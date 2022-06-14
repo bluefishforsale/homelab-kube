@@ -4,11 +4,11 @@ kind: Kustomization
 resources:
   - all.yaml
 
-patchesStrategicMerge:
-- |-
-  apiVersion: isindir.github.com/v1alpha3
-  kind: SopsSecret
-  metadata:
-    annotations:
-      argocd.argoproj.io/sync-options: Replace=true
-    name: ".*"
+# patchesStrategicMerge:
+# - |-
+#   apiVersion: isindir.github.com/v1alpha3
+#   kind: SopsSecret
+#   metadata:
+#     annotations:
+#       argocd.argoproj.io/sync-options: Replace=true
+#     name: ".*"
