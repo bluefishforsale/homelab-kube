@@ -20,7 +20,7 @@ plex:
   env:
     TZ: America/Los_Angeles
     ADVERTISE_IP: http://plex.svc.cluster.local
-    PLEX_CLAIM: "6SWvgNykocyxaHJszdz5"
+    PLEX_CLAIM: ""
     FriendlyName: MegaPlex
     EnableIPv6: 0
     LogVerbose: 1
