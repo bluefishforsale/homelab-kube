@@ -21,18 +21,18 @@ plex:
     TZ: America/Los_Angeles
     ADVERTISE_IP: http://plex.svc.cluster.local
     PLEX_CLAIM: ""
-    FriendlyName: MegaPlex
-    EnableIPv6: 0
-    LogVerbose: 1
-    logDebug: 1
     PLEX_MEDIA_SERVER_USE_SYSLOG: false
     NVIDIA_VISIBLE_DEVICES: all
     NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
-    PLEX_PREFERENCE_7: "TreatWanIpAsLocal=1"
-    PLEX_PREFERENCE_6: "TranscoderQuality=2"
-    PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
-    # PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
+    # ALLOWED_NETWORKS:
+    PLEX_PREFERENCE_1: "FriendlyName=MegaPlex"
+    PLEX_PREFERENCE_2: "EnableIPv6=0"
+    PLEX_PREFERENCE_3: "logDebug=0"
+    PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
     # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
+    PLEX_PREFERENCE_6: "TranscoderQuality=2"
+    PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
+    PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
