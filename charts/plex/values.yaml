@@ -20,7 +20,7 @@ plex:
   env:
     TZ: America/Los_Angeles
     ADVERTISE_IP: http://plex.svc.cluster.local
-    PLEX_CLAIM: |
+    PLEX_CLAIM:
       valueFrom:
         secretKeyRef:
           name: plex-claim
@@ -37,6 +37,7 @@ plex:
     PLEX_PREFERENCE_6: "TranscoderQuality=2"
     PLEX_PREFERENCE_7: "TreatWanIpAsLocal=0"
     PLEX_PREFERENCE_8: "TranscoderH264BackgroundPreset=fast"
+  envFrom:
 
   # -- Configures service settings for the chart.
   # @default -- See values.yaml
