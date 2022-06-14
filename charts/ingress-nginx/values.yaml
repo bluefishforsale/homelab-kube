@@ -560,8 +560,8 @@ ingress-nginx:
       failurePolicy: Fail
       # timeoutSeconds: 10
       port: 8443
-      certificate: "/usr/local/certificates/cert"
-      key: "/usr/local/certificates/key"
+      certificate: /certs/ca.pem
+      key: /certs/ca-key.pem
       namespaceSelector: {}
       objectSelector: {}
       ## Labels to be added to admission webhooks
@@ -811,15 +811,21 @@ ingress-nginx:
     #   cpu: 10m
     #   memory: 20Mi
 
-    extraVolumeMounts: []
+    extraVolumeMounts:
     ## Additional volumeMounts to the default backend container.
     #  - name: copy-portal-skins
     #   mountPath: /var/lib/lemonldap-ng/portal/skins
+      - name: certs
+        mountPath: /certs
 
-    extraVolumes: []
+    extraVolumes:
     ## Additional volumes to the default backend pod.
     #  - name: copy-portal-skins
     #    emptyDir: {}
+      - name: certs
+        hostPath:
+          path: /var/lib/kubernetes
+
 
     autoscaling:
       annotations: {}
