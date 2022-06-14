@@ -20,7 +20,11 @@ plex:
   env:
     TZ: America/Los_Angeles
     ADVERTISE_IP: http://plex.svc.cluster.local
-    PLEX_CLAIM: ""
+    PLEX_CLAIM: |
+      valueFrom:
+        secretKeyRef:
+          name: plex-claim
+          key: plex-claim
     PLEX_MEDIA_SERVER_USE_SYSLOG: false
     NVIDIA_VISIBLE_DEVICES: all
     NVIDIA_DRIVER_CAPABILITIES: compute,video,utility
