@@ -239,7 +239,7 @@ Applications:
   - name: sops-secrets-operator
     path: charts/sops-secrets-operator
     namespace: sops
-    # plugin: kustomized-helm
+    plugin: kustomized-helm
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
