@@ -556,7 +556,7 @@ ingress-nginx:
 
     admissionWebhooks:
       annotations: {}
-      enabled: true
+      enabled: false
       failurePolicy: Fail
       # timeoutSeconds: 10
       port: 8443
