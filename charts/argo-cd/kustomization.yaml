@@ -19,13 +19,13 @@ patchesStrategicMerge:
       argocd.argoproj.io/sync-options: Replace=true
     name: ".*"
 
-patches:
-- patch: |-
-    - op: replace
-      path: /apiVersion
-      value: autoscaling/v2beta2
-  target:
-    group: autoscaling
-    version: v2
-    kind: HorizontalPodAutoscaler
-    name: "argo-cd-.*"
+# patches:
+# - patch: |-
+#     - op: replace
+#       path: /apiVersion
+#       value: autoscaling/v2beta2
+#   target:
+#     group: autoscaling
+#     version: v2
+#     kind: HorizontalPodAutoscaler
+#     name: "argo-cd-.*"
