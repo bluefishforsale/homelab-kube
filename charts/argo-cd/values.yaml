@@ -370,6 +370,9 @@ argo-cd:
       # minAvailable: 1
       # maxUnavailable: 0
 
+  # -- Secrets with credentials to pull images from a private registry
+  imagePullSecrets: []
+
   ## Dex
   dex:
     # -- Enable dex
@@ -586,6 +589,9 @@ argo-cd:
       # minAvailable: 1
       # maxUnavailable: 0
 
+    # -- Secrets with credentials to pull images from a private registry
+    imagePullSecrets: []
+
   ## Redis
   redis:
     # -- Enable redis
@@ -597,7 +603,7 @@ argo-cd:
       # -- Redis repository
       repository: redis
       # -- Redis tag
-      tag: 6.2.6-alpine
+      tag: 7.0.0-alpine
       # -- Redis imagePullPolicy
       imagePullPolicy: IfNotPresent
 
@@ -775,6 +781,10 @@ argo-cd:
       # minAvailable: 1
       # maxUnavailable: 0
 
+
+    # -- Secrets with credentials to pull images from a private registry
+    imagePullSecrets: []
+
   # This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true)
   # the custom redis deployment is omitted
   # Check the redis-ha chart for more properties
@@ -820,7 +830,7 @@ argo-cd:
       # @default -- `nil` (follows subchart default)
       repository: ~
       # -- Redis tag
-      tag: 6.2.6-alpine
+      tag: 7.0.0-alpine
 
     ## https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
     topologySpreadConstraints:
@@ -847,6 +857,8 @@ argo-cd:
     # -- The name of an existing secret with Redis credentials (must contain key `redis-password`).
     # When it's set, the `externalRedis.password` parameter is ignored
     existingSecret: ""
+    # -- External Redis Secret annotations
+    secretAnnotations: {}
 
   ## Server
   server:
@@ -1225,14 +1237,14 @@ argo-cd:
       url: ""
       # Argo CD instance label key
       application.instanceLabelKey: argocd.argoproj.io/instance
-      configManagementPlugins: |
-        - name: kustomized-helm
-          init:
-            command: ["/bin/sh", "-c"]
-            args: [ "grep repository Chart.yaml | xargs | cut -d ' ' -f2 | xargs helm repo add $ARGOCD_APP_NAME && helm dependency build"]
-          generate:
-            command: ["/bin/sh", "-c"]
-            args: ["helm template . -f values.yaml --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --include-crds > all.yaml && kustomize build"]
+
+      # Enabled logs RBAC enforcement
+      # Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/upgrading/2.3-2.4/#enable-logs-rbac-enforcement
+      server.rbac.log.enforce.enable: "false"
+
+      # exec.enabled indicates whether the UI exec feature is enabled. It is disabled by default.
+      # Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/rbac/#exec-resource
+      exec.enabled: "false"
 
       # DEPRECATED: Please instead use configs.credentialTemplates and configs.repositories
       # repositories: |
@@ -1488,6 +1500,10 @@ argo-cd:
       enabled: false
       # minAvailable: 1
       # maxUnavailable: 0
+
+
+    # -- Secrets with credentials to pull images from a private registry
+    imagePullSecrets: []
 
   ## Repo Server
   repoServer:
@@ -1746,6 +1762,10 @@ argo-cd:
       # minAvailable: 1
       # maxUnavailable: 0
 
+
+    # -- Secrets with credentials to pull images from a private registry
+    imagePullSecrets: []
+
   ## Argo Configs
   configs:
     # -- Provide one or multiple [external cluster credentials]
@@ -1884,6 +1904,10 @@ argo-cd:
       #    ...
       #    -----END OPENSSH PRIVATE KEY-----
 
+
+    # -- Annotations to be added to `configs.credentialTemplates` Secret
+    credentialTemplatesAnnotations: {}
+
     # -- Repositories list to be used by applications
     ## Creates a secret for each key/value specified below to create repositories
     ## Note: the last example in the list would use a repository credential template, configured under "configs.repositoryCredentials".
@@ -1972,9 +1996,11 @@ argo-cd:
 
     image:
       # -- Repository to use for the application set controller
-      repository: quay.io/argoproj/argocd-applicationset
+      # @default -- `""` (defaults to global.image.repository)
+      repository: ""
       # -- Tag to use for the application set controller
-      tag: "v0.4.1"
+      # @default -- `""` (defaults to global.image.tag)
+      tag: ""
       # -- Image pull policy for the application set controller
       # @default -- `""` (defaults to global.image.imagePullPolicy)
       imagePullPolicy: ""
@@ -2240,7 +2266,9 @@ argo-cd:
           # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/email/
 
     # -- Set the logging level. (One of: `debug`, `info`, `warn`, `error`)
-    logLevel: info
+    logLevel: debug
+    # -- Application controller log format. Either `text` or `json`
+    logFormat: text
 
     # -- Extra arguments to provide to the controller
     extraArgs: []
