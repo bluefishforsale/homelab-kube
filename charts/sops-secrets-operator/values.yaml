@@ -76,7 +76,7 @@ sops-secrets-operator:
   # -- GPG configuration section
   gpg:
     # -- If `true` GCP secret will be created from provided value and mounted as environment variable
-    enabled: false
+    enabled: true
     # -- Name of the secret to create - will override default secret name if specified
     secret1: gpg1
     # -- Name of the secret to create - will override default secret name if specified
