@@ -1237,7 +1237,14 @@ argo-cd:
       url: ""
       # Argo CD instance label key
       application.instanceLabelKey: argocd.argoproj.io/instance
-
+      configManagementPlugins: |
+        - name: kustomized-helm
+          init:
+            command: ["/bin/sh", "-c"]
+            args: [ "grep repository Chart.yaml | xargs | cut -d ' ' -f2 | xargs helm repo add $ARGOCD_APP_NAME && helm dependency build"]
+          generate:
+            command: ["/bin/sh", "-c"]
+            args: ["helm template . -f values.yaml --name-template $ARGOCD_APP_NAME --namespace $ARGOCD_APP_NAMESPACE --include-crds > all.yaml && kustomize build"]
       # Enabled logs RBAC enforcement
       # Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/upgrading/2.3-2.4/#enable-logs-rbac-enforcement
       server.rbac.log.enforce.enable: "false"
