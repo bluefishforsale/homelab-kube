@@ -31,7 +31,7 @@ plex:
     # ALLOWED_NETWORKS:
     PLEX_PREFERENCE_1: "FriendlyName=MegaPlex"
     PLEX_PREFERENCE_2: "EnableIPv6=0"
-    PLEX_PREFERENCE_3: "logDebug=0"
+    PLEX_PREFERENCE_3: "logDebug=1"
     PLEX_PREFERENCE_4: "DisableTLSv1_0=1"
     # PLEX_PREFERENCE_5: "LanNetworksBandwidth=xxx.xxx.xxx.0/18\,xxx.xxx.xxx.0/24\,xxx.xxx.xxx.0/24"
     PLEX_PREFERENCE_6: "TranscoderQuality=2"
