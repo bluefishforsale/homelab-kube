@@ -8,12 +8,12 @@ httpbin:
 
   image:
     # -- Image repository
-    repository: kennethreitz/httpbin
+    repository: mccutchen/go-httpbin
     # -- Image pull policy
     pullPolicy: IfNotPresent
     # -- Image tag
     # @default -- chart appVersion
-    tag: latest
+    tag: ""
 
   # -- Specify docker-registry secret names as an array
   imagePullSecrets: []
