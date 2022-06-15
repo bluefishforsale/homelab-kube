@@ -1,0 +1,6 @@
+dependencies:
+- name: httpbin
+  repository: https://matheusfm.dev/charts
+  version: 0.1.1
+digest: sha256:a199d60b1eea8d2dfa5a4074ed3ab7236d588c1fb9d1f153521ca99ae44f0141
+generated: "2022-06-15T11:01:04.80781-07:00"
