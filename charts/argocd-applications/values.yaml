@@ -220,6 +220,14 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
+  - name: httpbin
+    path: charts/httpbin
+    namespace: httpbin
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
   # - name: vault
   #   path: charts/vault
   #   namespace: vault
