@@ -560,8 +560,8 @@ ingress-nginx:
       failurePolicy: Fail
       # timeoutSeconds: 10
       port: 8443
-      certificate: /certs/ca.pem
-      key: /certs/ca-key.pem
+      certificate: "/usr/local/certificates/cert"
+      key: "/usr/local/certificates/key"
       namespaceSelector: {}
       objectSelector: {}
       ## Labels to be added to admission webhooks
