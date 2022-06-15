@@ -59,7 +59,7 @@ httpbin:
     # -- Annotations to add to the ingress
     annotations:
       kubernetes.io/ingress.class: nginx
-      cert-manager.io/issuer: selfsigned-issuer
+      cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
 
     hosts:
       - host: httpbin.svc.cluster.local
