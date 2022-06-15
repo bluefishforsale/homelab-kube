@@ -71,6 +71,9 @@ kube-prometheus-stack:
     ## Additional labels for PrometheusRule alerts
     additionalRuleLabels: {}
 
+    ## Additional annotations for PrometheusRule alerts
+    additionalRuleAnnotations: {}
+
     ## Prefix for runbook URLs. Use this to override the first part of the runbookURLs that is common to all rules.
     runbookUrl: "https://runbooks.prometheus-operator.dev/runbooks"
 
@@ -168,8 +171,29 @@ kube-prometheus-stack:
     config:
       global:
         resolve_timeout: 5m
+      inhibit_rules:
+        - source_matchers:
+            - 'severity = critical'
+          target_matchers:
+            - 'severity =~ warning|info'
+          equal:
+            - 'namespace'
+            - 'alertname'
+        - source_matchers:
+            - 'severity = warning'
+          target_matchers:
+            - 'severity = info'
+          equal:
+            - 'namespace'
+            - 'alertname'
+        - source_matchers:
+            - 'alertname = InfoInhibitor'
+          target_matchers:
+            - 'severity = info'
+          equal:
+            - 'namespace'
       route:
-        group_by: ['job']
+        group_by: ['namespace']
         group_wait: 30s
         group_interval: 5m
         repeat_interval: 12h
@@ -424,7 +448,7 @@ kube-prometheus-stack:
       ##
       image:
         repository: quay.io/prometheus/alertmanager
-        tag: v0.22.2
+        tag: v0.24.0
         sha: ""
 
       ## If true then the user will be responsible to provide a secret with alertmanager configuration
@@ -486,7 +510,9 @@ kube-prometheus-stack:
       ## AlermanagerConfig to be used as top level configuration
       ##
       alertmanagerConfiguration: {}
-      # - name: global-alertmanager-Configuration
+      ## Example with select a global alertmanagerconfig
+      # alertmanagerConfiguration:
+      #   name: global-alertmanager-Configuration
 
       ## Define Log Format
       # Use logfmt (default) or json logging
@@ -721,6 +747,7 @@ kube-prometheus-stack:
       dashboards:
         enabled: true
         label: grafana_dashboard
+        labelValue: "1"
 
         ## Annotations for Grafana dashboard configmaps
         ##
@@ -762,6 +789,10 @@ kube-prometheus-stack:
     #   mountPath: /etc/grafana/ssl/
     #   configMap: certs-configmap
     #   readOnly: true
+
+    deleteDatasources: []
+    # - name: example-datasource
+    #   orgId: 1
 
     ## Configure additional grafana datasources (passed through tpl)
     ## ref: http://docs.grafana.org/administration/provisioning/#datasources
@@ -1715,7 +1746,7 @@ kube-prometheus-stack:
     ##
     image:
       repository: quay.io/prometheus-operator/prometheus-operator
-      tag: v0.56.2
+      tag: v0.57.0
       sha: ""
       pullPolicy: IfNotPresent
 
@@ -1733,7 +1764,7 @@ kube-prometheus-stack:
       # image to use for config and rule reloading
       image:
         repository: quay.io/prometheus-operator/prometheus-config-reloader
-        tag: v0.56.2
+        tag: v0.57.0
         sha: ""
 
       # resource config for prometheusConfigReloader
@@ -2172,7 +2203,7 @@ kube-prometheus-stack:
       ##
       image:
         repository: quay.io/prometheus/prometheus
-        tag: v2.35.0
+        tag: v2.36.1
         sha: ""
 
       ## Tolerations for use with node taints
@@ -2688,7 +2719,14 @@ kube-prometheus-stack:
 
       ## PrometheusRulesExcludedFromEnforce - list of prometheus rules to be excluded from enforcing of adding namespace labels.
       ## Works only if enforcedNamespaceLabel set to true. Make sure both ruleNamespace and ruleName are set for each pair
+      ## Deprecated, use `excludedFromEnforcement` instead
       prometheusRulesExcludedFromEnforce: []
+
+      ## ExcludedFromEnforcement - list of object references to PodMonitor, ServiceMonitor, Probe and PrometheusRule objects
+      ## to be excluded from enforcing a namespace label of origin.
+      ## Works only if enforcedNamespaceLabel set to true.
+      ## See https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#objectreference
+      excludedFromEnforcement: []
 
       ## QueryLogFile specifies the file to which PromQL queries are logged. Note that this location must be writable,
       ## and can be persisted using an attached volume. Alternatively, the location can be set to a stdout location such
