@@ -8,7 +8,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: pki-ca-keypair
+  name: selfsigned-keypair
   namespace:  cert-manager
 spec:
   isCA: true
