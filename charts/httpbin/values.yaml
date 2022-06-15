@@ -66,10 +66,10 @@ httpbin:
         paths:
           - path: /
             pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
+    tls:
+     - secretName: httpbin-tls
+       hosts:
+         - httpbin.svc.cluster.local
 
   # -- [Resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers) to add to the container
   resources: {}
