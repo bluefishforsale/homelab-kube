@@ -13,7 +13,7 @@ httpbin:
     pullPolicy: IfNotPresent
     # -- Image tag
     # @default -- chart appVersion
-    tag: ""
+    tag: latest
 
   # -- Specify docker-registry secret names as an array
   imagePullSecrets: []
