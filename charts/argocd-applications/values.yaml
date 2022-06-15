@@ -220,21 +220,21 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: vault
-    path: charts/vault
-    namespace: vault
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: vault
+  #   path: charts/vault
+  #   namespace: vault
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: consul
-    path: charts/consul
-    namespace: consul
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: consul
+  #   path: charts/consul
+  #   namespace: consul
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   - name: sops-secrets-operator
     path: charts/sops-secrets-operator
