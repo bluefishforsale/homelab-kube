@@ -201,11 +201,11 @@ plex:
       # -- The paths to logs on the volume
       logs:
       - name: logs
-        path: "/config/Library/Application Support/Plex Media Server/Logs/*.log"
+        path: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs/*.log"
 
       # -- Specify a list of volumes that get mounted in the promtail container.
       # At least 1 volumeMount is required!
       volumeMounts:
       - name: logs
-        mountPath: "/config/Library/Application Support/Plex Media Server/Logs"
+        mountPath: "/config/Library/Application Support/Plex Media Server/Logs/PMS Plugin Logs"
         readOnly: true
