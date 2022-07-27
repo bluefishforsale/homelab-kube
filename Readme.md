@@ -29,7 +29,7 @@ helm upgrade --install -n argocd --create-namespace argocd-applications -f chart
 
 ```
 
-### OLD MANUAL HELM WWAY
+### OLD MANUAL HELM WAY
 ```
 sh ./create_namespaces.sh
 kubectl apply -n flannel -f kube-flannel.yml
@@ -45,26 +45,26 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
 ```
  kubectl delete ValidatingWebhookConfiguration -n nginx ingress-nginx-admission
 
- helm install -n rook-ceph rook-ceph -f charts/rook-ceph/values.yaml charts/rook-ceph
- helm install -n rook-ceph rook-ceph-cluster -f charts/rook-ceph-cluster/values.yaml charts/rook-ceph-cluster
- helm install -n rook-ceph ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
+ helm upgrade --install -n rook-ceph rook-ceph -f charts/rook-ceph/values.yaml charts/rook-ceph
+ helm upgrade --install -n rook-ceph rook-ceph-cluster -f charts/rook-ceph-cluster/values.yaml charts/rook-ceph-cluster
+ helm upgrade --install -n rook-ceph ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
- helm install -n monitoring prom -f charts/kube-prometheus-stack/values.yaml charts/kube-prometheus-stack
- helm install -n monitoring loki -f charts/loki/values.yaml charts/loki
- helm install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
+ helm upgrade --install -n monitoring prom -f charts/kube-prometheus-stack/values.yaml charts/kube-prometheus-stack
+ helm upgrade --install -n monitoring loki -f charts/loki/values.yaml charts/loki
+ helm upgrade --install -n monitoring promtail -f charts/promtail/values.yaml charts/promtail
 
- helm install -n cert-manager cert-manager -f charts/cert-manager/values.yaml charts/cert-manager
- helm install -n argo-cd argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
+ helm upgrade --install -n cert-manager cert-manager -f charts/cert-manager/values.yaml charts/cert-manager
+ helm upgrade --install -n argo-cd argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
 
 
- helm install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
+ helm upgrade --install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
 
- helm install nvidia-device-plugin -f charts/nvidia-device-plugin/values.yaml charts/nvidia-device-plugin
- helm install -n media plex -f charts/plex/values.yaml charts/plex
- helm install -n media tautulli -f charts/tautulli/values.yaml charts/tautulli
- helm install -n media sonarr -f charts/sonarr/values.yaml charts/sonarr
- helm install -n media radarr -f charts/radarr/values.yaml charts/radarr
- helm install -n media nzbget -f charts/nzbget/values.yaml charts/nzbget
+ helm upgrade --install nvidia-device-plugin -f charts/nvidia-device-plugin/values.yaml charts/nvidia-device-plugin
+ helm upgrade --install -n media plex -f charts/plex/values.yaml charts/plex
+ helm upgrade --install -n media tautulli -f charts/tautulli/values.yaml charts/tautulli
+ helm upgrade --install -n media sonarr -f charts/sonarr/values.yaml charts/sonarr
+ helm upgrade --install -n media radarr -f charts/radarr/values.yaml charts/radarr
+ helm upgrade --install -n media nzbget -f charts/nzbget/values.yaml charts/nzbget
 ```
 
 # getting passwords
@@ -76,7 +76,7 @@ kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.dat
 
 ## argo-cd password
 ```
-kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
 
