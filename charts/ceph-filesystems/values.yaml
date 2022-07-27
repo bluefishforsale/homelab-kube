@@ -13,7 +13,7 @@ persistentVolumeClaims:
     storage: 2Gi
   - name: plex-config
     namespace: media
-    storage: 100Gi
+    storage: 200Gi
   - name: tv
     namespace: media
     storage: 9Ti
