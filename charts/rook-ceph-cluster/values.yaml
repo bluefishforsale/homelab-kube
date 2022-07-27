@@ -299,7 +299,7 @@ rook-ceph-cluster:
         - name: "sdd"
         - name: "sde"
         - name: "sdf"
-        - name: "sdf"
+        - name: "sdg"
         - name: "sdh"
       - name: node005
         devices:
@@ -309,7 +309,7 @@ rook-ceph-cluster:
         - name: "sdd"
         - name: "sde"
         - name: "sdf"
-        - name: "sdf"
+        - name: "sdg"
         - name: "sdh"
       - name: node006
         devices:
@@ -319,7 +319,7 @@ rook-ceph-cluster:
         - name: "sdd"
         - name: "sde"
         - name: "sdf"
-        - name: "sdf"
+        - name: "sdg"
         - name: "sdh"
 
     # The section for configuring management of daemon disruptions during upgrade or fencing.
