@@ -79,7 +79,23 @@ kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.dat
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
+# Ceph replace Disk / OSD
 
+- determine failed OSDs
+- determine which hosts those OSDs are on
+- get lsblk listing for those hosts to capture LVM name
+- get yaml from OSD showing LVM name (match with lsblk out)
+- match osd -> lvm -> /dev/sd?
+- ceph cluster CR: remove the bad disks
+- toolbox: `ceph osd out osd.N`  (for each bad OSD)
+- toolbox: `ceph osd purge osd.N --yes-i-really-mean-it`
+- do this slowly and let data re-position
+- toolbox: `ceph osd tree` (wait for all bad OSDs to be down or missing)
+- replace physical disk, or use teardown / zap script to reset lvm and disk partitions
+- toolbox: `ceph auth del osd.N` (for each osd being replaced)
+- cluster CR: add disks back
+- kube: restart deployment:  ceph-operator, ceph-mgr
+- toolbox: `watch -n 10 "ceph osd tree"`
 
 # ceph benchmarking procedure
 ## list pools already createed
