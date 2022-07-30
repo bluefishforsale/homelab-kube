@@ -11,6 +11,8 @@ dependencies:
     version: 0.3.1
     repository: https://utkuozdemir.org/helm-charts
 
+  # bare-metal w/ nvidia drivers + toolkit installed
+  # https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/getting-started.html#bare-metal-passthrough-with-pre-installed-drivers-and-nvidia-container-toolkit
   - name: gpu-operator
     version: 1.11.0
     repository: https://helm.ngc.nvidia.com/nvidia
