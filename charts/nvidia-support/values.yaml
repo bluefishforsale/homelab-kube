@@ -93,7 +93,7 @@ gpu-operator:
     strategy: single
 
   driver:
-    enabled: true
+    enabled: false
     repository: nvcr.io/nvidia
     image: driver
     version: "515.48.07"
