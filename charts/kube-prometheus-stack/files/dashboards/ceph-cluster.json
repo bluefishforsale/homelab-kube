@@ -27,7 +27,7 @@
   "gnetId": 7056,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1660493313540,
+  "iteration": 1660498150762,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -126,7 +126,7 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "value"
       },
       "pluginVersion": "8.5.3",
       "targets": [
@@ -2146,7 +2146,11 @@
       ],
       "targets": [
         {
-          "expr": "ceph_osd_up{cluster=\"$cluster\"} == 0",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "sum by (ceph_daemon)  (ceph_osd_up{cluster=\"$cluster\"}) == 0",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -4959,6 +4963,6 @@
   "timezone": "browser",
   "title": "Ceph - Cluster",
   "uid": "r6lloPJmz",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
