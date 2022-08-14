@@ -57,3 +57,10 @@ sys	1m8.268s
 fio --randrepeat=1 --ioengine=libaio --direct=1 --gtod_reduce=1 --name=test --filename=/movies/random_read_write.fio --bs=4k --iodepth=256 --readwrite=randrw --rwmixread=80 -runtime=300 --numjobs=4 --time_based --group_reporting --name=iops-test-job   --size=500GB  --eta-newline=1 --runtime=300
 
 fio --filename=/movies/random_read_write.fio --size=500GB --direct=1 --rw=randrw --bs=4k --ioengine=libaio --iodepth=256 --runtime=120 --numjobs=4 --time_based --group_reporting --name=iops-test-job --eta-newline=1
+
+
+### ceph speed up OSD recovery
+ceph tell 'osd.*' injectargs --osd-max-backfills=3 --osd-recovery-max-active=9
+
+#### default setttings
+ceph tell 'osd.*' injectargs --osd-max-backfills=1 --osd-recovery-max-active=0
