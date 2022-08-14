@@ -292,6 +292,8 @@ rook-ceph-cluster:
         osdsPerDevice: "1" # this value can be overridden at the node or device level
       nodes:
       - name: node004
+        config:
+          metadataDevice: nvme0n1
         devices:
         - name: "sda"
         - name: "sdb"
@@ -302,6 +304,8 @@ rook-ceph-cluster:
         - name: "sdg"
         - name: "sdh"
       - name: node005
+        config:
+          metadataDevice: nvme0n1
         devices:
         - name: "sda"
         - name: "sdb"
@@ -312,6 +316,8 @@ rook-ceph-cluster:
         - name: "sdg"
         - name: "sdh"
       - name: node006
+        config:
+          metadataDevice: nvme0n1
         devices:
         - name: "sda"
         - name: "sdb"
@@ -430,9 +436,9 @@ rook-ceph-cluster:
         dataPools:
           - failureDomain: host
             replicated:
-              size: 3
+              size: 2
         metadataServer:
-          activeCount: 1
+          activeCount: 3
           activeStandby: true
       storageClass:
         enabled: true

@@ -32,7 +32,6 @@ helm upgrade --install -n argocd --create-namespace argocd-applications -f chart
 ### OLD MANUAL HELM WAY
 ```
 sh ./create_namespaces.sh
-kubectl apply -n flannel -f kube-flannel.yml
 kubectl apply -n kube-system -f coredns-1.8.yaml
 helm install metrics-server -n kube-system  -f charts/metrics-server/values.yaml  charts/metrics-server
 kubectl apply -f ocean-nfs-pvc.yaml
