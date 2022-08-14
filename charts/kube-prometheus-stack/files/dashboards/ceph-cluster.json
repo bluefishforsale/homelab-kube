@@ -27,7 +27,7 @@
   "gnetId": 7056,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1660498150762,
+  "iteration": 1660499472310,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -409,16 +409,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "rgba(245, 54, 54, 0.9)",
+                "color": "dark-green",
                 "value": null
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.1
+                "value": 0.8
               },
               {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": 0.3
+                "color": "dark-red",
+                "value": 0.9
               }
             ]
           },
@@ -451,7 +451,11 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
-          "expr": "(ceph_cluster_total_bytes{cluster=\"$cluster\"}-ceph_cluster_total_used_bytes{cluster=\"$cluster\"})/ceph_cluster_total_bytes{cluster=\"$cluster\"}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "(ceph_cluster_total_used_bytes{cluster=\"$cluster\"})/ceph_cluster_total_bytes{cluster=\"$cluster\"}",
           "format": "time_series",
           "instant": true,
           "interval": "$interval",
@@ -461,7 +465,7 @@
           "step": 300
         }
       ],
-      "title": "Available Capacity",
+      "title": "Used Capacity",
       "type": "gauge"
     },
     {
@@ -4932,7 +4936,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -4963,6 +4967,6 @@
   "timezone": "browser",
   "title": "Ceph - Cluster",
   "uid": "r6lloPJmz",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }

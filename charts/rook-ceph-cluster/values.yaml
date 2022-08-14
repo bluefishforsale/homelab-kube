@@ -180,7 +180,41 @@ rook-ceph-cluster:
                 operator: In
                 values:
                 - "true"
-
+      mds:
+        tolerations:
+          - key: storage-node
+            operator: Exists
+        topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: host
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              ceph_daemon_type: mds
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: storage-node
+                operator: In
+                values:
+                - "true"
+    # placement:
+    #   all:
+    #     nodeAffinity:
+    #       requiredDuringSchedulingIgnoredDuringExecution:
+    #         nodeSelectorTerms:
+    #           - matchExpressions:
+    #             - key: role
+    #               operator: In
+    #               values:
+    #               - storage-node
+    #     podAffinity:
+    #     podAntiAffinity:
+    #     topologySpreadConstraints:
+    #     tolerations:
+    #     - key: storage-node
+    #       operator: Exists
     #   # The above placement information can also be specified for mon, osd, and mgr components
     #   mon:
     #   # Monitor deployments may contain an anti-affinity rule for avoiding monitor

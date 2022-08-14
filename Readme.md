@@ -70,7 +70,7 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
 ## rook-ceph UI password
 * username : admin
 ```
-kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.data.password}} | base64 -D
+kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.data.password}} | base64 -d ; echo
 ```
 
 ## argo-cd password
