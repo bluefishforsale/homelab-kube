@@ -58,7 +58,7 @@ helm install -n nginx ingress-nginx charts/ingress-nginx/
 
  helm upgrade --install -n media rsyc-cron -f charts/rsync-cron/values.yaml  charts/rsync-cron
 
- helm upgrade --install nvidia-device-plugin -f charts/nvidia-device-plugin/values.yaml charts/nvidia-device-plugin
+ helm upgrade --install -n kube-system nvidia-support -f charts/nvidia-support/values.yaml charts/nvidia-support
  helm upgrade --install -n media plex -f charts/plex/values.yaml charts/plex
  helm upgrade --install -n media tautulli -f charts/tautulli/values.yaml charts/tautulli
  helm upgrade --install -n media sonarr -f charts/sonarr/values.yaml charts/sonarr

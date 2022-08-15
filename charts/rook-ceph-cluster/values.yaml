@@ -318,44 +318,89 @@ rook-ceph-cluster:
       #   - name: "172.17.4.301"
       #     deviceFilter: "^sd."
       config:
-        osdsPerDevice: "1" # this value can be overridden at the node or device level
+        storeType: bluestore
+        osdsPerDevice: "1"
       nodes:
       - name: node004
-        config:
-          metadataDevice: nvme0n1
         devices:
         - name: "sda"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdb"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdc"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdd"
+          config:
+            metadataDevice: nvme0n1
         - name: "sde"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdf"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdg"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdh"
+          config:
+            metadataDevice: nvme0n1
       - name: node005
         config:
           metadataDevice: nvme0n1
         devices:
         - name: "sda"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdb"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdc"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdd"
+          config:
+            metadataDevice: nvme0n1
         - name: "sde"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdf"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdg"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdh"
+          config:
+            metadataDevice: nvme0n1
       - name: node006
-        config:
-          metadataDevice: nvme0n1
         devices:
         - name: "sda"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdb"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdc"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdd"
+          config:
+            metadataDevice: nvme0n1
         - name: "sde"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdf"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdg"
+          config:
+            metadataDevice: nvme0n1
         - name: "sdh"
+          config:
+            metadataDevice: nvme0n1
 
     # The section for configuring management of daemon disruptions during upgrade or fencing.
     disruptionManagement:
