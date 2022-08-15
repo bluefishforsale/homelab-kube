@@ -216,7 +216,7 @@ argo-cd:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: role
+            - key: kubernetes.io/role
               operator: NotIn
               values:
               - controller
