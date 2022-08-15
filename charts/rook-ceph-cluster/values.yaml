@@ -169,21 +169,23 @@ rook-ceph-cluster:
     # tolerate taints with a key of 'storage-node'.
     placement:
       all:
-        tolerations:
-          - key: storage-node
-            operator: Exists
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
+          requiredDuringSchedulingRequiredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
               - key: storage-node
                 operator: In
                 values:
-                - "true"
+                - true
       mds:
-        tolerations:
-          - key: storage-node
-            operator: Exists
+        nodeAffinity:
+          requiredDuringSchedulingRequiredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: storage-node
+                operator: In
+                values:
+                - true
         topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: node
