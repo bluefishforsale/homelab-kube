@@ -186,19 +186,12 @@ rook-ceph-cluster:
             operator: Exists
         topologySpreadConstraints:
         - maxSkew: 1
-          topologyKey: host
+          topologyKey: node
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
               ceph_daemon_type: mds
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: storage-node
-                operator: In
-                values:
-                - "true"
+
     # placement:
     #   all:
     #     nodeAffinity:

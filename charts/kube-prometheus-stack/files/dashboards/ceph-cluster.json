@@ -27,10 +27,245 @@
   "gnetId": 7056,
   "graphTooltip": 0,
   "id": 5,
-  "iteration": 1660499472310,
+  "iteration": 1660499815806,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ea6460",
+                "value": null
+              },
+              {
+                "color": "#052b51",
+                "value": 0
+              },
+              {
+                "color": "#508642",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 15,
+        "y": 0
+      },
+      "id": 98,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "diff"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "ceph_cluster_total_objects{cluster=\"$cluster\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Difference",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 18,
+        "y": 0
+      },
+      "id": 102,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "sum(ceph_mon_num_sessions{cluster='$cluster'})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Mon Session Num",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 2
+              },
+              {
+                "color": "rgba(50, 172, 45, 0.97)",
+                "value": 3
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 21,
+        "y": 0
+      },
+      "id": 14,
+      "interval": "1m",
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "count(ceph_mon_quorum_status{cluster=\"$cluster\"})",
+          "format": "time_series",
+          "instant": true,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A",
+          "step": 300
+        }
+      ],
+      "title": "Monitors In Quorum",
+      "type": "stat"
+    },
     {
       "collapsed": false,
       "datasource": {
@@ -41,7 +276,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 37,
       "panels": [],
@@ -108,7 +343,7 @@
         "h": 3,
         "w": 3,
         "x": 0,
-        "y": 1
+        "y": 4
       },
       "id": 21,
       "interval": "1m",
@@ -186,7 +421,7 @@
         "h": 3,
         "w": 3,
         "x": 3,
-        "y": 1
+        "y": 4
       },
       "id": 92,
       "links": [],
@@ -266,7 +501,7 @@
         "h": 3,
         "w": 3,
         "x": 6,
-        "y": 1
+        "y": 4
       },
       "id": 93,
       "links": [],
@@ -297,627 +532,6 @@
         }
       ],
       "title": "Read Throughput",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "rgb(31, 120, 193)",
-            "mode": "fixed"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.025
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 0.1
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 9,
-        "y": 1
-      },
-      "id": 33,
-      "interval": "1m",
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "ceph_cluster_total_bytes{cluster=\"$cluster\"}",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 300
-        }
-      ],
-      "title": "Cluster Capacity",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 1,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "dark-green",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0.8
-              },
-              {
-                "color": "dark-red",
-                "value": 0.9
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 12,
-        "y": 1
-      },
-      "id": 23,
-      "interval": "1m",
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "(ceph_cluster_total_used_bytes{cluster=\"$cluster\"})/ceph_cluster_total_bytes{cluster=\"$cluster\"}",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A",
-          "step": 300
-        }
-      ],
-      "title": "Used Capacity",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 15,
-        "y": 1
-      },
-      "id": 48,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "ceph_cluster_total_objects{cluster=\"$cluster\"}",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Number of Objects",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 18,
-        "y": 1
-      },
-      "id": 99,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "delta"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "sum(ceph_osd_op_w_in_bytes{cluster=\"$cluster\"})",
-          "format": "time_series",
-          "instant": false,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Bytes Written",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 21,
-        "y": 1
-      },
-      "id": 100,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "delta"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "sum(ceph_osd_op_r_out_bytes{cluster=\"$cluster\"})",
-          "format": "time_series",
-          "instant": false,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Bytes Read",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#9ac48a",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 1
-              },
-              {
-                "color": "#e24d42",
-                "value": 1
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 0,
-        "y": 4
-      },
-      "id": 75,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "count(ALERTS{cluster='$cluster', alertstate='firing'}) OR vector(0)",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Alerts",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ops"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 4
-      },
-      "id": 97,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "sum(irate(ceph_osd_op_w{cluster=\"$cluster\"}[5m]))",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Write IOPS",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#d44a3a",
-                "value": null
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 0
-              },
-              {
-                "color": "#9ac48a",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "ops"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 6,
-        "y": 4
-      },
-      "id": 96,
-      "links": [],
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.5.3",
-      "targets": [
-        {
-          "expr": "sum(irate(ceph_osd_op_r{cluster=\"$cluster\"}[5m]))",
-          "format": "time_series",
-          "instant": true,
-          "interval": "$interval",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "Read IOPS",
       "type": "stat"
     },
     {
@@ -1011,9 +625,9 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "rgb(31, 120, 193)",
+            "mode": "fixed"
           },
-          "decimals": 2,
           "mappings": [
             {
               "options": {
@@ -1029,40 +643,41 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#ea6460",
+                "color": "rgba(50, 172, 45, 0.97)",
                 "value": null
               },
               {
-                "color": "#052b51",
-                "value": 0
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0.025
               },
               {
-                "color": "#508642",
-                "value": 0
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 0.1
               }
             ]
           },
-          "unit": "short"
+          "unit": "decbytes"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 15,
+        "x": 12,
         "y": 4
       },
-      "id": 98,
+      "id": 33,
+      "interval": "1m",
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "none",
+        "colorMode": "none",
+        "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
-            "diff"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1072,15 +687,17 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
-          "expr": "ceph_cluster_total_objects{cluster=\"$cluster\"}",
+          "expr": "ceph_cluster_total_bytes{cluster=\"$cluster\"}",
           "format": "time_series",
-          "instant": false,
+          "instant": true,
           "interval": "$interval",
           "intervalFactor": 1,
-          "refId": "A"
+          "legendFormat": "",
+          "refId": "A",
+          "step": 300
         }
       ],
-      "title": "Difference",
+      "title": "Cluster Capacity",
       "type": "stat"
     },
     {
@@ -1124,10 +741,79 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 18,
+        "x": 15,
         "y": 4
       },
-      "id": 102,
+      "id": 48,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "ceph_cluster_total_objects{cluster=\"$cluster\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Number of Objects",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#9ac48a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 1
+              },
+              {
+                "color": "#e24d42",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 7
+      },
+      "id": 75,
       "links": [],
       "maxDataPoints": 100,
       "options": {
@@ -1147,14 +833,261 @@
       "pluginVersion": "8.5.3",
       "targets": [
         {
-          "expr": "sum(ceph_mon_num_sessions{cluster='$cluster'})",
+          "expr": "count(ALERTS{cluster='$cluster', alertstate='firing'}) OR vector(0)",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "Mon Session Num",
+      "title": "Alerts",
+      "transparent": true,
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 3,
+        "y": 7
+      },
+      "id": 97,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "sum(irate(ceph_osd_op_w{cluster=\"$cluster\"}[5m]))",
+          "format": "time_series",
+          "instant": true,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Write IOPS",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#d44a3a",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0
+              },
+              {
+                "color": "#9ac48a",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 7
+      },
+      "id": 96,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "sum(irate(ceph_osd_op_r{cluster=\"$cluster\"}[5m]))",
+          "format": "time_series",
+          "instant": true,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Read IOPS",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 75
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 9,
+        "y": 7
+      },
+      "id": 115,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum without (instance, pool_id, name) ((ceph_pool_stored / (ceph_pool_stored + ceph_pool_max_avail)) *on (pool_id) group_left(name)(ceph_pool_metadata{name=~\"ceph-filesystem-data0\"}))",
+          "format": "table",
+          "instant": false,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "step": 60
+        }
+      ],
+      "title": "ceph-filesystem-data0 Usage",
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -1177,6 +1110,8 @@
               "type": "special"
             }
           ],
+          "max": 1,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1186,32 +1121,29 @@
               },
               {
                 "color": "rgba(237, 129, 40, 0.89)",
-                "value": 2
+                "value": 0.1
               },
               {
                 "color": "rgba(50, 172, 45, 0.97)",
-                "value": 3
+                "value": 0.3
               }
             ]
           },
-          "unit": "none"
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 3,
-        "x": 21,
-        "y": 4
+        "x": 12,
+        "y": 7
       },
-      "id": 14,
+      "id": 23,
       "interval": "1m",
       "links": [],
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -1220,12 +1152,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
       },
       "pluginVersion": "8.5.3",
       "targets": [
         {
-          "expr": "count(ceph_mon_quorum_status{cluster=\"$cluster\"})",
+          "expr": "(ceph_cluster_total_bytes{cluster=\"$cluster\"}-ceph_cluster_total_used_bytes{cluster=\"$cluster\"})/ceph_cluster_total_bytes{cluster=\"$cluster\"}",
           "format": "time_series",
           "instant": true,
           "interval": "$interval",
@@ -1235,7 +1168,159 @@
           "step": 300
         }
       ],
-      "title": "Monitors In Quorum",
+      "title": "Available Capacity",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 3,
+        "y": 10
+      },
+      "id": 99,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "delta"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_op_w_in_bytes{cluster=\"$cluster\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Bytes Written",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 10
+      },
+      "id": 100,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "delta"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.3",
+      "targets": [
+        {
+          "expr": "sum(ceph_osd_op_r_out_bytes{cluster=\"$cluster\"})",
+          "format": "time_series",
+          "instant": false,
+          "interval": "$interval",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "Bytes Read",
       "type": "stat"
     },
     {
@@ -1248,7 +1333,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 13
       },
       "id": 38,
       "panels": [],
@@ -1301,7 +1386,7 @@
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 8
+        "y": 14
       },
       "id": 27,
       "links": [],
@@ -1382,7 +1467,7 @@
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 8
+        "y": 14
       },
       "id": 29,
       "links": [],
@@ -1459,7 +1544,7 @@
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 8
+        "y": 14
       },
       "id": 28,
       "links": [],
@@ -1536,7 +1621,7 @@
         "h": 3,
         "w": 2,
         "x": 6,
-        "y": 8
+        "y": 14
       },
       "id": 26,
       "links": [],
@@ -1617,7 +1702,7 @@
         "h": 3,
         "w": 2,
         "x": 8,
-        "y": 8
+        "y": 14
       },
       "id": 30,
       "links": [],
@@ -1698,7 +1783,7 @@
         "h": 3,
         "w": 3,
         "x": 10,
-        "y": 8
+        "y": 14
       },
       "id": 31,
       "links": [],
@@ -1779,7 +1864,7 @@
         "h": 3,
         "w": 3,
         "x": 13,
-        "y": 8
+        "y": 14
       },
       "id": 32,
       "links": [],
@@ -1861,7 +1946,7 @@
         "h": 3,
         "w": 3,
         "x": 16,
-        "y": 8
+        "y": 14
       },
       "id": 51,
       "links": [],
@@ -1939,7 +2024,7 @@
         "h": 3,
         "w": 3,
         "x": 19,
-        "y": 8
+        "y": 14
       },
       "id": 50,
       "links": [],
@@ -1981,7 +2066,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 17
       },
       "id": 53,
       "panels": [],
@@ -1999,7 +2084,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 18
       },
       "id": 70,
       "links": [],
@@ -2057,7 +2142,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 18
+        "y": 24
       },
       "id": 105,
       "links": [],
@@ -2115,7 +2200,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 30
       },
       "id": 103,
       "links": [],
@@ -2176,7 +2261,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 35
       },
       "id": 108,
       "panels": [],
@@ -2198,7 +2283,7 @@
         "h": 9,
         "w": 6,
         "x": 0,
-        "y": 30
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 110,
@@ -2282,7 +2367,7 @@
         "h": 9,
         "w": 6,
         "x": 6,
-        "y": 30
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 111,
@@ -2367,7 +2452,7 @@
         "h": 9,
         "w": 6,
         "x": 12,
-        "y": 30
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 112,
@@ -2452,7 +2537,7 @@
         "h": 9,
         "w": 6,
         "x": 18,
-        "y": 30
+        "y": 36
       },
       "hiddenSeries": false,
       "id": 113,
@@ -2532,7 +2617,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 45
       },
       "id": 39,
       "panels": [],
@@ -2564,7 +2649,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 40
+        "y": 46
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2689,7 +2774,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 40
+        "y": 46
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2793,7 +2878,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 40
+        "y": 46
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2893,7 +2978,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 48
+        "y": 54
       },
       "hiddenSeries": false,
       "id": 77,
@@ -2976,7 +3061,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 48
+        "y": 54
       },
       "hiddenSeries": false,
       "id": 78,
@@ -3059,7 +3144,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 48
+        "y": 54
       },
       "hiddenSeries": false,
       "id": 79,
@@ -3142,7 +3227,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 56
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 80,
@@ -3225,7 +3310,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 56
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 81,
@@ -3310,7 +3395,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 56
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 106,
@@ -3397,7 +3482,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 63
+        "y": 69
       },
       "id": 41,
       "panels": [],
@@ -3422,7 +3507,7 @@
         "h": 12,
         "w": 6,
         "x": 0,
-        "y": 64
+        "y": 70
       },
       "hiddenSeries": false,
       "id": 18,
@@ -3518,7 +3603,7 @@
         "h": 12,
         "w": 8,
         "x": 6,
-        "y": 64
+        "y": 70
       },
       "hiddenSeries": false,
       "id": 19,
@@ -3786,7 +3871,7 @@
         "h": 6,
         "w": 10,
         "x": 14,
-        "y": 64
+        "y": 70
       },
       "hiddenSeries": false,
       "id": 20,
@@ -3900,7 +3985,7 @@
         "h": 6,
         "w": 10,
         "x": 14,
-        "y": 70
+        "y": 76
       },
       "id": 15,
       "legend": {
@@ -3977,7 +4062,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 76
+        "y": 82
       },
       "id": 40,
       "panels": [],
@@ -4002,7 +4087,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 77
+        "y": 83
       },
       "heatmap": {},
       "highlightCards": true,
@@ -4059,7 +4144,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 77
+        "y": 83
       },
       "heatmap": {},
       "highlightCards": true,
@@ -4114,7 +4199,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 85
+        "y": 91
       },
       "heatmap": {},
       "highlightCards": true,
@@ -4170,7 +4255,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 85
+        "y": 91
       },
       "heatmap": {},
       "highlightCards": true,
@@ -4222,7 +4307,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 93
+        "y": 99
       },
       "id": 44,
       "legend": {
@@ -4308,7 +4393,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 93
+        "y": 99
       },
       "id": 35,
       "legend": {
@@ -4397,7 +4482,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 106
       },
       "id": 61,
       "panels": [
