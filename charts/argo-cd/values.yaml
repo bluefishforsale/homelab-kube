@@ -213,13 +213,13 @@ argo-cd:
     # -- Assign custom [affinity] rules to the deployment
     affinity: &affinity
       nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
+        requiredDuringSchedulingRequiredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
             - key: kubernetes.io/role
               operator: NotIn
               values:
-              - controller
+              - z
 
     # -- Assign custom [TopologySpreadConstraints] rules to the application controller
     ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
