@@ -177,22 +177,7 @@ rook-ceph-cluster:
                 operator: In
                 values:
                 - true
-      mds:
-        nodeAffinity:
-          requiredDuringSchedulingRequiredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: storage-node
-                operator: In
-                values:
-                - true
-        topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: node
-          whenUnsatisfiable: DoNotSchedule
-          labelSelector:
-            matchLabels:
-              ceph_daemon_type: mds
+
 
     # placement:
     #   all:
@@ -505,6 +490,7 @@ rook-ceph-cluster:
       # see https://github.com/rook/rook/blob/master/Documentation/ceph-filesystem-crd.md#filesystem-settings for available configuration
       spec:
         metadataPool:
+          failureDomain: host
           replicated:
             size: 3
         dataPools:
@@ -514,6 +500,22 @@ rook-ceph-cluster:
         metadataServer:
           activeCount: 3
           activeStandby: true
+          placement:
+            nodeAffinity:
+              requiredDuringSchedulingRequiredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: storage-node
+                    operator: In
+                    values:
+                    - true
+            topologySpreadConstraints:
+            - maxSkew: 2
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app: rook-ceph-mds
       storageClass:
         enabled: true
         isDefault: true
