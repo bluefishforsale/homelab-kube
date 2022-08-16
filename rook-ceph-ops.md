@@ -1,6 +1,28 @@
 
 # Ceph replace Disk / OSD
 
+# This will use osd.5 as an example
+# ceph commands are expected to be run in the rook-toolbox
+1) disk fails
+2) remove disk from node
+3) mark out osd. `ceph osd out osd.5`
+4) remove from crush map. `ceph osd crush remove osd.5`
+5) delete caps. `ceph auth del osd.5`
+6) down osd. `ceph osd down osd.5`
+6) delete all the Deployment for `osd.N` from kubernetes `kubectl delete deployment -n rook-ceph rook-ceph-osd-id-5`
+7) remove osd. `ceph osd rm osd.5`
+--- wait for ceph to stabalize ---
+8) delete osd data dir on node `rm -rf /var/lib/rook/osd5`
+9) edit the osd configmap `kubectl edit configmap -n rook-ceph rook-ceph-osd-nodename-config`
+9a) edit out the config section pertaining to your osd id and underlying device.
+10) add new disk and verify node sees it.
+11) restart the rook-operator pod by deleting the rook-operator pod
+12) osd prepare pods run
+13) new rook-ceph-osd-id-5 will be created
+14) check health of your cluster `ceph -s; ceph osd tree`
+
+
+## old docs (my way)
 - determine failed OSDs
 - determine which hosts those OSDs are on
 - get lsblk listing for those hosts to capture LVM name
