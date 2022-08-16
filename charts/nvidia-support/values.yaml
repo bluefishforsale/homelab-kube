@@ -52,7 +52,7 @@ gpu-operator:
     image: gpu-operator
     # If version is not specified, then default is to use chart.AppVersion
     #version: ""
-    imagePullPolicy: always
+    imagePullPolicy: Always
     imagePullSecrets: []
     priorityClassName: system-node-critical
     defaultRuntime: containerd
