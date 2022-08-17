@@ -4,7 +4,7 @@
 ### New helm bootstrap + argo way
 ```
 # CRDs so we don't need two passes
-kubectl apply  -f charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-*
+ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-* | xargs -n1 kubectl apply -f
 
 # cilium so things have a network
 helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
@@ -26,7 +26,6 @@ helm upgrade --install -n argocd --create-namespace argo-cd -f charts/argo-cd/va
 
 # argo app of apps
 helm upgrade --install -n argocd --create-namespace argocd-applications -f charts/argocd-applications/values.yaml charts/argocd-applications
-
 ```
 
 ### OLD MANUAL HELM WAY
