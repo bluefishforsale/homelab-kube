@@ -34,25 +34,6 @@ spec:
             mountPath: /{{ .name }}
           {{- end }}
 
-        # - name: fstrim
-        #   image: ubuntu:latest
-        #   command: ["/bin/bash"]
-        #   args: ["-c","while true ; do for mount in $(mount | mount | awk '/volumes/ {print $3}'); do if [ -d ${mount} ]; then fstrim -v ${mount}; fi; sleep 2; done; sleep 500 ;done"]
-        #   imagePullPolicy: IfNotPresent
-        #   tty: true
-        #   securityContext:
-        #     capabilities:
-        #       add:
-        #         - SYS_ADMIN
-        #     runAsNonRoot: false
-        #   volumeMounts:
-        #   - name: nfs-ocean
-        #     mountPath: /nfs-ocean
-        #   {{- range .Values.persistentVolumeClaims }}
-        #   - name: {{ .name }}
-        #     mountPath: /{{ .name }}
-        #   {{- end }}
-
       volumes:
       {{- range .Values.persistentVolumeClaims }}
       - name: {{ .name}}

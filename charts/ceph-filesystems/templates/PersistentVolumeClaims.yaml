@@ -14,6 +14,6 @@ spec:
   resources:
     requests:
       storage: {{ .storage }}
-  storageClassName: {{ .storageClassName | default "rook-cephfs" | trim | quote }}
+  storageClassName: {{ .storageClassName | default "cephfs" | trim | quote }}
 {{- end }}
 {{- end }}
