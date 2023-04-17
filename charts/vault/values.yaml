@@ -611,7 +611,7 @@ vault:
       mountPath: "/vault/data"
       # Name of the storage class to use.  If null it will use the
       # configured default Storage Class.
-      storageClass: rook-cephfs
+      storageClass: cephfs
       # Access Mode of the storage device being used for the PVC
       accessMode: ReadWriteMany
       # Annotations to apply to the PVC

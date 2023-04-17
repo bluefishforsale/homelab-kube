@@ -537,7 +537,7 @@ kube-prometheus-stack:
       storage:
       volumeClaimTemplate:
         spec:
-          storageClassName: rook-cephfs
+          storageClassName: cephfs
           accessModes: ["ReadWriteMany" ]
           resources:
             requests:
@@ -2490,7 +2490,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: rook-cephfs
+            storageClassName: cephfs
             accessModes: ["ReadWriteMany"]
             resources:
               requests:

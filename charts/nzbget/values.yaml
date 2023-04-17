@@ -40,12 +40,12 @@ nzbget:
   persistence:
     config:
       enabled: true
-      storageClass: rook-cephfs
+      storageClass: cephfs
       mountPath: /config
 
     incoming:
       enabled: true
-      storageClass: rook-cephfs
+      storageClass: cephfs
       mountPath: /incoming
       accessMode: ReadWriteOnce
       size: 100G

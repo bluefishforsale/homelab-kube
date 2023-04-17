@@ -12,5 +12,5 @@
 #   resources:
 #     requests:
 #       storage: 10Gi
-#   storageClassName: rook-cephfs
+#   storageClassName: cephfs
 # {{- end }}

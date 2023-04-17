@@ -1,5 +1,5 @@
 persistentVolumeClaims:
   - name: test-volume
-    storageClassName: rook-cephfs
+    storageClassName: cephfs
     namespace: media
     storage: 1Gi

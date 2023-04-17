@@ -77,7 +77,7 @@ sonarr:
       enabled: true
       mountPath: /tv
       # accessMode: ReadWriteMany
-      # storageClass: rook-cephfs
+      # storageClass: cephfs
       # size: 1G
 
   prometheus:

@@ -679,7 +679,7 @@ consul:
     # See https://www.consul.io/docs/install/performance#read-write-tuning for considerations around choosing a
     # performant storage class.
     # @type: string
-    storageClass: rook-cephfs
+    storageClass: cephfs
 
     # This will enable/disable Connect (https://consul.io/docs/connect). Setting this to true
     # _will not_ automatically secure pod communication, this

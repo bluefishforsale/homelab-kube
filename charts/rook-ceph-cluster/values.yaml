@@ -519,7 +519,7 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         isDefault: true
-        name: rook-cephfs
+        name: cephfs
         reclaimPolicy: Delete
         allowVolumeExpansion: true
         mountOptions: [ discard ]
