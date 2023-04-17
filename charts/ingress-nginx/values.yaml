@@ -353,7 +353,7 @@ ingress-nginx:
     autoscaling:
       enabled: true
       minReplicas: 1
-      maxReplicas: 11
+      maxReplicas: 3
       targetCPUUtilizationPercentage: 50
       targetMemoryUtilizationPercentage: 50
       behavior: {}
