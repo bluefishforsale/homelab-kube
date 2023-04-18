@@ -26,7 +26,6 @@ kubectl apply -f ocean-nfs-pvc.yaml
 # ceph appset / cluster def / pvc's
 helm upgrade --install -n rook-ceph --create-namespace rook-ceph -f charts/rook-ceph/values-proxmox.yaml charts/rook-ceph
 helm upgrade --install -n rook-ceph --create-namespace ceph-cluster -f charts/rook-ceph-cluster/values-proxmox.yaml charts/rook-ceph-cluster
-helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values-proxmox.yaml charts/ceph-filesystems
  -->
 
 # install argo server
@@ -48,38 +47,37 @@ kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.dat
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-# on ceph host
-git clone https://github.com/rook/rook.git
-cd rook/
-python3 ./deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash --dry-run
 
 python3 ./deploy/examples/create-external-cluster-resources.py --upgrade
 ceph auth list | less  # save output
 
 # on the host w/ kubectl
 git clone git@github.com:rook/rook.git
-kubectl apply -f deploy/examples/crds.yaml
-kubectl apply -f deploy/examples/common.yaml
+kubectl apply -f rook/deploy/examples/crds.yaml
+kubectl apply -f rook/deploy/examples/common.yaml
+
 # edit the namespace of these to rook-ceph
-kubectl apply -f deploy/examples/operator.yaml
-kubectl apply -f deploy/examples/common-external.yaml
+kubectl apply -f rook/deploy/examples/operator.yaml
+kubectl apply -f rook/deploy/examples/common-external.yaml
+
+# on ceph host
+git clone https://github.com/rook/rook.git
+python3 ./rook/deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash --dry-run
 
 # on the host w/ kubectl context
 <paste export credentials>
-bash ./deploy/examples/import-external-cluster.sh
+bash ./rook/deploy/examples/import-external-cluster.sh
 
 # edit the namespace of this to rook-ceph
-kubectl apply -f deploy/examples/cluster-external.yaml
+kubectl apply -f rook/deploy/examples/cluster-external.yaml
+helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
 
-kubectl -n rook-ceph patch secret rook-ceph-mon --type=json -p='[{"op": "remove", "path": "/data/ceph-secret"}]'
-kubectl -n rook-ceph patch secret rook-ceph-mon --type=json -p='[{"op": "remove", "path": "/data/ceph-username"}]'
 
-kubectl apply -f /home/terrac/Projects/bluefishforsale/homelab-kube/charts/rook-ceph-cluster/templates/external-cluster.yaml
-
-kubectl delete -f deploy/examples/cluster-external.yaml
-kubectl delete -f deploy/examples/common-external.yaml
-kubectl delete -f deploy/examples/operator.yaml
-kubectl delete -f deploy/examples/common.yaml
-kubectl delete -f deploy/examples/crds.yaml
+# uninstall
+kubectl delete -f rook/deploy/examples/cluster-external.yaml
+kubectl delete -f rook/deploy/examples/common-external.yaml
+kubectl delete -f rook/deploy/examples/operator.yaml
+kubectl delete -f rook/deploy/examples/common.yaml
+kubectl delete -f rook/deploy/examples/crds.yaml
 
