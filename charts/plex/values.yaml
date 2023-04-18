@@ -4,7 +4,7 @@ plex:
   # This chart inherits from our common library chart. You can check the default values/options here:
   # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
   #
-  runtimeClassName: nvidia
+  # runtimeClassName: nvidia
 
   image:
     # -- image repository
@@ -154,27 +154,27 @@ plex:
     #   gpu.intel.com/i915: 1
       cpu: 8
       memory: 4Gi
-      nvidia.com/gpu: 1
+      # nvidia.com/gpu:
     limits:
     #   # Hardware acceleration using an Intel iGPU w/ QuickSync and
     #   # using intel-gpu-plugin (https://github.com/intel/intel-device-plugins-for-kubernetes)
       cpu: 32
       memory: 32Gi
-      nvidia.com/gpu: 1
+      # nvidia.com/gpu: 1
 
   tolerations:
     - key: storage-node
       operator: Exists
-  affinity:
-    nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            # - key: nvidia.com/gpu.present
-            - key: nvidia
-              operator: In
-              values:
-              - "true"
+  # affinity:
+  #   nodeAffinity:
+  #       requiredDuringSchedulingIgnoredDuringExecution:
+  #         nodeSelectorTerms:
+  #         - matchExpressions:
+  #           # - key: nvidia.com/gpu.present
+  #           - key: nvidia
+  #             operator: In
+  #             values:
+  #             - "true"
 
   addons:
     promtail:
