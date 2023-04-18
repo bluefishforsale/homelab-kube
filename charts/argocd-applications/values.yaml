@@ -147,13 +147,13 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: rsync-cron
-    path: charts/rsync-cron
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: rsync-cron
+  #   path: charts/rsync-cron
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   - name: tautulli
     path: charts/tautulli
