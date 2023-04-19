@@ -49,6 +49,9 @@ helm upgrade --install -n argocd --create-namespace argo-cd -f charts/argo-cd/va
 
 # argo app of apps
 helm upgrade --install -n argocd --create-namespace argocd-applications -f charts/argocd-applications/values.yaml charts/argocd-applications
+
+# as of now we still need to remove the nginx webhook validation
+kubectl delete ValidatingWebhookConfiguration -n nginx ingress-nginx-admission
 ```
 
 # getting passwords
@@ -62,9 +65,6 @@ kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.dat
 ```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
-
-
-
 
 
 # rook ceph-external uninstall
