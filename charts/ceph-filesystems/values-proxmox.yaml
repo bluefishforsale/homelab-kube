@@ -1,5 +1,0 @@
-persistentVolumeClaims:
-  - name: test-volume
-    storageClassName: cephfs
-    namespace: media
-    storage: 1Gi

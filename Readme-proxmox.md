@@ -22,11 +22,27 @@ helm upgrade --install -n kube-system  coredns -f charts/coredns/values.yaml cha
 kubectl create ns media
 kubectl apply -f ocean-nfs-pvc.yaml
 
-<!--
-# ceph appset / cluster def / pvc's
-helm upgrade --install -n rook-ceph --create-namespace rook-ceph -f charts/rook-ceph/values-proxmox.yaml charts/rook-ceph
-helm upgrade --install -n rook-ceph --create-namespace ceph-cluster -f charts/rook-ceph-cluster/values-proxmox.yaml charts/rook-ceph-cluster
- -->
+# ceph-external
+# on the host w/ kubectl
+git clone git@github.com:rook/rook.git
+kubectl apply -f rook/deploy/examples/crds.yaml
+kubectl apply -f rook/deploy/examples/common.yaml
+
+# edit the namespace of these to rook-ceph
+kubectl apply -f rook/deploy/examples/operator.yaml
+kubectl apply -f rook/deploy/examples/common-external.yaml
+
+# on PVE proxmox node metal
+git clone https://github.com/rook/rook.git
+python3 ./rook/deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash --dry-run
+
+# on the host w/ kubectl context
+# <paste exported credentials from previous step>
+bash ./rook/deploy/examples/import-external-cluster.sh
+
+# edit the namespace of this to rook-ceph
+kubectl apply -f rook/deploy/examples/cluster-external.yaml
+helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
 # install argo server
 helm upgrade --install -n argocd --create-namespace argo-cd -f charts/argo-cd/values.yaml charts/argo-cd/
@@ -48,33 +64,10 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 
 
-python3 ./deploy/examples/create-external-cluster-resources.py --upgrade
-ceph auth list | less  # save output
-
-# on the host w/ kubectl
-git clone git@github.com:rook/rook.git
-kubectl apply -f rook/deploy/examples/crds.yaml
-kubectl apply -f rook/deploy/examples/common.yaml
-
-# edit the namespace of these to rook-ceph
-kubectl apply -f rook/deploy/examples/operator.yaml
-kubectl apply -f rook/deploy/examples/common-external.yaml
-
-# on ceph host
-git clone https://github.com/rook/rook.git
-python3 ./rook/deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash --dry-run
-
-# on the host w/ kubectl context
-<paste export credentials>
-bash ./rook/deploy/examples/import-external-cluster.sh
-
-# edit the namespace of this to rook-ceph
-kubectl apply -f rook/deploy/examples/cluster-external.yaml
-helm upgrade --install -n rook-ceph --create-namespace ceph-filesystems -f charts/ceph-filesystems/values.yaml charts/ceph-filesystems
 
 
 
-# uninstall
+# rook ceph-external uninstall
 kubectl delete -f rook/deploy/examples/cluster-external.yaml
 kubectl delete -f rook/deploy/examples/common-external.yaml
 kubectl delete -f rook/deploy/examples/operator.yaml

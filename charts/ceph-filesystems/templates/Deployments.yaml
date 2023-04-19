@@ -17,6 +17,23 @@ spec:
         app: ceph-mounts
     spec:
       dnsPolicy: ClusterFirstWithHostNet
+      initContainers:
+        - name: take-data-dir-ownership
+          image: alpine:3
+          # Give `grafana` user (id 472) permissions a mounted volume
+          # https://github.com/grafana/grafana-docker/blob/master/Dockerfile
+          command:
+          - chown
+          - -R
+          - 1001:1001
+          {{- range .Values.persistentVolumeClaims }} {{ .name }}  {{- end }}
+          volumeMounts:
+          {{- range .Values.persistentVolumeClaims }}
+          - name: {{ .name }}
+            mountPath: /{{ .name }}
+          {{- end }}
+
+
       containers:
 
         - name: ubuntu
