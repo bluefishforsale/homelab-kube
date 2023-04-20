@@ -1,0 +1,7 @@
+apiVersion: v2
+name: overseerr
+version: 8.0.11
+dependencies:
+  - name: overseerr
+    version: 8.0.11
+    repository: https://charts.truecharts.org/

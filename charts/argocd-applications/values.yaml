@@ -171,6 +171,14 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
+  - name: overseerr
+    path: charts/overseerr
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
+
   - name: radarr
     path: charts/radarr
     namespace: media
@@ -187,14 +195,14 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  # - name: nzbget
-  #   enabled: false
-  #   path: charts/nzbget
-  #   namespace: media
-  #   project: homelab
-  #   repoURL: *repoURL
-  #   syncPolicy: *syncPolicy
-  #   ignoreDifferences: *ignoreDifferences
+  - name: nzbget
+    enabled: false
+    path: charts/nzbget
+    namespace: media
+    project: homelab
+    repoURL: *repoURL
+    syncPolicy: *syncPolicy
+    ignoreDifferences: *ignoreDifferences
 
   # - name: lidarr
   #   path: charts/lidarr
