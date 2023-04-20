@@ -76,13 +76,11 @@ sonarr:
       existingClaim: tv
       enabled: true
       mountPath: /tv
-      # accessMode: ReadWriteMany
-      # storageClass: cephfs
-      # size: 1G
-    downloads:
-      existingClaim: nzbget-downloads-complete
+
+    complete:
+      existingClaim: nzbget-complete
       enabled: true
-      mountPath: /downloads
+      mountPath: /complete/tv
 
   prometheus:
     # -- Enable and configure a Prometheus podMonitor for the chart under this key.

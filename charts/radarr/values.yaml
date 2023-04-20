@@ -78,6 +78,11 @@ radarr:
       existingClaim: movies
       mountPath: /movies
 
+    complete:
+      existingClaim: nzbget-complete
+      enabled: true
+      mountPath: /complete/movies
+
   securityContext:
     runAsNonRoot: true
     runAsGroup: 1001
