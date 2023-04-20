@@ -43,12 +43,19 @@ nzbget:
       storageClass: cephfs
       mountPath: /config
 
+    complete:
+      enabled: true
+      storageClass: cephfs
+      mountPath: /complete
+      accessMode: ReadWriteOnce
+      size: 500G
+
     incoming:
       enabled: true
       storageClass: cephfs
       mountPath: /incoming
       accessMode: ReadWriteOnce
-      size: 100G
+      size: 500G
 
     tv:
       existingClaim: tv

@@ -80,7 +80,7 @@ sonarr:
       # storageClass: cephfs
       # size: 1G
     downloads:
-      existingClaim: nzbget-downloads
+      existingClaim: nzbget-downloads-complete
       enabled: true
       mountPath: /downloads
 
