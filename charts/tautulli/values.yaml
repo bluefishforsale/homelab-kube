@@ -1,6 +1,7 @@
 tautulli:
   env:
     TZ: America/Los_Angeles
+
   securityContext:
     runAsNonRoot: true
     runAsGroup: 1001

@@ -7,7 +7,7 @@
 #          │  │ │ │ │
 #          │  │ │ │ │
 #          *  * * * *
-schedule: "45 * * * *"
+schedule: "20 * * * *"
 
 nfsVolumes:
   - nfs: /nfs-ocean/complete/movies

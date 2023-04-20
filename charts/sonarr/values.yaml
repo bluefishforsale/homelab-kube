@@ -90,10 +90,11 @@ sonarr:
       scrapeTimeout: 1m
       additionalLabels: {}
 
-  podSecurityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    fsGroup: 1000
+  securityContext:
+    runAsNonRoot: true
+    runAsGroup: 1001
+    runAsUser: 1001
+    fsGroup: 1001
 
   # # When using the prometheus.podMonitor the following
   # # container is required
