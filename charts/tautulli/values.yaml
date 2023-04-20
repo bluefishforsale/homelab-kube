@@ -26,3 +26,8 @@ tautulli:
       enabled: true
       existingClaim: tautulli-config
       mountPath: /config
+    logs:
+      enabled: true
+      existingClaim: plex-config
+      mountPath: /plex-config
+
