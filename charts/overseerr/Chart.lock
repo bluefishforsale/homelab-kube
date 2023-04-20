@@ -1,6 +1,6 @@
 dependencies:
-- name: sonarr
-  repository: https://k8s-at-home.com/charts/
-  version: 13.0.0
-digest: sha256:bba4acaf7ca3666dd3d4739c0b6d05c6b1c6022ff3de5aa268f0315ac3f3469f
-generated: "2022-06-02T10:21:42.3362-07:00"
+- name: overseerr
+  repository: https://charts.truecharts.org/
+  version: 8.0.11
+digest: sha256:793e0ca962f396f08567715d9b3a880e1154923c99bee6453bbe9d67c6110689
+generated: "2023-04-20T11:02:04.575065-07:00"
