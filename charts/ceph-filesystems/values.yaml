@@ -5,6 +5,12 @@ persistentVolumeClaims:
   - name: nzbget-config
     namespace: media
     storage: 1Gi
+  - name: nzbget-intermediate
+    namespace: media
+    storage: 500Gi
+  - name: nzbget-completed
+    namespace: media
+    storage: 500Gi
   - name: tdarr-config
     namespace: media
     storage: 1Gi
@@ -29,6 +35,4 @@ persistentVolumeClaims:
   - name: music
     namespace: media
     storage: 1Ti
-  - name: nzbget-complete
-    namespaceL: media
-    storage: 1Ti
+
