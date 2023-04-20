@@ -2,7 +2,6 @@
 ## Start thigns in this order
 
 ### New helm bootstrap + argo way
-```
 
 # first time in repo, update / pull all helm charts
 ls -1d  update charts/* | xargs -n1 -I% helm dep update %
@@ -52,20 +51,14 @@ helm upgrade --install -n argocd --create-namespace argocd-applications -f chart
 
 # as of now we still need to remove the nginx webhook validation
 kubectl delete ValidatingWebhookConfiguration -n nginx ingress-nginx-admission
-```
 
 # getting passwords
 ## rook-ceph UI password
 * username : admin
-```
 kubectl get  secret -n rook-ceph rook-ceph-dashboard-password  --template={{.data.password}} | base64 -d ; echo
-```
 
 ## argo-cd password
-```
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-```
-
 
 # rook ceph-external uninstall
 kubectl delete -f rook/deploy/examples/cluster-external.yaml

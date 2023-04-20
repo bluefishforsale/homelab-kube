@@ -2,9 +2,12 @@ persistentVolumeClaims:
   - name: tautulli-config
     namespace: media
     storage: 5Gi
+  - name: nzbget-config
+    namespace: media
+    storage: 1Gi
   - name: tdarr-config
     namespace: media
-    storage: 2Gi
+    storage: 1Gi
   - name: sonarr-config
     namespace: media
     storage: 2Gi
@@ -26,6 +29,6 @@ persistentVolumeClaims:
   - name: music
     namespace: media
     storage: 1Ti
-  - name: nzbget-downloads
+  - name: nzbget-complete
     namespaceL: media
     storage: 1Ti
