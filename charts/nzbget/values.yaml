@@ -5,6 +5,9 @@ nzbget:
   # This chart inherits from our common library chart. You can check the default values/options here:
   # https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
   #
+  # defaults http ui
+  # login: nzbget
+  # password: tegbzn6789
 
   image:
     # -- image repository
@@ -43,29 +46,19 @@ nzbget:
       storageClass: cephfs
       mountPath: /config
 
-    complete:
+    completed:
       enabled: true
       storageClass: cephfs
-      mountPath: /complete
-      accessMode: ReadWriteOnce
+      mountPath: /config/downloads/completed
+      accessMode: ReadWriteMany
       size: 500G
 
-    incoming:
+    intermediate:
       enabled: true
       storageClass: cephfs
-      mountPath: /incoming
-      accessMode: ReadWriteOnce
+      mountPath: /config/downloads/intermediate
+      accessMode: ReadWriteMany
       size: 500G
-
-    tv:
-      existingClaim: tv
-      enabled: true
-      mountPath: /tv
-
-    movies:
-      existingClaim: movies
-      enabled: true
-      mountPath: /movies
 
   securityContext:
     runAsNonRoot: true
