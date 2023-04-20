@@ -1,115 +1,38 @@
-#
-# IMPORTANT NOTE
-#
-# This chart inherits from our common library chart. You can check the default values/options here:
-# https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common/values.yaml
-#
+sonarr:
+  image:
+    repository: tccr.io/truecharts/overseerr
+    tag: 1.32.5@sha256:8756b1d3d2fa8fde07e84e686cf7cb2cb99e7c741bfc82c62735c19354734db0
+    pullPolicy: IfNotPresent
 
-image:
-  # -- image repository
-  repository: ghcr.io/k8s-at-home/sonarr
-  # -- image tag
-  tag: v3.0.6.1196
-  # -- image pull policy
-  pullPolicy: IfNotPresent
+  securityContext:
+    readOnlyRootFilesystem: false
 
-  # -- environment variables.
-  # @default -- See below
   env:
-    # -- Set the container timezone
-    TZ: America/Los_Angeles
+    LOG_LEVEL: info
 
-# -- Configures service settings for the chart.
-# @default -- See values.yaml
-service:
-  main:
-    ports:
-      http:
-        port: 8989
+  service:
+    main:
+      ports:
+        main:
+          port: 5055
+          targetPort: 5055
 
-ingress:
-  # -- Enable and configure ingress settings for the chart under this key.
-  # @default -- See values.yaml
-  main:
-    enabled: true
-    ingressClassName: nginx
-    hosts:
-      - host: overseerr.svc.cluster.local
-        paths:
-          - path: /
-            # Ignored if not kubeVersion >= 1.14-0
-            pathType: Prefix
-
-# -- Configures the probes for the main Pod.
-# @default -- See values.yaml
-probes:
-  liveness:
-    enabled: true
-    ## Set this to true if you wish to specify your own livenessProbe
-    custom: true
-    ## The spec field contains the values for the default livenessProbe.
-    ## If you selected custom: true, this field holds the definition of the livenessProbe.
-    spec:
-      exec:
-        command:
-        - /usr/bin/env
-        - bash
-        - -c
-        - curl --fail localhost:8989/api/v3/system/status?apiKey=`IFS=\> && while
-          read -d \< E C; do if [[ $E = "ApiKey" ]]; then echo $C; fi; done < /config/config.xml`
-      failureThreshold: 5
-      initialDelaySeconds: 60
-      periodSeconds: 10
-      successThreshold: 1
-      timeoutSeconds: 10
-
-  # -- Configure persistence settings for the chart under this key.
-  # @default -- See values.yaml
+  ingress:
+    # -- Enable and configure ingress settings for the chart under this key.
+    # @default -- See values.yaml
+    main:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+        - host: overseerr.svc.cluster.local
+          paths:
+            - path: /
+              # Ignored if not kubeVersion >= 1.14-0
+              pathType: Prefix
   persistence:
     config:
       enabled: true
-      existingClaim: overseerr-config
-      mountPath: /config
+      mountPath: "/app/config"
 
-  # media:
-  #   enabled: false
-  #   mountPath: /media
-
-  prometheus:
-    # -- Enable and configure a Prometheus podMonitor for the chart under this key.
-    # See also the notes under `additionalContainers`.
-    # @default -- See values.yaml
-    podMonitor:
-      enabled: true
-      interval: 3m
-      scrapeTimeout: 1m
-      additionalLabels: {}
-
-  securityContext:
-    runAsNonRoot: true
-    runAsGroup: 1001
-    runAsUser: 1001
-    fsGroup: 1001
-
-  # # # When using the prometheus.podMonitor the following
-  # # # container is required
-  # additionalContainers:
-  #   exportarr:
-  #     name: exportarr
-  #     image: ghcr.io/onedr0p/exportarr:v0.6.0
-  #     imagePullPolicy: IfNotPresent
-  #     args: ["exportarr", "sonarr"]
-  #     env:
-  #     - name: PORT
-  #       value: "32123"
-  #     - name: URL
-  #       value: "http://localhost"
-  #     - name: CONFIG
-  #       value: "/config/config.xml"
-  #     ports:
-  #     - name: exportarr
-  #       containerPort: 32123
-  #     volumeMounts:
-  #     - name: config
-  #       mountPath: /config
-  #       readOnly: true
+  portal:
+    enabled: true
