@@ -74,29 +74,29 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
-  - name: cilium
-    path: charts/cilium
-    namespace: kube-system
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: cilium
+  #   path: charts/cilium
+  #   namespace: kube-system
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: coredns
-    path: charts/coredns
-    namespace: kube-system
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: coredns
+  #   path: charts/coredns
+  #   namespace: kube-system
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: metallb
-    path: charts/metallb
-    namespace: metallb
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: metallb
+  #   path: charts/metallb
+  #   namespace: metallb
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   - name: ingress-nginx
     path: charts/ingress-nginx
