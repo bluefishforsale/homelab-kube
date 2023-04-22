@@ -29,6 +29,7 @@ sonarr:
             - path: /
               # Ignored if not kubeVersion >= 1.14-0
               pathType: Prefix
+
   persistence:
     config:
       enabled: true
