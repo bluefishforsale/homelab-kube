@@ -14,6 +14,14 @@ ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-* | xar
 # cilium so things have a network
 helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
 
+# metallb
+helm upgrade --install -n metallb-system --create-namespace metallb -f charts/metallb/values.yaml charts/metallb
+
+# metrics server needed for HPA
+helm install metrics-server -n kube-system  -f charts/metrics-server/values.yaml  charts/metrics-server
+# ingress-nginx
+helm upgrade --install -n nginx --create-namespace ingress-nginx -f charts/ingress-nginx/values.yaml charts/ingress-nginx
+
 # dns but after cilium
 helm upgrade --install -n kube-system  coredns -f charts/coredns/values.yaml charts/coredns
 
