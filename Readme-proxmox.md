@@ -4,11 +4,12 @@
 ### New helm bootstrap + argo way
 
 # first time in repo, update / pull all helm charts
-ls -1d  update charts/* | xargs -n1 -I% helm dep update %
-cd '/Users/terrac/Projects/bluefishforsale/homelab-kube/charts/kube-prometheus-stack/charts'
+ls -1d charts/* | xargs -n1 -I% helm dep update %
+cd '/Users/terrac/Projects/bluefishorsale/homelab-kube/charts/kube-prometheus-stack/charts'
 tar xf kube-prometheus-stack-36.0.1.tgz
 
 # CRDs so we don't need two passes
+cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-* | xargs -n1 kubectl apply -f
 
 # cilium so things have a network
@@ -41,7 +42,7 @@ kubectl apply -f rook/deploy/examples/common-external.yaml
 
 # on PVE proxmox node metal
 git clone https://github.com/rook/rook.git
-python3 ./rook/deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash --dry-run
+python3 ./rook/deploy/examples/create-external-cluster-resources.py --ceph-conf /etc/ceph/ceph.conf --rbd-data-pool-name cephfs_data --cephfs-metadata-pool-name cephfs_metadata --cephfs-filesystem-name cephfs --namespace rook-ceph --format bash
 
 # on the host w/ kubectl context
 # <paste exported credentials from previous step>
