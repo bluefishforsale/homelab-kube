@@ -40,9 +40,9 @@ ignoreDifferences: &ignoreDifferences
 ##############################################################################################################
 Applications:
 
-  - name: argo-tunnel
-    path: charts/argo-tunnel
-    namespace: cloudflare
+  - name: cloudflare-tunnel
+    path: charts/cloudflare-tunnel
+    namespace: cloudflare-tunnel
     project: homelab
     repoURL: *repoURL
     syncPolicy: *syncPolicy
