@@ -11,7 +11,7 @@ cilium:
 
   debug:
     # -- Enable debug logging
-    enabled: false
+    enabled: true
     # -- Configure verbosity levels for debug logging
     # This option is used to enable debug messages for operations related to such
     # sub-system such as (e.g. kvstore, envoy, datapath or policy), and flow is
@@ -138,7 +138,7 @@ cilium:
   name: cilium
 
   # -- Roll out cilium agent pods automatically when configmap is updated.
-  rollOutCiliumPods: false
+  rollOutCiliumPods: true
 
   # -- Agent container image.
   image:
@@ -511,7 +511,7 @@ cilium:
   # DaemonSet. Implies cleanBpfState: true.
   #
   # WARNING: Use with care!
-  cleanState: true
+  cleanState: false
 
   # -- Wait for KUBE-PROXY-CANARY iptables rule to appear in "wait-for-kube-proxy"
   # init container before launching cilium-agent.
@@ -618,7 +618,7 @@ cilium:
     # The default is "config-map:cilium-config,cilium-node-config". For supported
     # values, see the help text for the build-config subcommand.
     # Note that this value should be a comma-separated string.
-    configSources: ~
+    configSources: "config-map:cilium-config"
 
     # -- allowedConfigOverrides is a list of config-map keys that can be overridden.
     # That is to say, if this value is set, config sources (excepting the first one) can
@@ -1493,11 +1493,11 @@ cilium:
       # -- IPv4 CIDR list range to delegate to individual nodes for IPAM.
       clusterPoolIPv4PodCIDRList: ["10.244.0.0/16"]
       # -- IPv4 CIDR mask size to delegate to individual nodes for IPAM.
-      clusterPoolIPv4MaskSize: 24
+      clusterPoolIPv4MaskSize: 22
       # -- IPv6 CIDR list range to delegate to individual nodes for IPAM.
       # clusterPoolIPv6PodCIDRList: ["fd00::/104"]
       # -- IPv6 CIDR mask size to delegate to individual nodes for IPAM.
-      clusterPoolIPv6MaskSize: 120
+      # clusterPoolIPv6MaskSize: 120
       # -- IP pools to auto-create in multi-pool IPAM mode.
       autoCreateCiliumPodIPPools: {}
         # default:
@@ -3079,7 +3079,7 @@ cilium:
     # -- Enable authentication processing and garbage collection.
     # Note that if disabled, policy enforcement will still block requests that require authentication.
     # But the resulting authentication requests for these requests will not be processed, therefore the requests not be allowed.
-    enabled: true
+    enabled: false
     # -- Buffer size of the channel Cilium uses to receive authentication events from the signal map.
     queueSize: 1024
     # -- Buffer size of the channel Cilium uses to receive certificate expiration events from auth handlers.
