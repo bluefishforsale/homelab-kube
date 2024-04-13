@@ -13,6 +13,7 @@ cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-* | xargs -n1 kubectl apply -f
 
 # cilium so things have a network
+cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
 
 # metallb

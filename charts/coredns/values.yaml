@@ -67,7 +67,7 @@ coredns:
       interval: ""
 
   service:
-    clusterIP: 10.32.0.10
+    clusterIP: 10.0.0.10
   # loadBalancerIP: ""
   # externalIPs: []
   # externalTrafficPolicy: ""

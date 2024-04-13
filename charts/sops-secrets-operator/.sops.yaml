@@ -1,0 +1,6 @@
+# creation rules are evaluated sequentially, the first match wins
+creation_rules:
+        # upon creation of a file that matches the pattern *.yaml,
+        # only pgp key
+        - path_regex: \.yaml$
+          pgp: '76CDA084E2E5EE7CF35D531DDFE9E53D2D8617C2'
