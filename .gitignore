@@ -8,4 +8,4 @@
 charts/**/charts/
 
 # upstream rook
-rook/
+rook
