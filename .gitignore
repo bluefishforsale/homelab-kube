@@ -1,2 +1,11 @@
+# macOS files
+.DS_Store
+
+# any tarballs
+*.tgz
+
+# all helm pulled chart dependencies
 charts/**/charts/
-**/.DS_Store
+
+# upstream rook
+rook/
