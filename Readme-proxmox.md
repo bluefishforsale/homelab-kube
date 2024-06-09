@@ -7,24 +7,32 @@
 ## first time in repo, update / pull all helm charts
 
 ```bash
+cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 ls -1d charts/* | xargs -n1 -I% helm dep update %
 cd '/Users/terrac/Projects/bluefishorsale/homelab-kube/charts/kube-prometheus-stack/charts'
-tar xf kube-prometheus-stack-36.0.1.tgz
+ls -1tr | tail -1 | xargs tar xf
 ```
 
-## CRDs so we don't need two passes
+## create (not apply because metadata too long) CRDs so we don't need two passes
 
 ```bash
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
-ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/crds/crd-* | xargs -n1 kubectl apply -f
+ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/charts/crds/crds/crd-* | xargs -n1 kubectl create -f
 ```
 
-## cilium so things have a network
+## flannel for CNI
+
+```bash
+cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
+helm upgrade --install -n kube-system flannel  -f charts/flannel/values.yaml charts/flannel
+```
+
+<!-- ## cilium so things have a network
 
 ```bash
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
-```
+``` -->
 
 ## metallb
 

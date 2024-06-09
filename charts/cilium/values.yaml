@@ -339,6 +339,7 @@ cilium:
   # -- Enable installation of PodCIDR routes between worker
   # nodes if worker nodes share a common L2 network segment.
   autoDirectNodeRoutes: false
+  # autoDirectNodeRoutes: true
 
   # -- Annotate k8s node upon initialization with Cilium's metadata.
   annotateK8sNode: false
@@ -415,6 +416,7 @@ cilium:
   bgpControlPlane:
     # -- Enables the BGP control plane.
     enabled: false
+    # enabled: true
     # -- SecretsNamespace is the namespace which BGP support will retrieve secrets from.
     secretsNamespace:
       # -- Create secrets namespace for BGP secrets.
@@ -630,6 +632,7 @@ cilium:
 
   # -- (string) Configure timeout in which Cilium will exit if CRDs are not available
   # @default -- `"5m"`
+  # crdWaitTimeout: "30s"
   crdWaitTimeout: ""
 
   # -- Tail call hooks for custom eBPF programs.
@@ -1234,7 +1237,7 @@ cilium:
       # -- Specifies the resources for the hubble-relay pods
       resources: {}
 
-      # -- Number of replicas run for the hubble-relay deployment.
+      # -- Number of replicas run for the hubble-relay deployment1
       replicas: 1
 
       # -- Affinity for hubble-replay
@@ -1774,13 +1777,13 @@ cilium:
   # -- Configure the kube-proxy replacement in Cilium BPF datapath
   # Valid options are "true", "false", "disabled" (deprecated), "partial" (deprecated), "strict" (deprecated).
   # ref: https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/
-  kubeProxyReplacement: "true"
+  #kubeProxyReplacement: "false"
 
   # -- healthz server bind address for the kube-proxy replacement.
   # To enable set the value to '0.0.0.0:10256' for all ipv4
   # addresses and this '[::]:10256' for all ipv6 addresses.
   # By default it is disabled.
-  kubeProxyReplacementHealthzBindAddr: "0.0.0.0:10256"
+  kubeProxyReplacementHealthzBindAddr: ""
 
   l2NeighDiscovery:
     # -- Enable L2 neighbor discovery in the agent
@@ -1864,6 +1867,7 @@ cilium:
   # the user must configure the routes to reach pods, either manually or by
   # setting the auto-direct-node-routes flag.
   ipv4NativeRoutingCIDR: ""
+  # ipv4NativeRoutingCIDR: "192.168.1.0/24"
 
   # -- (string) Allows to explicitly specify the IPv6 CIDR for native routing.
   # When specified, Cilium assumes networking for this CIDR is preconfigured and
@@ -2348,6 +2352,7 @@ cilium:
   #   - tunnel
   # @default -- `"tunnel"`
   routingMode: ""
+  # routingMode: "native"
 
   # -- Configure VXLAN and Geneve tunnel port.
   # @default -- Port 8472 for VXLAN, Port 6081 for Geneve
@@ -2500,7 +2505,7 @@ cilium:
       suffix: ""
 
     # -- Number of replicas to run for the cilium-operator deployment
-    replicas: 1
+    replicas: 2
 
     # -- The priority class to use for cilium-operator
     priorityClassName: ""

@@ -1,0 +1,6 @@
+dependencies:
+- name: flannel
+  repository: https://flannel-io.github.io/flannel/
+  version: v0.25.3
+digest: sha256:02657997eecd467a2f4161283a6537af6f2da29ecc0460a20696e14583db4f02
+generated: "2024-06-01T09:26:36.156626-07:00"

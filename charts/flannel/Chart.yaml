@@ -1,0 +1,8 @@
+apiVersion: v2
+name: flannel
+version: v0.25.3
+dependencies:
+  - name: flannel
+    version: v0.25.3
+    repository: https://flannel-io.github.io/flannel/
+
