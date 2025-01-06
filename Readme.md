@@ -1,38 +1,47 @@
 # Kubernetes Dependency map
 
-## Start thigns in this order
-
-### New helm bootstrap + argo way
-
-## first time in repo, update / pull all helm charts
+## Update / pull all helm charts
 
 ```bash
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
+# add repos for all charts
+grep repository charts/*/Chart.yaml | awk '{print $1, $NF}' | while read file repo ; do (dirname $file | sed -e 's/.*\///g' ; echo $repo) | xargs helm repo add ; done
+# grab all the charts
 ls -1d charts/* | xargs -n1 -I% helm dep update %
-cd '/Users/terrac/Projects/bluefishorsale/homelab-kube/charts/kube-prometheus-stack/charts'
-ls -1tr | tail -1 | xargs tar xf
+
 ```
 
-## create (not applyn) CRDs so we don't need two passes
+## Create prometheus CRDs
+We do this because some charts depend on these CRDs being in palce early so they can create their monitoring.
 
 ```bash
+# unpack kube-prometheus-stack
+cd '/Users/terrac/Projects/bluefishorsale/homelab-kube/charts/kube-prometheus-stack/charts'
+ls -1tr | tail -1 | xargs tar xf
+
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 ls -1 charts/kube-prometheus-stack/charts/kube-prometheus-stack/charts/crds/crds/crd-* | xargs -n1 kubectl create -f
 ```
+<!-- 
+## CNI (choose one)
 
-<!-- ## flannel for CNI
+### Flannel
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+```
 
 ```bash
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 helm upgrade --install -n kube-system flannel  -f charts/flannel/values.yaml charts/flannel
-``` -->
+```
 
-## cilium so things have a network
+### Cillium
 
 ```bash
 cd /Users/terrac/Projects/bluefishorsale/homelab-kube/
 helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts/cilium
-```
+``` -->
 
 ## metallb
 
@@ -40,7 +49,7 @@ helm upgrade --install -n kube-system cilium -f charts/cilium/values.yaml charts
 helm upgrade --install -n metallb-system --create-namespace metallb -f charts/metallb/values.yaml charts/metallb
 ```
 
-## metrics server needed for HPA
+## metrics server needed for horizontal-pod-autoscaling
 
 ```bash
 helm install metrics-server -n kube-system  -f charts/metrics-server/values.yaml  charts/metrics-server
@@ -52,11 +61,11 @@ helm install metrics-server -n kube-system  -f charts/metrics-server/values.yaml
 helm upgrade --install -n nginx --create-namespace ingress-nginx -f charts/ingress-nginx/values.yaml charts/ingress-nginx
 ```
 
-## dns but after cilium
+<!-- ## dns but after cilium
 
 ```bash
 helm upgrade --install -n kube-system  coredns -f charts/coredns/values.yaml charts/coredns
-```
+``` -->
 
 ## local NFS server to copy from
 

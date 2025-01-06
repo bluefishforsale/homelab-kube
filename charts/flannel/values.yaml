@@ -20,6 +20,7 @@ flannel:
     args:
     - "--ip-masq"
     - "--kube-subnet-mgr"
+    # - "--etcd-endpoints http://192.168.1.61:2379,http://192.168.1.62:2379,http://192.168.1.63:2379"
     # Backend for kube-flannel. Backend should not be changed
     # at runtime. (vxlan, host-gw, wireguard, udp)
     # Documentation at https://github.com/flannel-io/flannel/blob/master/Documentation/backends.md

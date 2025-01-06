@@ -4,13 +4,13 @@ metrics-server:
   # Declare variables to be passed into your templates.
 
   image:
-    repository: registry.k8s.io/metrics-server/metrics-server
+    repository: k8s.gcr.io/metrics-server/metrics-server
     # Overrides the image tag whose default is v{{ .Chart.AppVersion }}
     tag: ""
     pullPolicy: IfNotPresent
 
   imagePullSecrets: []
-  # - name: registrySecretName
+  # - registrySecretName
 
   nameOverride: ""
   fullnameOverride: ""
@@ -23,14 +23,10 @@ metrics-server:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
-    # The list of secrets mountable by this service account.
-    # See https://kubernetes.io/docs/reference/labels-annotations-taints/#enforce-mountable-secrets
-    secrets: []
 
   rbac:
     # Specifies whether RBAC resources should be created
     create: true
-    # Note: PodSecurityPolicy will not be created when Kubernetes version is 1.25 or later.
     pspEnabled: false
 
   apiService:
@@ -40,14 +36,7 @@ metrics-server:
     # manage it outside of this chart for e.g horizontal pod autoscaling to
     # work with this release.
     create: true
-    # Annotations to add to the API service
-    annotations: {}
-    # Specifies whether to skip TLS verification
-    insecureSkipTLSVerify: true
-    # The PEM encoded CA bundle for TLS verification
-    caBundle: ""
 
-  commonLabels: {}
   podLabels: {}
   podAnnotations: {}
 
@@ -58,15 +47,10 @@ metrics-server:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 1000
-    seccompProfile:
-      type: RuntimeDefault
-    capabilities:
-      drop:
-        - ALL
 
   priorityClassName: system-cluster-critical
 
-  containerPort: 10250
+  containerPort: 4443
 
   hostNetwork:
     # Specifies if metrics-server should be started in hostNetwork mode.
@@ -77,8 +61,6 @@ metrics-server:
     enabled: false
 
   replicas: 1
-
-  revisionHistoryLimit:
 
   updateStrategy: {}
   #   type: RollingUpdate
@@ -93,22 +75,19 @@ metrics-server:
     maxUnavailable:
 
   defaultArgs:
-    - --cert-dir=/tmp
-    - --kubelet-preferred-address-types=Hostname
+    - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
     - --kubelet-use-node-status-port
     - --metric-resolution=15s
-    - --kubelet-insecure-tls 
-    # - --tls-cert-file=/certs/ca.pem
-    # - --tls-private-key-file=/certs/ca-key.pem
+    - --tls-cert-file=/certs/ca.pem
+    - --tls-private-key-file=/certs/ca-key.pem
 
   args: []
-
   livenessProbe:
     httpGet:
       path: /livez
       port: https
       scheme: HTTPS
-    initialDelaySeconds: 0
+    initialDelaySeconds: 5
     periodSeconds: 10
     failureThreshold: 3
 
@@ -126,85 +105,45 @@ metrics-server:
     port: 443
     annotations: {}
     labels: {}
-    #  Add these labels to have metrics-server show up in `kubectl cluster-info`
-    #  kubernetes.io/cluster-service: "true"
-    #  kubernetes.io/name: "Metrics-server"
+      # kubernetes.io/cluster-service: "true"
+      # kubernetes.io/name: "Metrics-server"
 
-  addonResizer:
-    enabled: false
-    image:
-      repository: registry.k8s.io/autoscaling/addon-resizer
-      tag: 1.8.21
-    securityContext:
-      allowPrivilegeEscalation: false
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsUser: 1000
-      seccompProfile:
-        type: RuntimeDefault
-      capabilities:
-        drop:
-          - ALL
-    resources:
-      requests:
-        cpu: 40m
-        memory: 25Mi
-      limits:
-        cpu: 40m
-        memory: 25Mi
-    nanny:
-      cpu: 0m
-      extraCpu: 1m
-      memory: 0Mi
-      extraMemory: 2Mi
-      minClusterSize: 100
-      pollPeriod: 300000
-      threshold: 5
-
-  metrics:
-    enabled: false
+    metrics:
+      enabled: false
 
   serviceMonitor:
-    enabled: false
+    enabled: true
     additionalLabels: {}
     interval: 1m
     scrapeTimeout: 10s
-    metricRelabelings: []
-    relabelings: []
 
-  # See https://github.com/kubernetes-sigs/metrics-server#scaling
   resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
     requests:
       cpu: 100m
-      memory: 200Mi
-    # limits:
-    #   cpu:
-    #   memory:
+      memory: 128Mi
 
-  extraVolumes: []
-    # - name: metrics-server-tls
-    #   secret:
-    #     secretName: metrics-server-tls
+  extraVolumeMounts:
+    - name: certs
+      mountPath: /certs
 
-  extraVolumeMounts: []
-    # - name: metrics-server-tls
-    #   mountPath: /etc/metrics-server/tls
-    #   readOnly: true
+  extraVolumes:
+    - name: certs
+      hostPath:
+        path: /var/lib/kubernetes
 
   nodeSelector: {}
 
   tolerations: []
 
-  affinity: []
-
-  topologySpreadConstraints: []
-
-  dnsConfig: {}
-
-  # Annotations to add to the deployment
-  deploymentAnnotations: {}
-
-  schedulerName: ""
-
-  tmpVolume:
-    emptyDir: {}
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/role
+            operator: In
+            values:
+            - controller

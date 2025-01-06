@@ -139,13 +139,13 @@ Applications:
     syncPolicy: *syncPolicy
     ignoreDifferences: *ignoreDifferences
 
-  - name: nvidia-support
-    path: charts/nvidia-support
-    namespace: kube-system
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: nvidia-support
+  #   path: charts/nvidia-support
+  #   namespace: kube-system
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   # - name: rsync-cron
   #   path: charts/rsync-cron
@@ -155,54 +155,54 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
-  - name: tautulli
-    path: charts/tautulli
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: tautulli
+  #   path: charts/tautulli
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: plex
-    path: charts/plex
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: plex
+  #   path: charts/plex
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: overseerr
-    path: charts/overseerr
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: overseerr
+  #   path: charts/overseerr
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: radarr
-    path: charts/radarr
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: radarr
+  #   path: charts/radarr
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: sonarr
-    path: charts/sonarr
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: sonarr
+  #   path: charts/sonarr
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
-  - name: nzbget
-    enabled: false
-    path: charts/nzbget
-    namespace: media
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: nzbget
+  #   enabled: false
+  #   path: charts/nzbget
+  #   namespace: media
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   # - name: lidarr
   #   path: charts/lidarr
@@ -220,13 +220,13 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
-  - name: cert-manager
-    path: charts/cert-manager
-    namespace: cert-manager
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: cert-manager
+  #   path: charts/cert-manager
+  #   namespace: cert-manager
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   - name: httpbin
     path: charts/httpbin
@@ -252,14 +252,14 @@ Applications:
   #   syncPolicy: *syncPolicy
   #   ignoreDifferences: *ignoreDifferences
 
-  - name: sops-secrets-operator
-    path: charts/sops-secrets-operator
-    namespace: sops
-    # plugin: kustomized-helm
-    project: homelab
-    repoURL: *repoURL
-    syncPolicy: *syncPolicy
-    ignoreDifferences: *ignoreDifferences
+  # - name: sops-secrets-operator
+  #   path: charts/sops-secrets-operator
+  #   namespace: sops
+  #   # plugin: kustomized-helm
+  #   project: homelab
+  #   repoURL: *repoURL
+  #   syncPolicy: *syncPolicy
+  #   ignoreDifferences: *ignoreDifferences
 
   # - name: descheduler
   #   path: charts/descheduler
